@@ -12,25 +12,25 @@
        DESIGN TOKENS  —  Apple × Jimmy Buffett × Lowcountry
     ───────────────────────────────────────────── */
     :root {
-      --teal:        #0a7c6e;
-      --teal-light:  #12a897;
-      --teal-pale:   #e0f5f2;
-      --coral:       #e8612a;
-      --coral-light: #f4894e;
-      --gold:        #c9963a;
-      --gold-pale:   #fdf4e3;
-      --sand:        #f7f2ea;
-      --sand-dark:   #ede5d6;
-      --driftwood:   #8b7355;
-      --marsh:       #4a6741;
+      --teal:        #0077B6;
+      --teal-light:  #0096C7;
+      --teal-pale:   #E0F4FF;
+      --coral:       #E76F51;
+      --coral-light: #F4A261;
+      --gold:        #E9C46A;
+      --gold-pale:   #FFF8E1;
+      --sand:        #FAFAF9;
+      --sand-dark:   #EEEBE4;
+      --driftwood:   #8B7355;
+      --marsh:       #2D6A4F;
       --sky:         #b8dce8;
       --ink:         #1a1a1a;
       --ink-mid:     #3d3d3d;
       --ink-soft:    #6e6e73;  /* Apple secondary label */
       --ink-faint:   #8e8e93;  /* Apple tertiary label */
       --white:       #ffffff;
-      --glass-bg:    rgba(247, 242, 234, 0.75);
-      --glass-border:rgba(139, 115, 85, 0.18);
+      --glass-bg:    rgba(255,255,255,0.92);
+      --glass-border:rgba(0,0,0,0.08);
       --shadow-sm:   0 2px 8px rgba(0,0,0,0.07);
       --shadow-md:   0 8px 32px rgba(0,0,0,0.10);
       --shadow-lg:   0 20px 60px rgba(0,0,0,0.14);
@@ -126,8 +126,8 @@
       padding: 64px 24px 48px;
       background:
         radial-gradient(ellipse 120% 80% at 50% 110%,
-          rgba(10,124,110,0.18) 0%, transparent 70%),
-        linear-gradient(180deg, #d8ede9 0%, #eae4d8 50%, #f7f2ea 100%);
+          rgba(0,119,182,0.18) 0%, transparent 70%),
+        linear-gradient(180deg, #CAF0F8 0%, #E0EEF5 50%, #FAFAF9 100%);
     }
 
     /* Subtle marsh/wave texture behind the hero */
@@ -194,21 +194,21 @@
     }
 
     .pill-teal {
-      background: rgba(10,124,110,0.1);
+      background: rgba(0,119,182,0.1);
       color: var(--teal);
-      border: 1px solid rgba(10,124,110,0.2);
+      border: 1px solid rgba(0,119,182,0.2);
     }
 
     .pill-coral {
-      background: rgba(232,97,42,0.08);
+      background: rgba(231,111,81,0.08);
       color: var(--coral);
-      border: 1px solid rgba(232,97,42,0.2);
+      border: 1px solid rgba(231,111,81,0.2);
     }
 
     .pill-gold {
-      background: rgba(201,150,58,0.08);
+      background: rgba(233,196,106,0.08);
       color: var(--gold);
-      border: 1px solid rgba(201,150,58,0.2);
+      border: 1px solid rgba(233,196,106,0.2);
     }
 
     /* ─────────────────────────────────────────────
@@ -237,7 +237,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 12px 18px;
-      background: rgba(247,242,234,0.9);
+      background: rgba(255,255,255,0.95);
       border-bottom: 1px solid var(--sand-dark);
     }
 
@@ -273,7 +273,7 @@
     /* Video area */
     .stream-viewport {
       aspect-ratio: 16 / 9;
-      background: linear-gradient(160deg, #c6dfe0 0%, #a8cfc6 30%, #8abfb8 60%, #b5d4c8 100%);
+      background: linear-gradient(160deg, #ADE8F4 0%, #48CAE4 30%, #00B4D8 60%, #90E0EF 100%);
       position: relative;
       overflow: hidden;
       display: flex;
@@ -308,7 +308,7 @@
       top: -60px; left: 50%;
       transform: translateX(-50%);
       width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(249,215,100,0.35) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(233,196,106,0.35) 0%, transparent 65%);
       pointer-events: none;
     }
 
@@ -498,13 +498,13 @@
     .badge-teal {
       background: var(--teal-pale);
       color: var(--teal);
-      border: 1px solid rgba(10,124,110,0.2);
+      border: 1px solid rgba(0,119,182,0.2);
     }
 
     .badge-coral {
-      background: rgba(232,97,42,0.07);
+      background: rgba(231,111,81,0.07);
       color: var(--coral);
-      border: 1px solid rgba(232,97,42,0.2);
+      border: 1px solid rgba(231,111,81,0.2);
     }
 
     .sponsor-icon {
@@ -560,7 +560,7 @@
        MOOD STRIP — Lowcountry vibe quote
     ───────────────────────────────────────────── */
     .mood-strip {
-      background: linear-gradient(135deg, var(--teal) 0%, #0d8f80 50%, #0a7065 100%);
+      background: linear-gradient(135deg, var(--teal) 0%, #0097B2 50%, #0a7065 100%);
       padding: 64px 40px;
       text-align: center;
       position: relative;
@@ -792,7 +792,7 @@
     }
 
     .card-gray-man .folklore-card-header {
-      background: linear-gradient(135deg, #1a2744 0%, #0d1a35 100%);
+      background: linear-gradient(135deg, #01212F 0%, #0d1a35 100%);
     }
 
     .card-alice .folklore-card-header {
@@ -832,7 +832,7 @@
 
     .card-gray-man .folklore-tag { background: rgba(184,220,232,0.2); color: #a8d4e4; }
     .card-alice    .folklore-tag { background: rgba(220,180,220,0.2); color: #d4a8d4; }
-    .card-pirates  .folklore-tag { background: rgba(201,150,58,0.25); color: #d4a860; }
+    .card-pirates  .folklore-tag { background: rgba(233,196,106,0.25); color: #d4a860; }
     .card-arrogant .folklore-tag { background: rgba(10,124,110,0.25); color: #6fe0d4; }
 
     .folklore-card-title {
@@ -944,7 +944,7 @@
        REALTOR SPOTLIGHT
     ───────────────────────────────────────────── */
     .realtor-section {
-      background: linear-gradient(160deg, #0f2a24 0%, #0a1f1a 40%, #081510 100%);
+      background: linear-gradient(160deg, #011E2B 0%, #01161E 40%, #081510 100%);
       padding: 80px 40px;
       position: relative;
       overflow: hidden;
@@ -990,13 +990,13 @@
     }
 
     .badge-premier-gold {
-      background: linear-gradient(135deg, rgba(201,150,58,0.2), rgba(201,150,58,0.1));
+      background: linear-gradient(135deg, rgba(233,196,106,0.2), rgba(201,150,58,0.1));
       color: #f0c060;
       border: 1px solid rgba(201,150,58,0.4);
     }
 
     .badge-era {
-      background: rgba(10,124,110,0.15);
+      background: rgba(0,119,182,0.15);
       color: var(--teal-light);
       border: 1px solid rgba(18,168,151,0.3);
     }
@@ -1033,7 +1033,7 @@
       letter-spacing: -1px;
       border: 3px solid rgba(255,255,255,0.1);
       flex-shrink: 0;
-      box-shadow: 0 0 0 6px rgba(10,124,110,0.2);
+      box-shadow: 0 0 0 6px rgba(0,119,182,0.2);
     }
 
     .realtor-avatar-text { color: white; font-size: 1.5rem; font-weight: 700; }
@@ -1368,7 +1368,7 @@
     }
 
     .unit-b .unit-header { background: linear-gradient(135deg, #1a3a32 0%, #0d2820 100%); }
-    .unit-c .unit-header { background: linear-gradient(135deg, #3a1a0a 0%, #281008 100%); }
+    .unit-c .unit-header { background: linear-gradient(135deg, #6D1F00 0%, #281008 100%); }
 
     .unit-floor-badge {
       position: absolute;
@@ -1431,7 +1431,7 @@
     }
 
     .unit-b .unit-feature-icon { background: var(--teal-pale); }
-    .unit-c .unit-feature-icon { background: rgba(232,97,42,0.08); }
+    .unit-c .unit-feature-icon { background: rgba(231,111,81,0.08); }
 
     .book-btn {
       display: flex;
@@ -1511,7 +1511,7 @@
 
     .tide-stat-card.highlight-coral {
       background: rgba(232,97,42,0.06);
-      border-color: rgba(232,97,42,0.2);
+      border-color: rgba(231,111,81,0.2);
     }
 
     .stat-icon   { font-size: 1.5rem; margin-bottom: 6px; }
@@ -1563,7 +1563,7 @@
        ROTATING SPONSOR BANNER
     ───────────────────────────────────────────── */
     .ad-banner-section {
-      background: var(--navy, #1a2744);
+      background: var(--navy, #01212F);
       padding: 0;
       overflow: hidden;
     }
@@ -1744,7 +1744,7 @@
     /* Open / available slot */
     .partner-tile.open {
       border: 1.5px dashed var(--sand-dark);
-      background: rgba(247,242,234,0.5);
+      background: rgba(248,249,250,0.5);
     }
 
     .partner-tile.open .partner-tile-icon { opacity: 0.3; }
@@ -1755,7 +1755,7 @@
        ADVERTISE PANEL — MEDIA KIT
     ───────────────────────────────────────────── */
     .mediakit-hero {
-      background: linear-gradient(160deg, #0f2a24 0%, #0a1f1a 40%, #061410 100%);
+      background: linear-gradient(160deg, #011E2B 0%, #01161E 40%, #001219 100%);
       padding: 80px 40px;
       text-align: center;
       position: relative;
@@ -1766,8 +1766,8 @@
       content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 20% 50%, rgba(10,124,110,0.2) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 80% at 80% 30%, rgba(201,150,58,0.15) 0%, transparent 55%);
+        radial-gradient(ellipse 70% 60% at 20% 50%, rgba(0,119,182,0.2) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 80% at 80% 30%, rgba(233,196,106,0.15) 0%, transparent 55%);
       pointer-events: none;
     }
 
@@ -1815,7 +1815,7 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .mediakit-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(10,124,110,0.5); }
+    .mediakit-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,119,182,0.5); }
 
     /* Stats bar */
     .mediakit-stats {
@@ -2083,7 +2083,7 @@
 
     /* Contact strip */
     .contact-section {
-      background: linear-gradient(135deg, var(--teal) 0%, #0d8f80 100%);
+      background: linear-gradient(135deg, var(--teal) 0%, #0097B2 100%);
       padding: 64px 40px;
       text-align: center;
     }
@@ -2301,11 +2301,11 @@
     .partner-action:hover { background: #c2ede7; }
 
     .open-action {
-      background: rgba(232,97,42,0.08);
+      background: rgba(231,111,81,0.08);
       color: var(--coral);
     }
 
-    .open-action:hover { background: rgba(232,97,42,0.15); }
+    .open-action:hover { background: rgba(231,111,81,0.15); }
 
     .partners-eyebrow {
       font-size: 0.66rem;
@@ -2398,7 +2398,7 @@
       margin-top: 20px;
     }
 
-    .pricing-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(10,124,110,0.35); }
+    .pricing-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,119,182,0.35); }
 
     /* Proof strip */
     .proof-strip {
@@ -2470,7 +2470,7 @@
     <a href="#" class="nav-brand">
       <!-- SC Palmetto & Crescent logo -->
       <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-        <rect width="40" height="40" rx="9" fill="#0a7c6e"/>
+        <rect width="40" height="40" rx="9" fill="#0077B6"/>
         <!-- Crescent moon (SC flag style) -->
         <path d="M11,8 A6,6 0 1,0 11,20 A4.5,4.5 0 1,1 11,8Z" fill="rgba(255,255,255,0.92)"/>
         <!-- Palmetto trunk -->
@@ -2650,7 +2650,7 @@
     <div class="ad-banner-track" id="adTrack">
 
       <!-- Slide 1 — Bradham Wilder -->
-      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#0a3d35 0%,#0a7c6e 100%);">
+      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#003E5C 0%,#0077B6 100%);">
         <div class="ad-banner-left">
           <div class="ad-banner-tag">Premier Sponsor</div>
           <div class="ad-banner-name">Bradham Wilder · ERA Wilder Realty</div>
@@ -2660,7 +2660,7 @@
       </div>
 
       <!-- Slide 2 — King's Tide -->
-      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#3a1a0a 0%,#e8612a 100%);">
+      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#6D1F00 0%,#E76F51 100%);">
         <div class="ad-banner-left">
           <div class="ad-banner-tag">Premier Sponsor</div>
           <div class="ad-banner-name">King's Tide Beach House · 334 Myrtle Ave</div>
@@ -2672,11 +2672,11 @@
       <!-- Slide 3 — Open Slot -->
       <div class="ad-banner-slide" style="background:linear-gradient(135deg,#1a1a2e 0%,#2a2a4a 100%);opacity:0.7;">
         <div class="ad-banner-left">
-          <div class="ad-banner-tag" style="background:rgba(201,150,58,0.25);color:#c9963a;">Your Ad Here</div>
+          <div class="ad-banner-tag" style="background:rgba(233,196,106,0.25);color:#E9C46A;">Your Ad Here</div>
           <div class="ad-banner-name">Reach Thousands of Pawleys Island Visitors</div>
           <div class="ad-banner-sub">Local restaurants, shops, tours &amp; services — inquire about availability</div>
         </div>
-        <a href="#advertise" class="ad-banner-cta" onclick="document.querySelector('[data-tab=advertise]').click();return false;" style="background:rgba(201,150,58,0.2);border-color:rgba(201,150,58,0.5);color:#c9963a;">See Rates</a>
+        <a href="#advertise" class="ad-banner-cta" onclick="document.querySelector('[data-tab=advertise]').click();return false;" style="background:rgba(233,196,106,0.2);border-color:rgba(201,150,58,0.5);color:#E9C46A;">See Rates</a>
       </div>
 
     </div>
@@ -2698,7 +2698,7 @@
 
       <!-- Real partner: Bradham Wilder -->
       <div class="partner-tile">
-        <div class="partner-logo" style="background:linear-gradient(135deg,#0a7c6e,#12a897);color:#fff;font-size:1.1rem;font-weight:700;letter-spacing:-0.5px;">BW</div>
+        <div class="partner-logo" style="background:linear-gradient(135deg,#0077B6,#0096C7);color:#fff;font-size:1.1rem;font-weight:700;letter-spacing:-0.5px;">BW</div>
         <div class="partner-info">
           <div class="partner-name">ERA Wilder Realty</div>
           <div class="partner-cat">Real Estate</div>
@@ -2708,7 +2708,7 @@
 
       <!-- Real partner: King's Tide -->
       <div class="partner-tile">
-        <div class="partner-logo" style="background:linear-gradient(135deg,#e8612a,#f4894e);color:#fff;font-size:1.5rem;">🌊</div>
+        <div class="partner-logo" style="background:linear-gradient(135deg,#E76F51,#F4A261);color:#fff;font-size:1.5rem;">🌊</div>
         <div class="partner-info">
           <div class="partner-name">King's Tide Beach House</div>
           <div class="partner-cat">Vacation Rental</div>
@@ -2969,11 +2969,11 @@
           <div class="history-rule"></div>
           <!-- SC Crescent inline -->
           <svg class="sc-crescent" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#c9963a" opacity="0.8"/>
+            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#E9C46A" opacity="0.8"/>
           </svg>
           <span class="history-eyebrow">Est. 1711 · Georgetown County, SC</span>
           <svg class="sc-crescent" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#c9963a" opacity="0.8"/>
+            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#E9C46A" opacity="0.8"/>
           </svg>
           <div class="history-rule"></div>
         </div>
@@ -3026,11 +3026,11 @@
         <div class="history-kicker" style="justify-content:center;">
           <div class="history-rule"></div>
           <svg class="sc-crescent" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#c9963a" opacity="0.8"/>
+            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#E9C46A" opacity="0.8"/>
           </svg>
           <span class="history-eyebrow">Local Legends &amp; Lore</span>
           <svg class="sc-crescent" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#c9963a" opacity="0.8"/>
+            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#E9C46A" opacity="0.8"/>
           </svg>
           <div class="history-rule"></div>
         </div>
@@ -3499,8 +3499,8 @@
 
     // Gradient fill
     const grad = ctx.createLinearGradient(0, 0, 0, 260);
-    grad.addColorStop(0,   'rgba(10,124,110,0.35)');
-    grad.addColorStop(0.6, 'rgba(10,124,110,0.08)');
+    grad.addColorStop(0,   'rgba(0,119,182,0.35)');
+    grad.addColorStop(0.6, 'rgba(0,119,182,0.08)');
     grad.addColorStop(1,   'rgba(10,124,110,0.0)');
 
     if (tideChart) tideChart.destroy();
@@ -3513,14 +3513,14 @@
           {
             label: 'Tide Height (ft)',
             data: values,
-            borderColor: '#0a7c6e',
+            borderColor: '#0077B6',
             borderWidth: 2.5,
             backgroundColor: grad,
             fill: true,
             tension: 0.45,
             pointRadius: 0,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: '#0a7c6e',
+            pointHoverBackgroundColor: '#0077B6',
           },
           {
             label: 'Hi / Lo',
@@ -3538,7 +3538,7 @@
                 const [h,m] = t.split(':').map(Number);
                 return Math.round((h*60+m)/6) === idx && p.type === 'H';
               });
-              return isHigh ? '#0a7c6e' : '#e8612a';
+              return isHigh ? '#0077B6' : '#E76F51';
             },
             pointBorderColor: '#ffffff',
             pointBorderWidth: 2,
@@ -3612,7 +3612,7 @@
           ctx2.lineTo(x, bottom);
           ctx2.stroke();
           // "NOW" label
-          ctx2.fillStyle   = '#e8612a';
+          ctx2.fillStyle   = '#E76F51';
           ctx2.font        = 'bold 10px Inter, sans-serif';
           ctx2.textAlign   = 'center';
           ctx2.fillText('NOW', x, top - 4);
@@ -3641,9 +3641,9 @@
         display:inline-flex; align-items:center; gap:7px;
         padding:6px 14px; border-radius:20px;
         font-size:0.78rem; font-weight:600;
-        background:${isH ? 'rgba(10,124,110,0.08)' : 'rgba(232,97,42,0.07)'};
-        color:${isH ? '#0a7c6e' : '#e8612a'};
-        border:1px solid ${isH ? 'rgba(10,124,110,0.2)' : 'rgba(232,97,42,0.2)'};
+        background:${isH ? 'rgba(0,119,182,0.08)' : 'rgba(231,111,81,0.07)'};
+        color:${isH ? '#0077B6' : '#E76F51'};
+        border:1px solid ${isH ? 'rgba(0,119,182,0.2)' : 'rgba(231,111,81,0.2)'};
       `;
       chip.innerHTML = `${isH ? '⬆️' : '⬇️'} <span>${isH ? 'High' : 'Low'} ${fmtTime(p.t)} — ${fmtHeight(p.v)}</span>`;
       wrap.appendChild(chip);
