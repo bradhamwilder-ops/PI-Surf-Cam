@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pawleys Island Surf Cam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    /* ─────────────────────────────────────────────
+       DESIGN TOKENS  —  Apple × Jimmy Buffett × Lowcountry
+    ───────────────────────────────────────────── */
+    :root {
+      --teal:        #0a7c6e;
+      --teal-light:  #12a897;
+      --teal-pale:   #e0f5f2;
+      --coral:       #e8612a;
+      --coral-light: #f4894e;
+      --gold:        #c9963a;
+      --gold-pale:   #fdf4e3;
+      --sand:        #f7f2ea;
+      --sand-dark:   #ede5d6;
+      --driftwood:   #8b7355;
+      --marsh:       #4a6741;
+      --sky:         #b8dce8;
+      --ink:         #1a1a1a;
+      --ink-mid:     #3d3d3d;
+      --ink-soft:    #6e6e73;  /* Apple secondary label */
+      --ink-faint:   #8e8e93;  /* Apple tertiary label */
+      --white:       #ffffff;
+      --glass-bg:    rgba(247, 242, 234, 0.75);
+      --glass-border:rgba(139, 115, 85, 0.18);
+      --shadow-sm:   0 2px 8px rgba(0,0,0,0.07);
+      --shadow-md:   0 8px 32px rgba(0,0,0,0.10);
+      --shadow-lg:   0 20px 60px rgba(0,0,0,0.14);
+      --radius-sm:   10px;
+      --radius-md:   18px;
+      --radius-lg:   28px;
+      --radius-xl:   40px;
+    }
+
+    /* ─────────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+      background-color: var(--sand);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────────────────────
+       STICKY NAV  —  Apple frosted-glass
+    ───────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 0 40px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+    }
+
+    .nav-brand-icon { font-size: 1.25rem; }
+
+    .nav-brand-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.2px;
+    }
+
+    .nav-live {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--teal);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-dot {
+      width: 7px; height: 7px;
+      background: var(--teal-light);
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.3; }
+    }
+
+    /* ─────────────────────────────────────────────
+       HERO BANNER
+    ───────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 64px 24px 48px;
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 110%,
+          rgba(10,124,110,0.18) 0%, transparent 70%),
+        linear-gradient(180deg, #d8ede9 0%, #eae4d8 50%, #f7f2ea 100%);
+    }
+
+    /* Subtle marsh/wave texture behind the hero */
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 90px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath d='M0,45 C180,80 360,10 540,45 C720,80 900,10 1080,45 C1260,80 1350,30 1440,45 L1440,90 L0,90Z' fill='%23f7f2ea'/%3E%3C/svg%3E") no-repeat bottom/100%;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 50%, var(--coral) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--ink-soft);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    .hero-pills {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .pill-teal {
+      background: rgba(10,124,110,0.1);
+      color: var(--teal);
+      border: 1px solid rgba(10,124,110,0.2);
+    }
+
+    .pill-coral {
+      background: rgba(232,97,42,0.08);
+      color: var(--coral);
+      border: 1px solid rgba(232,97,42,0.2);
+    }
+
+    .pill-gold {
+      background: rgba(201,150,58,0.08);
+      color: var(--gold);
+      border: 1px solid rgba(201,150,58,0.2);
+    }
+
+    /* ─────────────────────────────────────────────
+       STREAM SECTION
+    ───────────────────────────────────────────── */
+    .stream-section {
+      padding: 0 24px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stream-card {
+      width: 100%;
+      max-width: 1060px;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--glass-border);
+    }
+
+    /* Chrome bar — Apple window / iPhone notch feel */
+    .stream-chrome {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: rgba(247,242,234,0.9);
+      border-bottom: 1px solid var(--sand-dark);
+    }
+
+    .chrome-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .chrome-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+    }
+    .dot-red    { background: #ff5f57; }
+    .dot-yellow { background: #febc2e; }
+    .dot-green  { background: #28c840; }
+
+    .chrome-label {
+      font-size: 0.73rem;
+      font-weight: 500;
+      color: var(--ink-faint);
+      letter-spacing: 0.5px;
+    }
+
+    .chrome-live {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--teal);
+    }
+
+    /* Video area */
+    .stream-viewport {
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(160deg, #c6dfe0 0%, #a8cfc6 30%, #8abfb8 60%, #b5d4c8 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Animated CSS "water shimmer" */
+    .stream-viewport::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 28px,
+        rgba(255,255,255,0.07) 28px,
+        rgba(255,255,255,0.07) 30px
+      );
+      animation: shimmer 8s linear infinite;
+    }
+
+    @keyframes shimmer {
+      from { background-position: 0 0; }
+      to   { background-position: 0 -200px; }
+    }
+
+    /* Sun glow */
+    .stream-viewport::after {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(249,215,100,0.35) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .stream-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stream-emoji { font-size: 4.5rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15)); }
+
+    .stream-inner h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    .stream-inner p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 400px;
+      line-height: 1.65;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+
+    .stream-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 18px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-top: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Caption below the card */
+    .stream-caption {
+      margin-top: 14px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--ink-faint);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ─────────────────────────────────────────────
+       DIVIDER — Lowcountry palmetto silhouette
+    ───────────────────────────────────────────── */
+    .section-break {
+      text-align: center;
+      padding: 8px 0 32px;
+      font-size: 1.6rem;
+      letter-spacing: 12px;
+      color: var(--teal-light);
+      opacity: 0.55;
+      user-select: none;
+    }
+
+    /* ─────────────────────────────────────────────
+       SPONSORS SECTION
+    ───────────────────────────────────────────── */
+    .sponsors-section {
+      padding: 0 24px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    .section-title em {
+      font-style: normal;
+      color: var(--teal);
+    }
+
+    .section-title span {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--ink-soft);
+      letter-spacing: 0;
+      margin-top: 8px;
+    }
+
+    /* Grid */
+    .sponsors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 860px;
+    }
+
+    /* Apple-style card */
+    .sponsor-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--glass-border);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    /* Lowcountry watercolor wash top strip */
+    .sponsor-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .card-realty::before {
+      background: linear-gradient(90deg, var(--teal) 0%, var(--teal-light) 50%, var(--sky) 100%);
+    }
+
+    .card-rental::before {
+      background: linear-gradient(90deg, var(--coral) 0%, var(--gold) 60%, var(--coral-light) 100%);
+    }
+
+    /* Faint palmetto watermark */
+    .sponsor-card::after {
+      content: attr(data-icon);
+      position: absolute;
+      bottom: -10px; right: 12px;
+      font-size: 7rem;
+      opacity: 0.04;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .sponsor-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .sponsor-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .badge-teal {
+      background: var(--teal-pale);
+      color: var(--teal);
+      border: 1px solid rgba(10,124,110,0.2);
+    }
+
+    .badge-coral {
+      background: rgba(232,97,42,0.07);
+      color: var(--coral);
+      border: 1px solid rgba(232,97,42,0.2);
+    }
+
+    .sponsor-icon {
+      font-size: 2.6rem;
+      margin-bottom: 14px;
+      display: block;
+      line-height: 1;
+    }
+
+    .sponsor-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--ink);
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+
+    .sponsor-company {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--teal);
+      margin-bottom: 18px;
+    }
+
+    .card-rental .sponsor-company { color: var(--coral); }
+
+    .sponsor-rule {
+      width: 32px;
+      height: 2px;
+      border-radius: 1px;
+      background: var(--sand-dark);
+      margin-bottom: 18px;
+    }
+
+    .sponsor-detail {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    .sponsor-detail a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .card-rental .sponsor-detail a { color: var(--coral); }
+
+    .sponsor-detail a:hover { text-decoration: underline; }
+
+    /* ─────────────────────────────────────────────
+       MOOD STRIP — Lowcountry vibe quote
+    ───────────────────────────────────────────── */
+    .mood-strip {
+      background: linear-gradient(135deg, var(--teal) 0%, #0d8f80 50%, #0a7065 100%);
+      padding: 64px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mood-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 120% at 20% 50%, rgba(255,255,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 80% at 80% 50%, rgba(201,150,58,0.12) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .mood-palms {
+      font-size: 2.5rem;
+      margin-bottom: 18px;
+      letter-spacing: 8px;
+      opacity: 0.8;
+    }
+
+    .mood-quote {
+      font-size: clamp(1.25rem, 3vw, 1.7rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.95);
+      max-width: 680px;
+      margin: 0 auto 14px;
+      line-height: 1.55;
+      letter-spacing: 0.2px;
+    }
+
+    .mood-attr {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ─────────────────────────────────────────────
+       ABOUT SECTION
+    ───────────────────────────────────────────── */
+    /* ─────────────────────────────────────────────
+       HISTORY SECTION
+    ───────────────────────────────────────────── */
+    .history-section {
+      background: var(--gold-pale);
+      border-top: 1px solid var(--sand-dark);
+      padding: 80px 40px;
+    }
+
+    .history-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .history-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .history-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    /* SC flag crescent inline */
+    .sc-crescent {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+
+    .history-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+
+    .history-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .history-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .history-title em { font-style: normal; color: var(--teal); }
+
+    .history-intro {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 64px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--teal) 0%, var(--gold) 50%, var(--coral) 100%);
+      border-radius: 1px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 40px 28px;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -38px;
+      top: 5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 3px solid var(--teal);
+      box-shadow: 0 0 0 3px rgba(10,124,110,0.12);
+    }
+
+    .timeline-item:nth-child(2) .timeline-dot { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,150,58,0.12); }
+    .timeline-item:nth-child(3) .timeline-dot { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(232,97,42,0.12); }
+    .timeline-item:nth-child(4) .timeline-dot { border-color: var(--marsh); box-shadow: 0 0 0 3px rgba(74,103,65,0.12); }
+    .timeline-item:nth-child(5) .timeline-dot { border-color: var(--teal-light); box-shadow: 0 0 0 3px rgba(18,168,151,0.12); }
+
+    .timeline-year {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 4px;
+    }
+
+    .timeline-item:nth-child(2) .timeline-year { color: var(--gold); }
+    .timeline-item:nth-child(3) .timeline-year { color: var(--coral); }
+    .timeline-item:nth-child(4) .timeline-year { color: var(--marsh); }
+    .timeline-item:nth-child(5) .timeline-year { color: var(--teal-light); }
+
+    .timeline-heading {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.2px;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .timeline-body {
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      max-width: 680px;
+    }
+
+    /* Folklore section */
+    .folklore-header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .folklore-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .folklore-sub {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    .folklore-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .folklore-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--glass-border);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+    }
+
+    .folklore-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .folklore-card-header {
+      padding: 28px 28px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-gray-man .folklore-card-header {
+      background: linear-gradient(135deg, #1a2744 0%, #0d1a35 100%);
+    }
+
+    .card-alice .folklore-card-header {
+      background: linear-gradient(135deg, #2a1022 0%, #1a0815 100%);
+    }
+
+    .card-pirates .folklore-card-header {
+      background: linear-gradient(135deg, #1a180a 0%, #2a2510 100%);
+    }
+
+    .card-arrogant .folklore-card-header {
+      background: linear-gradient(135deg, #0d2820 0%, #0a1e18 100%);
+    }
+
+    /* Subtle texture in card headers */
+    .folklore-card-header::before {
+      content: attr(data-symbol);
+      position: absolute;
+      right: -10px;
+      bottom: -20px;
+      font-size: 7rem;
+      opacity: 0.07;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .folklore-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .card-gray-man .folklore-tag { background: rgba(184,220,232,0.2); color: #a8d4e4; }
+    .card-alice    .folklore-tag { background: rgba(220,180,220,0.2); color: #d4a8d4; }
+    .card-pirates  .folklore-tag { background: rgba(201,150,58,0.25); color: #d4a860; }
+    .card-arrogant .folklore-tag { background: rgba(10,124,110,0.25); color: #6fe0d4; }
+
+    .folklore-card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.2px;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .folklore-card-subtitle {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+    }
+
+    .folklore-card-body {
+      padding: 22px 28px 28px;
+    }
+
+    .folklore-card-text {
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .folklore-pull {
+      border-left: 3px solid var(--teal);
+      padding-left: 14px;
+      font-size: 0.88rem;
+      font-style: italic;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    .card-alice    .folklore-pull { border-color: #c084c8; }
+    .card-pirates  .folklore-pull { border-color: var(--gold); }
+    .card-arrogant .folklore-pull { border-color: var(--teal-light); }
+
+    @media (max-width: 740px) {
+      .folklore-grid { grid-template-columns: 1fr; }
+      .history-section { padding: 52px 20px; }
+    }
+
+    .about-section {
+      background: var(--gold-pale);
+      border-top: 1px solid var(--sand-dark);
+      padding: 72px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .about-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .about-body {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--ink-mid);
+      max-width: 620px;
+    }
+
+    .about-body strong { color: var(--ink); font-weight: 600; }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      padding: 36px 40px;
+      text-align: center;
+    }
+
+    .footer-wordmark {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.2px;
+      margin-bottom: 8px;
+    }
+
+    .footer-wordmark span { color: var(--teal-light); }
+
+    .footer-sub {
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.8px;
+      line-height: 1.7;
+    }
+
+    .footer-sponsors {
+      margin-top: 10px;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer-sponsors strong { color: rgba(255,255,255,0.55); font-weight: 500; }
+
+    /* ─────────────────────────────────────────────
+       REALTOR SPOTLIGHT
+    ───────────────────────────────────────────── */
+    .realtor-section {
+      background: linear-gradient(160deg, #0f2a24 0%, #0a1f1a 40%, #081510 100%);
+      padding: 80px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle texture */
+    .realtor-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 0% 50%, rgba(10,124,110,0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 80% at 100% 20%, rgba(201,150,58,0.12) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .realtor-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Top badge row */
+    .realtor-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .realtor-eyebrow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .badge-premier-gold {
+      background: linear-gradient(135deg, rgba(201,150,58,0.2), rgba(201,150,58,0.1));
+      color: #f0c060;
+      border: 1px solid rgba(201,150,58,0.4);
+    }
+
+    .badge-era {
+      background: rgba(10,124,110,0.15);
+      color: var(--teal-light);
+      border: 1px solid rgba(18,168,151,0.3);
+    }
+
+    /* Main content grid */
+    .realtor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* LEFT: identity */
+    .realtor-identity {}
+
+    .realtor-avatar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .realtor-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal) 0%, #0d9e8e 60%, #12b8a5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -1px;
+      border: 3px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+      box-shadow: 0 0 0 6px rgba(10,124,110,0.2);
+    }
+
+    .realtor-avatar-text { color: white; font-size: 1.5rem; font-weight: 700; }
+
+    .realtor-id-text {}
+
+    .realtor-name {
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.6px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .realtor-title-line {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--teal-light);
+      letter-spacing: 0.3px;
+    }
+
+    .realtor-tagline {
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.65;
+      margin-bottom: 28px;
+      font-style: italic;
+      border-left: 3px solid var(--teal-light);
+      padding-left: 16px;
+    }
+
+    /* Credential chips */
+    .credential-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .credential {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 13px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* CTA buttons */
+    .realtor-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
+      letter-spacing: 0.2px;
+    }
+
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+
+    .cta-primary {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      color: white;
+      box-shadow: 0 4px 16px rgba(10,124,110,0.4);
+    }
+
+    .cta-outline {
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .cta-gold {
+      background: linear-gradient(135deg, rgba(201,150,58,0.9) 0%, rgba(240,192,96,0.9) 100%);
+      color: #1a1a1a;
+      font-weight: 700;
+    }
+
+    /* RIGHT: stats */
+    .realtor-stats {}
+
+    .stats-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(10px);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-num span { color: var(--teal-light); }
+
+    .stat-desc {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .specialties-card {
+      background: rgba(10,124,110,0.12);
+      border: 1px solid rgba(10,124,110,0.25);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+    }
+
+    .specialties-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 12px;
+    }
+
+    .specialty-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .specialty-tag {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 4px 12px;
+    }
+
+    /* Responsive realtor */
+    @media (max-width: 780px) {
+      .realtor-grid { grid-template-columns: 1fr; gap: 32px; }
+      .realtor-section { padding: 56px 24px; }
+    }
+
+    /* ─────────────────────────────────────────────
+       PHOTO GALLERY
+    ───────────────────────────────────────────── */
+    .unit-gallery {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .gallery-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .gallery-slide {
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+
+    .gallery-btn:hover { background: rgba(0,0,0,0.65); }
+    .gallery-btn.prev { left: 10px; }
+    .gallery-btn.next { right: 10px; }
+
+    .gallery-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+      z-index: 2;
+    }
+
+    .gallery-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .gallery-dot.active {
+      background: white;
+      transform: scale(1.3);
+    }
+
+    /* ─────────────────────────────────────────────
+       KINGS TIDE RENTAL SECTION
+    ───────────────────────────────────────────── */
+    .rental-section {
+      background: var(--gold-pale);
+      padding: 72px 40px;
+      border-top: 1px solid var(--sand-dark);
+    }
+
+    .rental-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .rental-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .rental-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    .rental-brand-icon { font-size: 2.2rem; }
+
+    .rental-brand-name {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .rental-brand-sub {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--coral);
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .rental-address-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: white;
+      border: 1px solid var(--sand-dark);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+    }
+
+    .rental-address-pill:hover { color: var(--coral); }
+
+    /* Units grid */
+    .units-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .unit-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--sand-dark);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+    }
+
+    .unit-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .unit-header {
+      padding: 24px 28px 18px;
+      position: relative;
+    }
+
+    .unit-b .unit-header { background: linear-gradient(135deg, #1a3a32 0%, #0d2820 100%); }
+    .unit-c .unit-header { background: linear-gradient(135deg, #3a1a0a 0%, #281008 100%); }
+
+    .unit-floor-badge {
+      position: absolute;
+      top: 16px; right: 16px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 10px;
+    }
+
+    .unit-b .unit-floor-badge { background: rgba(18,168,151,0.25); color: #6fe0d4; border: 1px solid rgba(18,168,151,0.3); }
+    .unit-c .unit-floor-badge { background: rgba(244,137,78,0.2); color: #f4a870; border: 1px solid rgba(244,137,78,0.3); }
+
+    .unit-icon { font-size: 2rem; display: block; margin-bottom: 8px; }
+
+    .unit-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.3px;
+      margin-bottom: 2px;
+    }
+
+    .unit-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .unit-body {
+      padding: 22px 28px 28px;
+    }
+
+    .unit-features {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .unit-feature {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.85rem;
+      color: var(--ink-mid);
+    }
+
+    .unit-feature-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .unit-b .unit-feature-icon { background: var(--teal-pale); }
+    .unit-c .unit-feature-icon { background: rgba(232,97,42,0.08); }
+
+    .book-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.2px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .book-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+
+    .book-btn-teal {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      color: white;
+    }
+
+    .book-btn-coral {
+      background: linear-gradient(135deg, var(--coral) 0%, var(--coral-light) 100%);
+      color: white;
+    }
+
+    @media (max-width: 640px) {
+      .units-grid { grid-template-columns: 1fr; }
+      .rental-section { padding: 52px 20px; }
+    }
+
+    /* ─────────────────────────────────────────────
+       TIDES SECTION
+    ───────────────────────────────────────────── */
+    .tides-section {
+      background: linear-gradient(180deg, var(--sand) 0%, #e8f5f3 50%, var(--sand) 100%);
+      padding: 64px 24px 72px;
+      border-top: 1px solid var(--sand-dark);
+    }
+
+    .tides-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .tides-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* Stat cards row */
+    .tide-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .tide-stat-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 20px 16px;
+      text-align: center;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease;
+    }
+
+    .tide-stat-card:hover { transform: translateY(-3px); }
+
+    .tide-stat-card.highlight-teal {
+      background: var(--teal-pale);
+      border-color: rgba(10,124,110,0.25);
+    }
+
+    .tide-stat-card.highlight-coral {
+      background: rgba(232,97,42,0.06);
+      border-color: rgba(232,97,42,0.2);
+    }
+
+    .stat-icon   { font-size: 1.5rem; margin-bottom: 6px; }
+    .stat-label  { font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+    .stat-value  { font-size: 1.3rem; font-weight: 700; color: var(--ink); letter-spacing: -0.3px; margin-bottom: 4px; }
+    .stat-sub    { font-size: 0.75rem; color: var(--ink-soft); }
+
+    /* Chart */
+    .tide-chart-wrap {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-md);
+      padding: 28px 24px 20px;
+      position: relative;
+      min-height: 220px;
+    }
+
+    #tideChart { width: 100% !important; }
+
+    .tide-chart-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      font-weight: 500;
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      transition: opacity 0.4s ease;
+    }
+
+    .tide-chart-loading.hidden { opacity: 0; pointer-events: none; }
+
+    .tide-attribution {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+    }
+
+    .tide-attribution a { color: var(--teal); text-decoration: none; }
+    .tide-attribution a:hover { text-decoration: underline; }
+
+    /* ─────────────────────────────────────────────
+       TAB BAR
+    ───────────────────────────────────────────── */
+    .tab-bar {
+      position: sticky;
+      top: 52px;
+      z-index: 90;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .tab-bar-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      gap: 2px;
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .tab-bar-inner::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      flex-shrink: 0;
+      padding: 14px 22px;
+      border: none;
+      background: transparent;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      font-weight: 500;
+      font-family: 'Inter', -apple-system, sans-serif;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      letter-spacing: -0.1px;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 20px; right: 20px;
+      height: 2px;
+      background: var(--teal);
+      border-radius: 2px 2px 0 0;
+      transform: scaleX(0);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .tab-btn:hover { color: var(--ink); }
+
+    .tab-btn.active {
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    .tab-btn.active::after { transform: scaleX(1); }
+
+    /* Tab panels */
+    .tab-panel { display: none; }
+
+    .tab-panel.active {
+      display: block;
+      animation: tabFadeIn 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 740px) {
+      .tide-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 52px 20px 44px; }
+      .tab-bar-inner { padding: 0 16px; }
+      .tab-btn { padding: 12px 14px; font-size: 0.8rem; }
+      .stream-section, .sponsors-section { padding-left: 16px; padding-right: 16px; }
+      .tides-section { padding: 44px 16px 52px; }
+      .mood-strip { padding: 48px 24px; }
+      .about-section { padding: 52px 24px; }
+      footer { padding: 28px 24px; }
+      .sponsor-card { padding: 28px 24px; }
+      .tide-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ FROSTED-GLASS NAV ══════════ -->
+  <nav>
+    <a href="#" class="nav-brand">
+      <!-- SC Palmetto & Crescent logo -->
+      <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <rect width="40" height="40" rx="9" fill="#0a7c6e"/>
+        <!-- Crescent moon (SC flag style) -->
+        <path d="M11,8 A6,6 0 1,0 11,20 A4.5,4.5 0 1,1 11,8Z" fill="rgba(255,255,255,0.92)"/>
+        <!-- Palmetto trunk -->
+        <path d="M20.5,18 L21.5,32 L19.5,32 Z" fill="rgba(255,255,255,0.92)"/>
+        <!-- Palmetto fronds -->
+        <path d="M20,18 C17,15 14,11 12,8 C14,11 17,15 20,18Z" fill="rgba(255,255,255,0.92)"/>
+        <path d="M20,18 C23,15 26,11 28,8 C26,11 23,15 20,18Z" fill="rgba(255,255,255,0.92)"/>
+        <path d="M20,18 C16,15 11,13 7,12 C11,13 16,16 20,18Z" fill="rgba(255,255,255,0.92)"/>
+        <path d="M20,18 C24,15 29,13 33,12 C29,13 24,16 20,18Z" fill="rgba(255,255,255,0.92)"/>
+        <path d="M20,18 C18,13 16,9 15,6 C16,9 18,14 20,18Z" fill="rgba(255,255,255,0.92)"/>
+        <path d="M20,18 C22,13 24,9 25,6 C24,9 22,14 20,18Z" fill="rgba(255,255,255,0.92)"/>
+      </svg>
+      <span class="nav-brand-name">Pawleys Island Surf Cam</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a href="links.html" style="font-size:0.78rem;font-weight:600;color:var(--teal);text-decoration:none;letter-spacing:0.2px;">🔗 Links</a>
+      <div class="nav-live">
+        <div class="nav-dot"></div>
+        Live
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero">
+    <p class="hero-eyebrow">Pawleys Island, South Carolina</p>
+    <h1 class="hero-title">Life's a Beach.<br><em>Watch It Live.</em></h1>
+    <p class="hero-sub">Your front-row seat to the Pawleys Island Pier — Lowcountry sunrises, crashing surf, and the endless horizon of the Carolina coast.</p>
+    <div class="hero-pills">
+      <span class="pill pill-teal">Pier Cam</span>
+      <span class="pill pill-coral">Live Sunsets</span>
+      <span class="pill pill-gold">Lowcountry Vibes</span>
+    </div>
+  </section>
+
+  <!-- ══════════ TAB BAR ══════════ -->
+  <div class="tab-bar" id="tabBar">
+    <div class="tab-bar-inner">
+      <button class="tab-btn active" data-tab="cam">
+        <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="7" r="2" fill="currentColor"/></svg>
+        Live Cam
+      </button>
+      <button class="tab-btn" data-tab="realestate">
+        <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><path d="M2,12 L2,6 L7,2 L12,6 L12,12 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><rect x="5" y="8" width="4" height="4" fill="currentColor" opacity="0.5"/></svg>
+        Real Estate
+      </button>
+      <button class="tab-btn" data-tab="stay">
+        <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><path d="M7,1 C4,1 1,3.5 1,7 C1,11 4,13 7,13 C10,13 13,11 13,7 C13,3.5 10,1 7,1Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1,7 Q4,5 7,7 Q10,9 13,7" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+        Stay
+      </button>
+      <button class="tab-btn" data-tab="history">
+        <svg width="13" height="13" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="currentColor"/></svg>
+        History &amp; Lore
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════ PANEL: LIVE CAM ══════════ -->
+  <div class="tab-panel active" data-panel="cam">
+
+  <!-- ══════════ LIVE STREAM ══════════ -->
+  <section class="stream-section">
+    <div class="stream-card">
+
+      <!-- macOS-style window chrome -->
+      <div class="stream-chrome">
+        <div class="chrome-dots">
+          <div class="chrome-dot dot-red"></div>
+          <div class="chrome-dot dot-yellow"></div>
+          <div class="chrome-dot dot-green"></div>
+        </div>
+        <span class="chrome-label">Pawleys Island Pier — Live Feed</span>
+        <div class="chrome-live">
+          <div class="nav-dot"></div>
+          LIVE
+        </div>
+      </div>
+
+      <!-- Stream viewport -->
+      <div class="stream-viewport">
+
+        <!--
+        ╔══════════════════════════════════════════════════════╗
+        ║  PLACEHOLDER — swap with your live stream iframe     ║
+        ║                                                      ║
+        ║  Example YouTube Live embed:                         ║
+        ║  <iframe                                             ║
+        ║    style="width:100%;height:100%;border:none"        ║
+        ║    src="https://www.youtube.com/embed/YOUR_ID        ║
+        ║         ?autoplay=1&mute=1&controls=0"               ║
+        ║    allow="autoplay;encrypted-media"                  ║
+        ║    allowfullscreen>                                  ║
+        ║  </iframe>                                           ║
+        ╚══════════════════════════════════════════════════════╝
+        -->
+        <div class="stream-inner">
+          <svg width="56" height="56" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:8px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));">
+            <rect width="40" height="40" rx="10" fill="rgba(255,255,255,0.15)"/>
+            <rect width="40" height="40" rx="10" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <path d="M11,8 A6,6 0 1,0 11,20 A4.5,4.5 0 1,1 11,8Z" fill="rgba(255,255,255,0.9)"/>
+            <path d="M20.5,18 L21.5,32 L19.5,32 Z" fill="rgba(255,255,255,0.9)"/>
+            <path d="M20,18 C17,15 14,11 12,8 C14,11 17,15 20,18Z" fill="rgba(255,255,255,0.9)"/>
+            <path d="M20,18 C23,15 26,11 28,8 C26,11 23,15 20,18Z" fill="rgba(255,255,255,0.9)"/>
+            <path d="M20,18 C16,15 11,13 7,12 C11,13 16,16 20,18Z" fill="rgba(255,255,255,0.9)"/>
+            <path d="M20,18 C24,15 29,13 33,12 C29,13 24,16 20,18Z" fill="rgba(255,255,255,0.9)"/>
+          </svg>
+          <h2>Pawleys Island Pier</h2>
+          <p>Live camera stream coming soon. When your feed goes live, it will appear right here — 24 hours a day, 7 days a week.</p>
+          <div class="stream-badge">Stream Connecting Soon</div>
+        </div>
+
+      </div>
+    </div>
+    <p class="stream-caption">Pawleys Island Pier &nbsp;·&nbsp; Pawleys Island, SC &nbsp;·&nbsp; Live 24 / 7</p>
+  </section>
+
+  <!-- ══════════ TIDES SECTION ══════════ -->
+  <section class="tides-section">
+    <div class="tides-inner">
+
+      <div class="tides-header">
+        <p class="section-eyebrow" style="color:var(--teal);">NOAA Station · Georgetown, SC</p>
+        <h2 class="section-title" style="font-size:1.8rem;">Today's <em>Tidal Patterns</em>
+          <span>Live predictions updated from NOAA Tides &amp; Currents</span>
+        </h2>
+      </div>
+
+      <!-- Stat Pills -->
+      <div class="tide-stats" id="tide-stats">
+        <div class="tide-stat-card" id="stat-current">
+          <div class="stat-icon">🌊</div>
+          <div class="stat-label">Current Tide</div>
+          <div class="stat-value" id="val-current">—</div>
+          <div class="stat-sub" id="sub-current">Loading…</div>
+        </div>
+        <div class="tide-stat-card highlight-teal" id="stat-nexthigh">
+          <div class="stat-icon">⬆️</div>
+          <div class="stat-label">Next High</div>
+          <div class="stat-value" id="val-nexthigh">—</div>
+          <div class="stat-sub" id="sub-nexthigh">—</div>
+        </div>
+        <div class="tide-stat-card highlight-coral" id="stat-nextlow">
+          <div class="stat-icon">⬇️</div>
+          <div class="stat-label">Next Low</div>
+          <div class="stat-value" id="val-nextlow">—</div>
+          <div class="stat-sub" id="sub-nextlow">—</div>
+        </div>
+        <div class="tide-stat-card" id="stat-trend">
+          <div class="stat-icon" id="icon-trend">〰️</div>
+          <div class="stat-label">Trend</div>
+          <div class="stat-value" id="val-trend">—</div>
+          <div class="stat-sub" id="sub-trend">—</div>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="tide-chart-wrap">
+        <canvas id="tideChart"></canvas>
+        <div class="tide-chart-loading" id="chart-loading">
+          <span>🌊</span> Loading tide data…
+        </div>
+      </div>
+
+      <p class="tide-attribution">
+        Data sourced from <a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8661070" target="_blank" rel="noopener">NOAA Tides &amp; Currents — Georgetown, SC (Station 8661070)</a>
+      </p>
+
+    </div>
+  </section>
+
+  </div><!-- /tab-panel cam -->
+
+  <!-- ══════════ PANEL: REAL ESTATE ══════════ -->
+  <div class="tab-panel" data-panel="realestate">
+
+  <!-- ══════════ BRADHAM WILDER — TOP REALTOR SPOTLIGHT ══════════ -->
+  <section class="realtor-section">
+    <div class="realtor-inner">
+
+      <!-- Top badges -->
+      <div class="realtor-eyebrow">
+        <span class="realtor-eyebrow-badge badge-premier-gold">⭐ Premier Sponsor</span>
+        <span class="realtor-eyebrow-badge badge-era">ERA Wilder Realty</span>
+        <span class="realtor-eyebrow-badge badge-era">Pawleys Island, SC</span>
+      </div>
+
+      <div class="realtor-grid">
+
+        <!-- LEFT: Identity + CTA -->
+        <div class="realtor-identity">
+          <div class="realtor-avatar-wrap">
+            <div class="realtor-avatar">
+              <span class="realtor-avatar-text">BW</span>
+            </div>
+            <div class="realtor-id-text">
+              <div class="realtor-name">Bradham Wilder</div>
+              <div class="realtor-title-line">REALTOR® · ERA Wilder Realty</div>
+            </div>
+          </div>
+
+          <p class="realtor-tagline">
+            "Born and raised on the South Carolina coast — I don't just sell the Lowcountry lifestyle, I live it."
+          </p>
+
+          <div class="credential-row">
+            <span class="credential">Top Producer</span>
+            <span class="credential">Coastal Specialist</span>
+            <span class="credential">Barrier Island Expert</span>
+            <span class="credential">Investment Properties</span>
+            <span class="credential">Buyer &amp; Seller Advocate</span>
+            <span class="credential">Vacation &amp; Second Homes</span>
+          </div>
+
+          <div class="realtor-ctas">
+            <a href="tel:+18033094709" class="cta-btn cta-primary">803-309-4709</a>
+            <a href="mailto:bradham.wilder@gmail.com" class="cta-btn cta-outline">Send Email</a>
+            <a href="https://bradhamwilder.erawilderrealty.com/search/#status=active&sold_days=180&ls_conversion=acres&location_search_field=pawleys%20island&drive_time=09%3A00&drive_duration=15&drive_avoid_ferry=1&drive_departure=1&ss_locale=en-US&ss_description=Pawleys%20Island%2C%20SC&ss_email_freq=40&ss_send_zero_result=1&bounds_north=33.46552589481308&bounds_east=-79.09390796994691&bounds_south=33.37741134564772&bounds_west=-79.15553440427308&center_lat=33.4332236&center_lon=-79.12143130000001&center_lat_pan=33.421479798422965&center_lon_pan=-79.12472118711&geotype=PopulatedPlace&user_lat=33.4332236&user_lon=-79.12143130000001&pgsize=20&startidx=0&zoom=13&sort_by=1&company_uuid=3880084&commute=0&buffer_miles=0.25&geospatial=true&agent_uuid=ad93b90d-a437-4fec-9275-e39fe0bc85ae&ptype=1%2C2%2C3%2C4%2C5%2C7%2C9%2C8&searchType=criteria&pstatus=1%2C2%2C11&omit_hidden=true&currency=USD"
+               target="_blank" rel="noopener" class="cta-btn cta-gold">Pawleys Island Properties</a>
+            <a href="links.html" class="cta-btn cta-outline">All My Links</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: Stats + Specialties -->
+        <div class="realtor-stats">
+          <div class="stats-card">
+            <div class="stats-grid" style="grid-template-columns:1fr 1fr;">
+              <div class="stat-item">
+                <div class="stat-num">15<span>+</span></div>
+                <div class="stat-desc">Years in Market</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">5<span>★</span></div>
+                <div class="stat-desc">Client Rating</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="specialties-card">
+            <div class="specialties-label">Market Expertise</div>
+            <div class="specialty-list">
+              <span class="specialty-tag">Pawleys Island</span>
+              <span class="specialty-tag">Litchfield Beach</span>
+              <span class="specialty-tag">Murrells Inlet</span>
+              <span class="specialty-tag">Georgetown County</span>
+              <span class="specialty-tag">Waccamaw Neck</span>
+              <span class="specialty-tag">Myrtle Beach</span>
+              <span class="specialty-tag">Waterfront Homes</span>
+              <span class="specialty-tag">Oceanfront Estates</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /tab-panel realestate -->
+
+  <!-- ══════════ PANEL: STAY ══════════ -->
+  <div class="tab-panel" data-panel="stay">
+
+  <!-- ══════════ KING'S TIDE — RENTAL UNITS ══════════ -->
+  <section class="rental-section">
+    <div class="rental-inner">
+
+      <div class="rental-header">
+        <div class="rental-brand">
+          <span class="rental-brand-icon">🌅</span>
+          <span class="rental-brand-name">King's Tide</span>
+        </div>
+        <div class="rental-brand-sub">⭐ Premier Sponsor &nbsp;·&nbsp; Vacation Rental · Pawleys Island</div>
+        <a href="https://maps.google.com/?q=334+Myrtle+Ave,+Pawleys+Island,+SC" target="_blank" rel="noopener" class="rental-address-pill">
+          📍 334 Myrtle Ave, Pawleys Island, SC
+        </a>
+      </div>
+
+      <div class="units-grid">
+
+        <!-- Unit B — Downstairs -->
+        <div class="unit-card unit-b">
+          <div class="unit-gallery" id="gallery-b">
+            <div class="gallery-track" id="track-b">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20879/1_dji_20250621132837_0583_d_1.jpg?v=31053" alt="King's Tide Unit B aerial view" loading="lazy">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20879/IMG_4985.JPG?v=30276" alt="King's Tide Unit B interior" loading="lazy">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20879/IMG_4855.JPG?v=30281" alt="King's Tide Unit B interior" loading="lazy">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20879/IMG_4863.JPG?v=30280" alt="King's Tide Unit B interior" loading="lazy">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20879/IMG_4873.JPG?v=30284" alt="King's Tide Unit B interior" loading="lazy">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20879/DJI_20241118125637_0110_D.JPG?v=30283" alt="King's Tide aerial" loading="lazy">
+            </div>
+            <button class="gallery-btn prev" onclick="galleryMove('b',-1)">&#8249;</button>
+            <button class="gallery-btn next" onclick="galleryMove('b', 1)">&#8250;</button>
+            <div class="gallery-dots" id="dots-b"></div>
+          </div>
+          <div class="unit-header">
+            <span class="unit-floor-badge">Downstairs</span>
+            <div class="unit-name">Unit B</div>
+            <div class="unit-label">Ground Floor Suite · 334 Myrtle Ave</div>
+          </div>
+          <div class="unit-body">
+            <div class="unit-features">
+              <div class="unit-feature">
+                <div class="unit-feature-icon">🌿</div>
+                Ground floor access — easy in, easy out
+              </div>
+              <div class="unit-feature">
+                <div class="unit-feature-icon">🌊</div>
+                Steps to the beach and Pawleys Island shoreline
+              </div>
+              <div class="unit-feature">
+                <div class="unit-feature-icon">🏖️</div>
+                Breezy coastal setting in the heart of the island
+              </div>
+            </div>
+            <a href="https://www.pawleysislandrealty.com/rentals/kings-tide-dn-ste-b"
+               target="_blank" rel="noopener"
+               class="book-btn book-btn-teal">
+              Check Availability — Unit B
+            </a>
+          </div>
+        </div>
+
+        <!-- Unit C — Upstairs -->
+        <div class="unit-card unit-c">
+          <div class="unit-gallery" id="gallery-c">
+            <div class="gallery-track" id="track-c">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20848/1_dji_20250621132837_0583_d_1.jpg?v=31060" alt="King's Tide Unit C aerial view" loading="lazy">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20848/IMG_4988.JPG?v=30241" alt="King's Tide Unit C interior" loading="lazy">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20848/IMG_4991.JPG?v=30237" alt="King's Tide Unit C interior" loading="lazy">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20848/IMG_4994.JPG?v=30239" alt="King's Tide Unit C interior" loading="lazy">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20848/IMG_5003.JPG?v=30240" alt="King's Tide Unit C interior" loading="lazy">
+              <img class="gallery-slide" src="https://photos.barefoot.com/v3cpir0118/images/properties/20848/DJI_20241118125637_0110_D.JPG?v=30242" alt="King's Tide aerial" loading="lazy">
+            </div>
+            <button class="gallery-btn prev" onclick="galleryMove('c',-1)">&#8249;</button>
+            <button class="gallery-btn next" onclick="galleryMove('c', 1)">&#8250;</button>
+            <div class="gallery-dots" id="dots-c"></div>
+          </div>
+          <div class="unit-header">
+            <span class="unit-floor-badge">Upstairs</span>
+            <div class="unit-name">Unit C</div>
+            <div class="unit-label">Upper Floor Suite · 334 Myrtle Ave</div>
+          </div>
+          <div class="unit-body">
+            <div class="unit-features">
+              <div class="unit-feature">
+                <div class="unit-feature-icon">🌅</div>
+                Elevated views of the Pawleys Island coast
+              </div>
+              <div class="unit-feature">
+                <div class="unit-feature-icon">🌬️</div>
+                Catch the ocean breeze from the upper deck
+              </div>
+              <div class="unit-feature">
+                <div class="unit-feature-icon">🌟</div>
+                Stunning sunrises and salt air above the treetops
+              </div>
+            </div>
+            <a href="https://www.pawleysislandrealty.com/rentals/kings-tide-upste-c"
+               target="_blank" rel="noopener"
+               class="book-btn book-btn-coral">
+              Check Availability — Unit C
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /tab-panel stay -->
+
+  <!-- ══════════ PANEL: HISTORY ══════════ -->
+  <div class="tab-panel" data-panel="history">
+
+  <!-- ══════════ HISTORY & FOLKLORE ══════════ -->
+  <section class="history-section">
+    <div class="history-inner">
+
+      <!-- Header -->
+      <div class="history-header">
+        <div class="history-kicker">
+          <div class="history-rule"></div>
+          <!-- SC Crescent inline -->
+          <svg class="sc-crescent" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#c9963a" opacity="0.8"/>
+          </svg>
+          <span class="history-eyebrow">Est. 1711 · Georgetown County, SC</span>
+          <svg class="sc-crescent" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#c9963a" opacity="0.8"/>
+          </svg>
+          <div class="history-rule"></div>
+        </div>
+        <h2 class="history-title">Three Centuries of<br><em>Sand, Salt &amp; Story</em></h2>
+        <p class="history-intro">Pawleys Island isn't just a place on a map. It's one of the oldest seaside resorts in America — a four-mile barrier island where planters escaped the fever, pirates lurked offshore, and ghosts still walk the beach before a storm.</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">c. 1711 — The Beginning</div>
+          <div class="timeline-heading">Percival Pawley Claims the Island</div>
+          <div class="timeline-body">English colonist Percival Pawley received a land grant along the South Carolina coast and lent his name to the slender barrier island flanked by creek and sea. Georgetown County was already producing rice that fed the Atlantic world, and the Pawleys family used the island as a seasonal retreat — one of the earliest in the New World.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1700s–1800s — The Planter Era</div>
+          <div class="timeline-heading">Rice, Wealth &amp; the Summer Escape</div>
+          <div class="timeline-body">Georgetown County's tidal rice fields made its planters some of the wealthiest people in colonial America — and also some of the most vulnerable to malaria. Every summer, families packed up and fled to Pawleys Island, where ocean breezes kept the mosquitoes at bay. The island became a close-knit colony of planter families, a world of open porches, hammocks, and salt air — a tradition that never really ended.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1898 — The Hammock is Born</div>
+          <div class="timeline-heading">The Original Rope Hammock, Made Right Here</div>
+          <div class="timeline-body">Pawleys Island riverboat captain Joshua John Ward grew frustrated with the stiff, uncomfortable hammocks of his era and hand-wove a loosely slung rope hammock that conformed to the body. The design was so perfect it's barely changed in 125 years. The Original Pawleys Island Rope Hammock, still made locally at The Hammock Shop, became one of the most iconic products ever to come out of South Carolina — and a symbol of the island's unhurried philosophy.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">1954 &amp; 1989 — Storms of a Lifetime</div>
+          <div class="timeline-heading">Hurricane Hazel &amp; Hugo: The Island Endures</div>
+          <div class="timeline-body">Hurricane Hazel made landfall near Pawleys Island on October 15, 1954 — one of the most powerful Atlantic hurricanes ever recorded at Category 4. Entire oceanfront rows were swept clean. Then, 35 years later, Hurricane Hugo (1989) struck with even greater fury, a Category 4 with 135 mph winds. Each time, Pawleys Island rebuilt, quietly and without drama. The island's resilience is part of its character — battered but unbowed, arrogantly shabby to the end.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">Today — "Arrogantly Shabby"</div>
+          <div class="timeline-heading">A Place Stubbornly Resistant to Change</div>
+          <div class="timeline-body">Pawleys Island has long embraced the unofficial motto <em>"Arrogantly Shabby"</em> — a phrase that captures its refusal to be glamorized. No neon, no chain restaurants, no high-rises. Just creaking screen doors, weathered cottages on stilts, the smell of low tide, and the same families who have been coming for generations. In a world obsessed with newness, Pawleys Island remains defiantly, beautifully old.</div>
+        </div>
+
+      </div>
+
+      <!-- Folklore -->
+      <div class="folklore-header">
+        <div class="history-kicker" style="justify-content:center;">
+          <div class="history-rule"></div>
+          <svg class="sc-crescent" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#c9963a" opacity="0.8"/>
+          </svg>
+          <span class="history-eyebrow">Local Legends &amp; Lore</span>
+          <svg class="sc-crescent" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8,3 A7,7 0 1,0 8,17 A5.5,5.5 0 1,1 8,3Z" fill="#c9963a" opacity="0.8"/>
+          </svg>
+          <div class="history-rule"></div>
+        </div>
+        <h2 class="folklore-title">The Island Keeps Its Secrets</h2>
+        <p class="folklore-sub">Three centuries leave marks that don't wash away with the tide. Some stories are history. Some are something else entirely.</p>
+      </div>
+
+      <div class="folklore-grid">
+
+        <!-- Gray Man -->
+        <div class="folklore-card card-gray-man">
+          <div class="folklore-card-header" data-symbol="👻">
+            <span class="folklore-tag">Ghost Story</span>
+            <div class="folklore-card-title">The Gray Man of Pawleys Island</div>
+            <div class="folklore-card-subtitle">South Carolina's Most Famous Ghost</div>
+          </div>
+          <div class="folklore-card-body">
+            <p class="folklore-card-text">He appears at dusk, walking the beach in tattered gray clothes, just before a hurricane makes landfall. Residents who encounter him — and heed his wordless warning to leave — return to find their homes untouched amid the destruction all around. Those who ignore him are not so fortunate.</p>
+            <p class="folklore-card-text">The legend traces back to the early 1800s, when a young man drowned in the marshes rushing to reunite with his fiancée after a long journey. He has since appeared before Hurricane Hazel (1954), Hugo (1989), and several storms since — always on the same stretch of beach, always at twilight, always alone.</p>
+            <div class="folklore-pull">"He was wearing gray — gray pants, gray shirt — and he just looked at me. Then he walked toward the dunes and disappeared. The next morning, we left. Our neighbors didn't. Their house was gone."<br><span style="font-size:0.78rem;margin-top:6px;display:block;opacity:0.7;">— Local resident, 1989</span></div>
+          </div>
+        </div>
+
+        <!-- Alice of the Hermitage -->
+        <div class="folklore-card card-alice">
+          <div class="folklore-card-header" data-symbol="💍">
+            <span class="folklore-tag">Lost Love</span>
+            <div class="folklore-card-title">Alice of the Hermitage</div>
+            <div class="folklore-card-subtitle">The Girl Who Died for a Ring</div>
+          </div>
+          <div class="folklore-card-body">
+            <p class="folklore-card-text">Alice Flagg was sixteen, beautiful, and desperately in love with a merchant her family considered far beneath her station. She wore his engagement ring on a ribbon beneath her dress — hidden from her powerful brother, Dr. Allard Flagg, who governed the plantation called The Hermitage on Murrells Inlet, just north of Pawleys.</p>
+            <p class="folklore-card-text">When Alice fell gravely ill with typhoid fever in 1849, her brother stripped the ring from her finger before her family could see it. She died days later, whispering for it. She was buried at All Saints Episcopal Church — and to this day, visitors walk three times backward around her grave to summon her, often leaving rings at the headstone.</p>
+            <div class="folklore-pull">"The ring was never found. But on quiet nights near the old cemetery, a girl in white has been seen drifting between the graves — her hands searching, always searching."</div>
+          </div>
+        </div>
+
+        <!-- Pirates -->
+        <div class="folklore-card card-pirates">
+          <div class="folklore-card-header" data-symbol="⚓">
+            <span class="folklore-tag">Pirate History</span>
+            <div class="folklore-card-title">Blackbeard's Coast</div>
+            <div class="folklore-card-subtitle">When the Waccamaw Neck Was Pirate Country</div>
+          </div>
+          <div class="folklore-card-body">
+            <p class="folklore-card-text">In the early 1700s, the shallow inlets and dense marshes of the South Carolina coast were a pirate's paradise. Edward Teach — Blackbeard — and "Gentleman Pirate" Stede Bonnet prowled these waters, raiding merchant vessels and disappearing into creeks too shallow for pursuing naval frigates.</p>
+            <p class="folklore-card-text">Bonnet was famously captured in the Cape Fear River in 1718 after a pitched battle, tried in Charleston, and hanged. But the legend of buried treasure along the Pawleys shoreline — gold doubloons and Spanish silver hastily buried before a chase — has sent generations of locals probing the dunes with shovels after a good storm rearranges the sand.</p>
+            <div class="folklore-pull">"Nobody has ever found Blackbeard's treasure on Pawleys Island. But nobody has proven it isn't there, either."</div>
+          </div>
+        </div>
+
+        <!-- Arrogantly Shabby -->
+        <div class="folklore-card card-arrogant">
+          <div class="folklore-card-header" data-symbol="⚑">
+            <span class="folklore-tag">Island Identity</span>
+            <div class="folklore-card-title">"Arrogantly Shabby"</div>
+            <div class="folklore-card-subtitle">A Motto Born from Pure Stubbornness</div>
+          </div>
+          <div class="folklore-card-body">
+            <p class="folklore-card-text">Sometime in the mid-20th century, as neighboring Grand Strand communities raced to build hotels, arcades, and souvenir shops, someone put a sign on Pawleys Island that said it all: <em>Arrogantly Shabby.</em> It wasn't an apology. It was a declaration.</p>
+            <p class="folklore-card-text">The island had no streetlights, no boardwalk, no resort development — and wanted none. Families who had been coming for a hundred years saw no reason to change anything. The cottages sagged pleasantly on their stilts. The docks weathered silver. The hammocks swayed. And that, the islanders felt, was precisely the point.</p>
+            <div class="folklore-pull">"On Pawleys Island, the whole idea is to do as little as possible, as slowly as possible, for as long as possible — and to feel absolutely no guilt about it whatsoever."</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /tab-panel history -->
+
+  <!-- ══════════ MOOD STRIP — always visible ══════════ -->
+  <section class="mood-strip">
+    <svg width="48" height="48" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:16px;opacity:0.7;">
+      <path d="M11,8 A6,6 0 1,0 11,20 A4.5,4.5 0 1,1 11,8Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M20.5,18 L21.5,32 L19.5,32 Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M20,18 C17,15 14,11 12,8 C14,11 17,15 20,18Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M20,18 C23,15 26,11 28,8 C26,11 23,15 20,18Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M20,18 C16,15 11,13 7,12 C11,13 16,16 20,18Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M20,18 C24,15 29,13 33,12 C29,13 24,16 20,18Z" fill="rgba(255,255,255,0.85)"/>
+    </svg>
+    <p class="mood-quote">"If the phone doesn't ring, it's me… watching the surf at Pawleys Island Pier."</p>
+    <p class="mood-attr">— The Lowcountry Way</p>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="footer-wordmark">Pawleys Island <span>Surf Cam</span></div>
+    <div class="footer-sub">
+      Pawleys Island, South Carolina &nbsp;·&nbsp; Live 24/7<br>
+      Where the Lowcountry meets the Atlantic
+    </div>
+    <div class="footer-sponsors">
+      Premier Sponsors: &nbsp;
+      <strong>Bradham Wilder · ERA Wilder Realty · 803-309-4709</strong>
+      &nbsp;&amp;&nbsp;
+      <strong>King's Tide Beach House · Unit B &amp; Unit C · 334 Myrtle Ave, Pawleys Island</strong>
+    </div>
+  </footer>
+
+
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+  <script>
+  /* ── Photo Gallery ── */
+  const galleries = {};
+
+  function initGallery(id) {
+    const track  = document.getElementById('track-' + id);
+    const dotsEl = document.getElementById('dots-' + id);
+    if (!track || !dotsEl) return;
+    const count = track.children.length;
+    galleries[id] = { idx: 0, count, track, dotsEl, timer: null };
+    // Build dots
+    for (let i = 0; i < count; i++) {
+      const d = document.createElement('button');
+      d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i+1));
+      d.addEventListener('click', () => galleryGo(id, i));
+      dotsEl.appendChild(d);
+    }
+    startAuto(id);
+  }
+
+  function galleryGo(id, idx) {
+    const g = galleries[id];
+    if (!g) return;
+    g.idx = (idx + g.count) % g.count;
+    g.track.style.transform = `translateX(-${g.idx * 100}%)`;
+    g.dotsEl.querySelectorAll('.gallery-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === g.idx));
+    resetAuto(id);
+  }
+
+  function galleryMove(id, dir) { const g = galleries[id]; if (g) galleryGo(id, g.idx + dir); }
+
+  function startAuto(id) {
+    const g = galleries[id];
+    g.timer = setInterval(() => galleryGo(id, g.idx + 1), 4000);
+  }
+
+  function resetAuto(id) {
+    const g = galleries[id];
+    clearInterval(g.timer);
+    startAuto(id);
+  }
+
+  </script>
+
+  <script>
+  /* ══════════════════════════════════════════════════════════
+     PAWLEYS ISLAND TIDE ENGINE
+     NOAA Station 8661070 — Georgetown, SC
+     API docs: https://api.tidesandcurrents.noaa.gov/api/prod/
+  ══════════════════════════════════════════════════════════ */
+
+  const STATION   = '8661070';
+  const STATION_NAME = 'Georgetown, SC';
+  let   tideChart = null;
+
+  /* ── helpers ── */
+  function padZ(n) { return String(n).padStart(2,'0'); }
+
+  function todayStr() {
+    const d = new Date();
+    return `${d.getFullYear()}${padZ(d.getMonth()+1)}${padZ(d.getDate())}`;
+  }
+
+  function fmtTime(dtStr) {
+    // dtStr = "2025-03-22 06:14"
+    const [, time] = dtStr.split(' ');
+    if (!time) return dtStr;
+    const [h, m] = time.split(':').map(Number);
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const h12  = h % 12 || 12;
+    return `${h12}:${padZ(m)} ${ampm}`;
+  }
+
+  function fmtHeight(ft) {
+    return `${parseFloat(ft).toFixed(1)} ft`;
+  }
+
+  /* ── fetch hi/lo predictions ── */
+  async function fetchHiLo() {
+    const date = todayStr();
+    const url  = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter`
+      + `?begin_date=${date}&end_date=${date}`
+      + `&station=${STATION}&product=predictions&datum=MLLW`
+      + `&time_zone=lst_ldt&interval=hilo&units=english`
+      + `&application=pawleys_surf_cam&format=json`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    return data.predictions || [];
+  }
+
+  /* ── fetch 6-min predictions for the chart (whole day) ── */
+  async function fetchCurve() {
+    const date = todayStr();
+    const url  = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter`
+      + `?begin_date=${date}&end_date=${date}`
+      + `&station=${STATION}&product=predictions&datum=MLLW`
+      + `&time_zone=lst_ldt&interval=6&units=english`
+      + `&application=pawleys_surf_cam&format=json`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    return data.predictions || [];
+  }
+
+  /* ── update stat cards ── */
+  function updateStats(hilos, curve) {
+    const now    = new Date();
+    const nowMin = now.getHours() * 60 + now.getMinutes();
+
+    // Interpolate current height from the curve
+    let currentHt = null;
+    for (let i = 0; i < curve.length - 1; i++) {
+      const a = curve[i], b = curve[i+1];
+      const [, ta] = a.t.split(' ');
+      const [, tb] = b.t.split(' ');
+      const [ha, ma] = ta.split(':').map(Number);
+      const [hb, mb] = tb.split(':').map(Number);
+      const minA = ha*60+ma, minB = hb*60+mb;
+      if (nowMin >= minA && nowMin <= minB) {
+        const frac = (nowMin - minA) / (minB - minA);
+        currentHt = parseFloat(a.v) + frac * (parseFloat(b.v) - parseFloat(a.v));
+        break;
+      }
+    }
+    if (currentHt === null && curve.length) {
+      currentHt = parseFloat(curve[curve.length-1].v);
+    }
+
+    // Find next high and low
+    let nextHigh = null, nextLow = null;
+    for (const p of hilos) {
+      const [, t] = p.t.split(' ');
+      const [h, m] = t.split(':').map(Number);
+      const pMin = h*60+m;
+      if (pMin > nowMin) {
+        if (p.type === 'H' && !nextHigh) nextHigh = p;
+        if (p.type === 'L' && !nextLow)  nextLow  = p;
+      }
+      if (nextHigh && nextLow) break;
+    }
+    // fallback: wrap to tomorrow's first predictions
+    if (!nextHigh) nextHigh = hilos.find(p => p.type === 'H') || null;
+    if (!nextLow)  nextLow  = hilos.find(p => p.type === 'L') || null;
+
+    // Trend: rising or falling
+    const trendRising = nextHigh && nextLow
+      ? (parseFloat(nextHigh.t.split(' ')[1].replace(':','')) < parseFloat(nextLow.t.split(' ')[1].replace(':','')))
+      : null;
+
+    // --- Populate DOM ---
+    if (currentHt !== null) {
+      document.getElementById('val-current').textContent = fmtHeight(currentHt);
+      document.getElementById('sub-current').textContent = `at ${now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`;
+    }
+
+    if (nextHigh) {
+      document.getElementById('val-nexthigh').textContent = fmtHeight(nextHigh.v);
+      document.getElementById('sub-nexthigh').textContent = fmtTime(nextHigh.t);
+    }
+
+    if (nextLow) {
+      document.getElementById('val-nextlow').textContent  = fmtHeight(nextLow.v);
+      document.getElementById('sub-nextlow').textContent  = fmtTime(nextLow.t);
+    }
+
+    // Determine rising/falling by checking if current ht < next high
+    const isRising = nextHigh
+      ? (currentHt !== null && parseFloat(nextHigh.v) > currentHt && (!nextLow || fmtTime(nextHigh.t) < fmtTime(nextLow.t) || true))
+      : true;
+
+    // Simple rising/falling: compare currentHt to the two nearest curve points
+    let rising = false;
+    for (let i = 0; i < curve.length - 1; i++) {
+      const [, ta] = curve[i].t.split(' ');
+      const [ha, ma] = ta.split(':').map(Number);
+      const minA = ha*60+ma;
+      if (minA >= nowMin - 6) {
+        rising = parseFloat(curve[Math.min(i+1, curve.length-1)].v) > parseFloat(curve[i].v);
+        break;
+      }
+    }
+
+    document.getElementById('icon-trend').textContent = rising ? '📈' : '📉';
+    document.getElementById('val-trend').textContent  = rising ? 'Rising' : 'Falling';
+    document.getElementById('sub-trend').textContent  = rising ? 'Tide coming in' : 'Tide going out';
+  }
+
+  /* ── draw the chart ── */
+  function drawChart(curve, hilos) {
+    const labels = curve.map(p => {
+      const [, t] = p.t.split(' ');
+      const [h, m] = t.split(':').map(Number);
+      if (m !== 0) return '';
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      return `${h%12||12}${ampm}`;
+    });
+
+    const values = curve.map(p => parseFloat(p.v));
+
+    // Current time marker
+    const now    = new Date();
+    const nowMin = now.getHours()*60 + now.getMinutes();
+    const nowIdx = Math.round(nowMin / 6);
+
+    // Hi/Lo annotation points
+    const hiloPoints = new Array(curve.length).fill(null);
+    hilos.forEach(p => {
+      const [, t] = p.t.split(' ');
+      const [h, m] = t.split(':').map(Number);
+      const idx = Math.round((h*60+m) / 6);
+      if (idx < hiloPoints.length) hiloPoints[idx] = parseFloat(p.v);
+    });
+
+    const ctx = document.getElementById('tideChart').getContext('2d');
+
+    // Gradient fill
+    const grad = ctx.createLinearGradient(0, 0, 0, 260);
+    grad.addColorStop(0,   'rgba(10,124,110,0.35)');
+    grad.addColorStop(0.6, 'rgba(10,124,110,0.08)');
+    grad.addColorStop(1,   'rgba(10,124,110,0.0)');
+
+    if (tideChart) tideChart.destroy();
+
+    tideChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Tide Height (ft)',
+            data: values,
+            borderColor: '#0a7c6e',
+            borderWidth: 2.5,
+            backgroundColor: grad,
+            fill: true,
+            tension: 0.45,
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: '#0a7c6e',
+          },
+          {
+            label: 'Hi / Lo',
+            data: hiloPoints,
+            borderColor: 'transparent',
+            backgroundColor: 'transparent',
+            pointRadius: (ctx) => hiloPoints[ctx.dataIndex] !== null ? 7 : 0,
+            pointBackgroundColor: (ctx) => {
+              const val = hiloPoints[ctx.dataIndex];
+              if (val === null) return 'transparent';
+              // High = teal, Low = coral
+              const idx = ctx.dataIndex;
+              const isHigh = hilos.some(p => {
+                const [, t] = p.t.split(' ');
+                const [h,m] = t.split(':').map(Number);
+                return Math.round((h*60+m)/6) === idx && p.type === 'H';
+              });
+              return isHigh ? '#0a7c6e' : '#e8612a';
+            },
+            pointBorderColor: '#ffffff',
+            pointBorderWidth: 2,
+            pointHoverRadius: 9,
+            fill: false,
+            tension: 0,
+            showLine: false,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 3.5,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(26,26,26,0.85)',
+            titleColor: '#fff',
+            bodyColor: 'rgba(255,255,255,0.8)',
+            padding: 10,
+            callbacks: {
+              label: (ctx) => {
+                if (ctx.dataset.label === 'Hi / Lo') return null;
+                return ` ${parseFloat(ctx.parsed.y).toFixed(2)} ft`;
+              }
+            }
+          },
+          // "NOW" vertical line via annotation plugin (fallback: custom plugin)
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(0,0,0,0.04)', drawTicks: false },
+            border: { display: false },
+            ticks: {
+              color: '#8e8e93',
+              font: { size: 11, family: 'Inter, sans-serif', weight: '500' },
+              maxRotation: 0,
+              autoSkip: false,
+            }
+          },
+          y: {
+            grid: { color: 'rgba(0,0,0,0.05)' },
+            border: { display: false },
+            ticks: {
+              color: '#8e8e93',
+              font: { size: 11, family: 'Inter, sans-serif' },
+              callback: v => `${v.toFixed(1)} ft`,
+              maxTicksLimit: 5,
+            }
+          }
+        }
+      },
+      plugins: [{
+        // Draw "NOW" line
+        id: 'nowLine',
+        afterDraw(chart) {
+          const idx = Math.min(nowIdx, chart.data.labels.length - 1);
+          const meta = chart.getDatasetMeta(0);
+          if (!meta.data[idx]) return;
+          const x = meta.data[idx].x;
+          const { top, bottom } = chart.chartArea;
+          const ctx2 = chart.ctx;
+          ctx2.save();
+          ctx2.strokeStyle = 'rgba(232,97,42,0.7)';
+          ctx2.lineWidth   = 1.5;
+          ctx2.setLineDash([4,4]);
+          ctx2.beginPath();
+          ctx2.moveTo(x, top);
+          ctx2.lineTo(x, bottom);
+          ctx2.stroke();
+          // "NOW" label
+          ctx2.fillStyle   = '#e8612a';
+          ctx2.font        = 'bold 10px Inter, sans-serif';
+          ctx2.textAlign   = 'center';
+          ctx2.fillText('NOW', x, top - 4);
+          ctx2.restore();
+        }
+      }]
+    });
+  }
+
+  /* ── Add hi/lo labels below chart ── */
+  function renderHiLoList(hilos) {
+    const existing = document.getElementById('hilo-list');
+    if (existing) existing.remove();
+
+    const wrap = document.createElement('div');
+    wrap.id = 'hilo-list';
+    wrap.style.cssText = `
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;
+      justify-content:center;
+    `;
+
+    hilos.forEach(p => {
+      const isH = p.type === 'H';
+      const chip = document.createElement('div');
+      chip.style.cssText = `
+        display:inline-flex; align-items:center; gap:7px;
+        padding:6px 14px; border-radius:20px;
+        font-size:0.78rem; font-weight:600;
+        background:${isH ? 'rgba(10,124,110,0.08)' : 'rgba(232,97,42,0.07)'};
+        color:${isH ? '#0a7c6e' : '#e8612a'};
+        border:1px solid ${isH ? 'rgba(10,124,110,0.2)' : 'rgba(232,97,42,0.2)'};
+      `;
+      chip.innerHTML = `${isH ? '⬆️' : '⬇️'} <span>${isH ? 'High' : 'Low'} ${fmtTime(p.t)} — ${fmtHeight(p.v)}</span>`;
+      wrap.appendChild(chip);
+    });
+
+    document.querySelector('.tide-chart-wrap').appendChild(wrap);
+  }
+
+  /* ── main ── */
+  async function initTides() {
+    try {
+      const [hilos, curve] = await Promise.all([fetchHiLo(), fetchCurve()]);
+
+      document.getElementById('chart-loading').classList.add('hidden');
+
+      if (curve.length) drawChart(curve, hilos);
+      if (hilos.length) {
+        updateStats(hilos, curve);
+        renderHiLoList(hilos);
+      }
+
+    } catch (err) {
+      document.getElementById('chart-loading').textContent = '⚠️  Unable to load tide data. Please check your connection.';
+      console.warn('Tide fetch error:', err);
+    }
+  }
+
+  /* ── Tab switching ── */
+  function initTabs() {
+    const btns   = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+    const bar    = document.getElementById('tabBar');
+
+    function switchTab(tabId) {
+      btns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+      panels.forEach(p => p.classList.toggle('active', p.dataset.panel === tabId));
+      // Smooth scroll to just below the tab bar
+      const offset = bar ? bar.getBoundingClientRect().bottom + window.scrollY - 1 : 0;
+      window.scrollTo({ top: Math.max(0, offset - window.innerHeight * 0.02), behavior: 'smooth' });
+    }
+
+    btns.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+
+    // Handle deep-link via hash  e.g.  #stay
+    const hash = window.location.hash.replace('#','');
+    if (hash && document.querySelector(`[data-panel="${hash}"]`)) switchTab(hash);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initTides();
+    initGallery('b');
+    initGallery('c');
+    initTabs();
+  });
+  </script>
+
+</body>
+</html>
