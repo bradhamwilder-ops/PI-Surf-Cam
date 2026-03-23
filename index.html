@@ -5,39 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pawleys Island Surf Cam</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
 
     /* ─────────────────────────────────────────────
-       DESIGN TOKENS  —  Apple × Jimmy Buffett × Lowcountry
+       DESIGN TOKENS  —  Faherty × Google Material × Quick Silver Flare × Tropical
     ───────────────────────────────────────────── */
     :root {
+      /* Tropical Ocean */
       --teal:        #0077B6;
       --teal-light:  #0096C7;
       --teal-pale:   #E0F4FF;
+
+      /* Tropical Warmth */
       --coral:       #E76F51;
       --coral-light: #F4A261;
       --gold:        #E9C46A;
       --gold-pale:   #FFF8E1;
+
+      /* Faherty Naturals */
       --sand:        #FAFAF9;
       --sand-dark:   #EEEBE4;
       --driftwood:   #8B7355;
       --marsh:       #2D6A4F;
-      --sky:         #b8dce8;
-      --ink:         #1a1a1a;
-      --ink-mid:     #3d3d3d;
-      --ink-soft:    #6e6e73;  /* Apple secondary label */
-      --ink-faint:   #8e8e93;  /* Apple tertiary label */
-      --white:       #ffffff;
+      --sky:         #90E0EF;
+
+      /* Quick Silver */
+      --silver:      #ADB5BD;
+      --silver-light:#DEE2E6;
+      --silver-pale: #F8F9FA;
+      --flare:       rgba(255,255,255,0.65);
+
+      /* ERA Brand */
+      --era-red:     #005B9A;
+      --era-red-dark:#003F6B;
+      --era-red-pale:#E3F2FD;
+
+      /* Modern Dark */
+      --dark:        #0F1923;
+      --dark-mid:    #1C2B38;
+      --dark-soft:   #2D3F50;
+
+      /* Type */
+      --ink:         #1C1C1E;
+      --ink-mid:     #3A3A3C;
+      --ink-soft:    #6C6C70;
+      --ink-faint:   #8E8E93;
+      --white:       #FFFFFF;
+
+      /* Glass */
       --glass-bg:    rgba(255,255,255,0.92);
       --glass-border:rgba(0,0,0,0.08);
-      --shadow-sm:   0 2px 8px rgba(0,0,0,0.07);
-      --shadow-md:   0 8px 32px rgba(0,0,0,0.10);
-      --shadow-lg:   0 20px 60px rgba(0,0,0,0.14);
-      --radius-sm:   10px;
-      --radius-md:   18px;
-      --radius-lg:   28px;
-      --radius-xl:   40px;
+
+      /* Modern bold elevation */
+      --shadow-sm:   0 1px 4px rgba(0,0,0,0.12);
+      --shadow-md:   0 4px 16px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+      --shadow-lg:   0 12px 40px rgba(0,0,0,0.16), 0 4px 12px rgba(0,0,0,0.10);
+
+      /* Radius — Modern sharp */
+      --radius-sm:   6px;
+      --radius-md:   10px;
+      --radius-lg:   14px;
+      --radius-xl:   20px;
     }
 
     /* ─────────────────────────────────────────────
@@ -48,29 +78,37 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+      font-family: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background-color: var(--sand);
       color: var(--ink);
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
+    /* Faherty-style serif headlines */
+    h1, h2, .hero-title, .section-title, .sponsor-name,
+    .realtor-name, .mediakit-title, .why-title, .pricing-title,
+    .contact-title, .history-title, .folklore-card-title,
+    .timeline-title, .unit-name, .realtor-section-title {
+      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      font-weight: 700;
+    }
+
     /* ─────────────────────────────────────────────
-       STICKY NAV  —  Apple frosted-glass
+       STICKY NAV  —  Google-style clean white
     ───────────────────────────────────────────── */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: var(--white);
       border-bottom: 1px solid var(--glass-border);
       padding: 0 40px;
-      height: 52px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
 
     .nav-brand {
@@ -83,25 +121,27 @@
     .nav-brand-icon { font-size: 1.25rem; }
 
     .nav-brand-name {
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-size: 0.92rem;
+      font-weight: 700;
       color: var(--ink);
-      letter-spacing: -0.2px;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
     }
 
     .nav-live {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--teal);
-      letter-spacing: 0.5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--era-red);
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .nav-dot {
       width: 7px; height: 7px;
-      background: var(--teal-light);
+      background: var(--era-red);
       border-radius: 50%;
       animation: blink 2s ease-in-out infinite;
     }
@@ -116,62 +156,77 @@
     ───────────────────────────────────────────── */
     .hero {
       position: relative;
-      min-height: 380px;
+      min-height: 480px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
       overflow: hidden;
-      padding: 64px 24px 48px;
-      background:
-        radial-gradient(ellipse 120% 80% at 50% 110%,
-          rgba(0,119,182,0.18) 0%, transparent 70%),
-        linear-gradient(180deg, #CAF0F8 0%, #E0EEF5 50%, #FAFAF9 100%);
+      padding: 96px 24px 80px;
+      background: linear-gradient(160deg, #0F1923 0%, #1C2B38 45%, #0F1923 100%);
     }
 
-    /* Subtle marsh/wave texture behind the hero */
+    /* Quick Silver Flare — radial burst top-right */
     .hero::before {
       content: '';
       position: absolute;
-      bottom: -1px; left: 0; right: 0;
-      height: 90px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath d='M0,45 C180,80 360,10 540,45 C720,80 900,10 1080,45 C1260,80 1350,30 1440,45 L1440,90 L0,90Z' fill='%23f7f2ea'/%3E%3C/svg%3E") no-repeat bottom/100%;
+      top: -120px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,150,199,0.22) 0%, rgba(0,91,154,0.08) 40%, transparent 68%);
+      pointer-events: none;
+    }
+
+    /* ERA red/gold/ocean gradient line at bottom */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #005B9A 0%, #E9C46A 50%, #0096C7 100%);
+    }
+
+    /* Wave divider */
+    .hero-wave {
+      position: absolute;
+      bottom: 3px; left: 0; right: 0;
+      height: 80px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0,40 C240,75 480,8 720,40 C960,72 1200,12 1440,40 L1440,80 L0,80Z' fill='%23FAFAF9'/%3E%3C/svg%3E") no-repeat bottom/100%;
+      pointer-events: none;
     }
 
     .hero-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 3px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 4px;
       text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 14px;
+      color: rgba(0,150,199,0.90);
+      margin-bottom: 18px;
+      font-family: 'DM Sans', sans-serif;
     }
 
     .hero-title {
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-size: clamp(2.6rem, 6.5vw, 4.8rem);
       font-weight: 700;
-      letter-spacing: -1.5px;
-      line-height: 1.05;
-      color: var(--ink);
-      margin-bottom: 16px;
+      letter-spacing: -2px;
+      line-height: 1.02;
+      color: #FFFFFF;
+      margin-bottom: 20px;
     }
 
     .hero-title em {
-      font-style: normal;
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 50%, var(--coral) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-style: italic;
+      color: #005B9A;
+      -webkit-text-fill-color: #005B9A;
     }
 
     .hero-sub {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 400;
-      color: var(--ink-soft);
-      max-width: 520px;
-      line-height: 1.65;
-      margin-bottom: 32px;
+      color: rgba(255,255,255,0.58);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 36px;
     }
 
     .hero-pills {
@@ -194,21 +249,24 @@
     }
 
     .pill-teal {
-      background: rgba(0,119,182,0.1);
-      color: var(--teal);
-      border: 1px solid rgba(0,119,182,0.2);
+      background: rgba(0,150,199,0.18);
+      color: rgba(0,180,216,0.95);
+      border: 1px solid rgba(0,150,199,0.30);
+      font-weight: 600;
     }
 
     .pill-coral {
-      background: rgba(231,111,81,0.08);
-      color: var(--coral);
-      border: 1px solid rgba(231,111,81,0.2);
+      background: rgba(0,91,154,0.18);
+      color: rgba(255,120,130,0.95);
+      border: 1px solid rgba(0,91,154,0.30);
+      font-weight: 600;
     }
 
     .pill-gold {
-      background: rgba(233,196,106,0.08);
-      color: var(--gold);
-      border: 1px solid rgba(233,196,106,0.2);
+      background: rgba(233,196,106,0.18);
+      color: rgba(240,200,80,0.95);
+      border: 1px solid rgba(233,196,106,0.30);
+      font-weight: 600;
     }
 
     /* ─────────────────────────────────────────────
@@ -231,14 +289,14 @@
       border: 1px solid var(--glass-border);
     }
 
-    /* Chrome bar — Apple window / iPhone notch feel */
+    /* Chrome bar — clean Google-style header */
     .stream-chrome {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 18px;
-      background: rgba(255,255,255,0.95);
-      border-bottom: 1px solid var(--sand-dark);
+      padding: 10px 18px;
+      background: var(--white);
+      border-bottom: 1px solid var(--glass-border);
     }
 
     .chrome-dots {
@@ -273,7 +331,7 @@
     /* Video area */
     .stream-viewport {
       aspect-ratio: 16 / 9;
-      background: linear-gradient(160deg, #ADE8F4 0%, #48CAE4 30%, #00B4D8 60%, #90E0EF 100%);
+      background: #000;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -281,36 +339,8 @@
       justify-content: center;
     }
 
-    /* Animated CSS "water shimmer" */
-    .stream-viewport::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 28px,
-        rgba(255,255,255,0.07) 28px,
-        rgba(255,255,255,0.07) 30px
-      );
-      animation: shimmer 8s linear infinite;
-    }
-
-    @keyframes shimmer {
-      from { background-position: 0 0; }
-      to   { background-position: 0 -200px; }
-    }
-
-    /* Sun glow */
-    .stream-viewport::after {
-      content: '';
-      position: absolute;
-      top: -60px; left: 50%;
-      transform: translateX(-50%);
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(233,196,106,0.35) 0%, transparent 65%);
-      pointer-events: none;
-    }
+    /* iframe fills viewport cleanly */
+    .stream-viewport iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
 
     .stream-inner {
       position: relative;
@@ -372,12 +402,22 @@
     ───────────────────────────────────────────── */
     .section-break {
       text-align: center;
-      padding: 8px 0 32px;
-      font-size: 1.6rem;
-      letter-spacing: 12px;
-      color: var(--teal-light);
-      opacity: 0.55;
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
       user-select: none;
+    }
+
+    .section-break::before,
+    .section-break::after {
+      content: '';
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: var(--era-red);
+      opacity: 0.4;
     }
 
     /* ─────────────────────────────────────────────
@@ -396,11 +436,11 @@
     }
 
     .section-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 600;
+      font-size: 0.66rem;
+      font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--coral);
+      color: #005B9A;
       margin-bottom: 10px;
     }
 
@@ -413,8 +453,8 @@
     }
 
     .section-title em {
-      font-style: normal;
-      color: var(--teal);
+      font-style: italic;
+      color: #005B9A;
     }
 
     .section-title span {
@@ -435,7 +475,7 @@
       max-width: 860px;
     }
 
-    /* Apple-style card */
+    /* Material card */
     .sponsor-card {
       background: var(--white);
       border-radius: var(--radius-lg);
@@ -459,11 +499,11 @@
     }
 
     .card-realty::before {
-      background: linear-gradient(90deg, var(--teal) 0%, var(--teal-light) 50%, var(--sky) 100%);
+      background: linear-gradient(90deg, #003F6B 0%, #005B9A 50%, #4B9CD3 100%);
     }
 
     .card-rental::before {
-      background: linear-gradient(90deg, var(--coral) 0%, var(--gold) 60%, var(--coral-light) 100%);
+      background: linear-gradient(90deg, var(--coral) 0%, var(--gold) 60%, #F4A261 100%);
     }
 
     /* Faint palmetto watermark */
@@ -478,8 +518,8 @@
     }
 
     .sponsor-card:hover {
-      transform: translateY(-8px) scale(1.01);
-      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.16);
     }
 
     .sponsor-badge {
@@ -560,7 +600,7 @@
        MOOD STRIP — Lowcountry vibe quote
     ───────────────────────────────────────────── */
     .mood-strip {
-      background: linear-gradient(135deg, var(--teal) 0%, #0097B2 50%, #0a7065 100%);
+      background: linear-gradient(150deg, #0F1923 0%, #1C2B38 30%, #005B9A 70%, #1C2B38 100%);
       padding: 64px 40px;
       text-align: center;
       position: relative;
@@ -572,8 +612,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 120% at 20% 50%, rgba(255,255,255,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 80% at 80% 50%, rgba(201,150,58,0.12) 0%, transparent 55%);
+        radial-gradient(ellipse 50% 120% at 10% 50%, rgba(255,255,255,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 70% at 90% 30%, rgba(233,196,106,0.18) 0%, transparent 50%);
       pointer-events: none;
     }
 
@@ -610,7 +650,7 @@
        HISTORY SECTION
     ───────────────────────────────────────────── */
     .history-section {
-      background: var(--gold-pale);
+      background: linear-gradient(180deg, #F5F0E8 0%, #FAFAF9 100%);
       border-top: 1px solid var(--sand-dark);
       padding: 80px 40px;
     }
@@ -910,7 +950,8 @@
        FOOTER
     ───────────────────────────────────────────── */
     footer {
-      background: var(--ink);
+      background: #0F1923;
+      border-top: 3px solid #005B9A;
       padding: 36px 40px;
       text-align: center;
     }
@@ -944,20 +985,21 @@
        REALTOR SPOTLIGHT
     ───────────────────────────────────────────── */
     .realtor-section {
-      background: linear-gradient(160deg, #011E2B 0%, #01161E 40%, #081510 100%);
+      background: linear-gradient(155deg, #0F1923 0%, #1C2B38 50%, #0F1923 100%);
       padding: 80px 40px;
       position: relative;
       overflow: hidden;
+      border-top: 3px solid #005B9A;
     }
 
-    /* Subtle texture */
+    /* ERA red + Quick Silver Flare overlay */
     .realtor-section::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 0% 50%, rgba(10,124,110,0.25) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 80% at 100% 20%, rgba(201,150,58,0.12) 0%, transparent 55%);
+        radial-gradient(ellipse 60% 70% at 5% 50%, rgba(0,91,154,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 60% at 100% 20%, rgba(233,196,106,0.10) 0%, transparent 50%);
       pointer-events: none;
     }
 
@@ -996,9 +1038,9 @@
     }
 
     .badge-era {
-      background: rgba(0,119,182,0.15);
-      color: var(--teal-light);
-      border: 1px solid rgba(18,168,151,0.3);
+      background: rgba(0,91,154,0.15);
+      color: #F0838F;
+      border: 1px solid rgba(0,91,154,0.35);
     }
 
     /* Main content grid */
@@ -1112,9 +1154,9 @@
     .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
 
     .cta-primary {
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      background: var(--era-red);
       color: white;
-      box-shadow: 0 4px 16px rgba(10,124,110,0.4);
+      box-shadow: 0 4px 16px rgba(0,91,154,0.40);
     }
 
     .cta-outline {
@@ -1469,7 +1511,7 @@
        TIDES SECTION
     ───────────────────────────────────────────── */
     .tides-section {
-      background: linear-gradient(180deg, var(--sand) 0%, #e8f5f3 50%, var(--sand) 100%);
+      background: linear-gradient(180deg, #FAFAF9 0%, #EBF6FF 60%, #FAFAF9 100%);
       padding: 64px 24px 72px;
       border-top: 1px solid var(--sand-dark);
     }
@@ -1575,61 +1617,159 @@
 
     .ad-banner-slide {
       min-width: 100%;
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 160px 1fr auto 140px;
+      align-items: stretch;
+      min-height: 140px;
     }
 
-    .ad-banner-left {
+    /* LEFT: Photo placeholder */
+    .ad-banner-photo {
+      width: 160px;
+      min-height: 140px;
+      background: rgba(0,0,0,0.25);
       display: flex;
       align-items: center;
-      gap: 16px;
+      justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .ad-banner-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ad-banner-photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.35;
+    }
+
+    .ad-banner-photo-placeholder svg { width: 28px; height: 28px; }
+
+    .ad-banner-photo-placeholder span {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    /* CENTER: Text content */
+    .ad-banner-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      padding: 20px 28px;
     }
 
     .ad-banner-tag {
-      font-size: 0.6rem;
+      font-size: 0.58rem;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       color: var(--gold);
-      opacity: 0.8;
-      white-space: nowrap;
+      opacity: 0.85;
     }
 
     .ad-banner-name {
-      font-size: 1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: white;
-      letter-spacing: -0.2px;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      font-family: 'Playfair Display', serif;
     }
 
     .ad-banner-sub {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.55);
-      margin-top: 2px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.5;
+    }
+
+    /* RIGHT MIDDLE: CTA */
+    .ad-banner-cta-wrap {
+      display: flex;
+      align-items: center;
+      padding: 20px 20px;
     }
 
     .ad-banner-cta {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 9px 20px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
+      padding: 11px 22px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
       border-radius: 10px;
       color: white;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 600;
       text-decoration: none;
       white-space: nowrap;
       transition: background 0.2s;
-      font-family: 'Inter', sans-serif;
+      font-family: 'DM Sans', sans-serif;
     }
 
-    .ad-banner-cta:hover { background: rgba(255,255,255,0.18); }
+    .ad-banner-cta:hover { background: rgba(255,255,255,0.22); }
+
+    /* FAR RIGHT: Logo placeholder */
+    .ad-banner-logo {
+      width: 140px;
+      min-height: 140px;
+      background: rgba(0,0,0,0.20);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .ad-banner-logo img {
+      max-width: 110px;
+      max-height: 80px;
+      object-fit: contain;
+    }
+
+    .ad-banner-logo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.30;
+    }
+
+    .ad-banner-logo-placeholder svg { width: 24px; height: 24px; }
+
+    .ad-banner-logo-placeholder span {
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: white;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .ad-banner-slide { grid-template-columns: 90px 1fr 90px; }
+      .ad-banner-photo { width: 90px; min-height: 120px; }
+      .ad-banner-logo  { width: 90px; min-height: 120px; }
+      .ad-banner-left  { padding: 14px 14px; }
+      .ad-banner-cta-wrap { display: none; }
+      .ad-banner-name { font-size: 0.95rem; }
+    }
 
     .ad-banner-dots {
       display: flex;
@@ -1652,7 +1792,7 @@
        LOCAL PARTNERS GRID
     ───────────────────────────────────────────── */
     .partners-section {
-      background: var(--sand);
+      background: #F5F0E8;
       padding: 52px 40px;
       border-top: 1px solid var(--sand-dark);
     }
@@ -1755,7 +1895,7 @@
        ADVERTISE PANEL — MEDIA KIT
     ───────────────────────────────────────────── */
     .mediakit-hero {
-      background: linear-gradient(160deg, #011E2B 0%, #01161E 40%, #001219 100%);
+      background: linear-gradient(155deg, #0F1923 0%, #1C2B38 40%, #005B9A 100%);
       padding: 80px 40px;
       text-align: center;
       position: relative;
@@ -1906,7 +2046,7 @@
 
     /* Pricing tiers */
     .pricing-section {
-      background: linear-gradient(180deg, #e8f5f3 0%, var(--sand) 100%);
+      background: linear-gradient(180deg, #E0F4FF 0%, var(--sand) 100%);
       padding: 72px 40px;
       border-top: 1px solid var(--sand-dark);
     }
@@ -2083,7 +2223,7 @@
 
     /* Contact strip */
     .contact-section {
-      background: linear-gradient(135deg, var(--teal) 0%, #0097B2 100%);
+      background: linear-gradient(135deg, #0077B6 0%, #0096C7 60%, #00B4D8 100%);
       padding: 64px 40px;
       text-align: center;
     }
@@ -2145,7 +2285,7 @@
       .mediakit-hero { padding: 56px 24px; }
       .mediakit-stats { padding: 28px 20px; }
       .why-section, .pricing-section, .proof-section, .contact-section { padding: 48px 20px; }
-      .ad-banner-slide { padding: 14px 20px; }
+      /* banner mobile handled in banner css */
     }
 
     /* ─────────────────────────────────────────────
@@ -2153,12 +2293,11 @@
     ───────────────────────────────────────────── */
     .tab-bar {
       position: sticky;
-      top: 52px;
+      top: 56px;
       z-index: 90;
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid var(--glass-border);
+      background: var(--white);
+      border-bottom: 2px solid var(--glass-border);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
 
     .tab-bar-inner {
@@ -2182,7 +2321,7 @@
       color: var(--ink-soft);
       font-size: 0.85rem;
       font-weight: 500;
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'DM Sans', 'Inter', sans-serif;
       cursor: pointer;
       transition: color 0.2s ease;
       letter-spacing: -0.1px;
@@ -2193,19 +2332,19 @@
     .tab-btn::after {
       content: '';
       position: absolute;
-      bottom: 0; left: 20px; right: 20px;
-      height: 2px;
-      background: var(--teal);
-      border-radius: 2px 2px 0 0;
+      bottom: -2px; left: 0; right: 0;
+      height: 3px;
+      background: var(--era-red);
+      border-radius: 0;
       transform: scaleX(0);
-      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      transition: transform 0.22s cubic-bezier(0.4,0,0.2,1);
     }
 
     .tab-btn:hover { color: var(--ink); }
 
     .tab-btn.active {
-      color: var(--teal);
-      font-weight: 600;
+      color: var(--dark);
+      font-weight: 700;
     }
 
     .tab-btn.active::after { transform: scaleX(1); }
@@ -2291,21 +2430,21 @@
       font-size: 0.72rem;
       font-weight: 700;
       text-decoration: none;
-      background: var(--teal-pale);
-      color: var(--teal);
+      background: #E3F2FD;
+      color: #005B9A;
       flex-shrink: 0;
       white-space: nowrap;
       transition: background 0.2s;
     }
 
-    .partner-action:hover { background: #c2ede7; }
+    .partner-action:hover { background: #d0e8f8; }
 
     .open-action {
-      background: rgba(231,111,81,0.08);
-      color: var(--coral);
+      background: rgba(0,91,154,0.08);
+      color: #005B9A;
     }
 
-    .open-action:hover { background: rgba(231,111,81,0.15); }
+    .open-action:hover { background: rgba(0,91,154,0.15); }
 
     .partners-eyebrow {
       font-size: 0.66rem;
@@ -2391,14 +2530,14 @@
       font-weight: 700;
       text-align: center;
       text-decoration: none;
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      background: var(--era-red);
       color: white;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      font-family: 'Inter', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       margin-top: 20px;
     }
 
-    .pricing-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,119,182,0.35); }
+    .pricing-cta:hover { transform: translateY(-2px); background: var(--era-red-dark); box-shadow: 0 6px 16px rgba(0,91,154,0.35); }
 
     /* Proof strip */
     .proof-strip {
@@ -2468,25 +2607,27 @@
   <!-- ══════════ FROSTED-GLASS NAV ══════════ -->
   <nav>
     <a href="#" class="nav-brand">
-      <!-- SC Palmetto & Crescent logo -->
-      <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-        <rect width="40" height="40" rx="9" fill="#0077B6"/>
-        <!-- Crescent moon (SC flag style) -->
-        <path d="M11,8 A6,6 0 1,0 11,20 A4.5,4.5 0 1,1 11,8Z" fill="rgba(255,255,255,0.92)"/>
+      <!-- SC State Flag — proper proportioned flag -->
+      <svg width="52" height="36" viewBox="0 0 104 72" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;border-radius:5px;box-shadow:0 2px 8px rgba(0,63,102,0.35);">
+        <rect width="104" height="72" fill="#003366"/>
+        <!-- Crescent (upper left, SC flag style) -->
+        <path d="M18,11 A11,11 0 1,0 18,33 A8,8 0 1,1 18,11Z" fill="white"/>
         <!-- Palmetto trunk -->
-        <path d="M20.5,18 L21.5,32 L19.5,32 Z" fill="rgba(255,255,255,0.92)"/>
-        <!-- Palmetto fronds -->
-        <path d="M20,18 C17,15 14,11 12,8 C14,11 17,15 20,18Z" fill="rgba(255,255,255,0.92)"/>
-        <path d="M20,18 C23,15 26,11 28,8 C26,11 23,15 20,18Z" fill="rgba(255,255,255,0.92)"/>
-        <path d="M20,18 C16,15 11,13 7,12 C11,13 16,16 20,18Z" fill="rgba(255,255,255,0.92)"/>
-        <path d="M20,18 C24,15 29,13 33,12 C29,13 24,16 20,18Z" fill="rgba(255,255,255,0.92)"/>
-        <path d="M20,18 C18,13 16,9 15,6 C16,9 18,14 20,18Z" fill="rgba(255,255,255,0.92)"/>
-        <path d="M20,18 C22,13 24,9 25,6 C24,9 22,14 20,18Z" fill="rgba(255,255,255,0.92)"/>
+        <rect x="48" y="30" width="6" height="28" rx="3" fill="white"/>
+        <!-- Top frond (vertical) -->
+        <path d="M51,30 C50,24 49,17 51,12 C53,17 52,24 51,30Z" fill="white"/>
+        <!-- Side fronds -->
+        <path d="M51,28 C46,23 38,19 32,18 C38,20 46,24 51,28Z" fill="white"/>
+        <path d="M51,28 C56,23 64,19 70,18 C64,20 56,24 51,28Z" fill="white"/>
+        <path d="M51,28 C45,26 38,26 33,27 C38,25 45,25 51,28Z" fill="white"/>
+        <path d="M51,28 C57,26 64,26 69,27 C64,25 57,25 51,28Z" fill="white"/>
+        <path d="M51,28 C48,21 45,16 46,11 C47,16 49,22 51,28Z" fill="white"/>
+        <path d="M51,28 C54,21 57,16 56,11 C55,16 53,22 51,28Z" fill="white"/>
       </svg>
       <span class="nav-brand-name">Pawleys Island Surf Cam</span>
     </a>
     <div style="display:flex;align-items:center;gap:16px;">
-      <a href="links.html" style="font-size:0.78rem;font-weight:600;color:var(--teal);text-decoration:none;letter-spacing:0.2px;">🔗 Links</a>
+      <a href="links.html" style="font-size:0.72rem;font-weight:700;color:#005B9A;text-decoration:none;letter-spacing:1px;text-transform:uppercase;">Links</a>
       <div class="nav-live">
         <div class="nav-dot"></div>
         Live
@@ -2500,10 +2641,11 @@
     <h1 class="hero-title">Life's a Beach.<br><em>Watch It Live.</em></h1>
     <p class="hero-sub">Your front-row seat to the Pawleys Island Pier — Lowcountry sunrises, crashing surf, and the endless horizon of the Carolina coast.</p>
     <div class="hero-pills">
-      <span class="pill pill-teal">Pier Cam</span>
+      <span class="pill pill-teal">Live Pier Cam</span>
       <span class="pill pill-coral">Live Sunsets</span>
       <span class="pill pill-gold">Lowcountry Vibes</span>
     </div>
+    <div class="hero-wave"></div>
   </section>
 
   <!-- ══════════ TAB BAR ══════════ -->
@@ -2539,7 +2681,7 @@
   <section class="stream-section">
     <div class="stream-card">
 
-      <!-- macOS-style window chrome -->
+      <!-- stream card chrome bar -->
       <div class="stream-chrome">
         <div class="chrome-dots">
           <div class="chrome-dot dot-red"></div>
@@ -2553,39 +2695,16 @@
         </div>
       </div>
 
-      <!-- Stream viewport -->
-      <div class="stream-viewport">
-
-        <!--
-        ╔══════════════════════════════════════════════════════╗
-        ║  PLACEHOLDER — swap with your live stream iframe     ║
-        ║                                                      ║
-        ║  Example YouTube Live embed:                         ║
-        ║  <iframe                                             ║
-        ║    style="width:100%;height:100%;border:none"        ║
-        ║    src="https://www.youtube.com/embed/YOUR_ID        ║
-        ║         ?autoplay=1&mute=1&controls=0"               ║
-        ║    allow="autoplay;encrypted-media"                  ║
-        ║    allowfullscreen>                                  ║
-        ║  </iframe>                                           ║
-        ╚══════════════════════════════════════════════════════╝
-        -->
-        <div class="stream-inner">
-          <svg width="56" height="56" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:8px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));">
-            <rect width="40" height="40" rx="10" fill="rgba(255,255,255,0.15)"/>
-            <rect width="40" height="40" rx="10" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-            <path d="M11,8 A6,6 0 1,0 11,20 A4.5,4.5 0 1,1 11,8Z" fill="rgba(255,255,255,0.9)"/>
-            <path d="M20.5,18 L21.5,32 L19.5,32 Z" fill="rgba(255,255,255,0.9)"/>
-            <path d="M20,18 C17,15 14,11 12,8 C14,11 17,15 20,18Z" fill="rgba(255,255,255,0.9)"/>
-            <path d="M20,18 C23,15 26,11 28,8 C26,11 23,15 20,18Z" fill="rgba(255,255,255,0.9)"/>
-            <path d="M20,18 C16,15 11,13 7,12 C11,13 16,16 20,18Z" fill="rgba(255,255,255,0.9)"/>
-            <path d="M20,18 C24,15 29,13 33,12 C29,13 24,16 20,18Z" fill="rgba(255,255,255,0.9)"/>
-          </svg>
-          <h2>Pawleys Island Pier</h2>
-          <p>Live camera stream coming soon. When your feed goes live, it will appear right here — 24 hours a day, 7 days a week.</p>
-          <div class="stream-badge">Stream Connecting Soon</div>
-        </div>
-
+      <!-- Stream viewport — surfwashout.com live feed -->
+      <div class="stream-viewport" style="background:#000;position:relative;">
+        <iframe
+          src="https://surfwashout.com"
+          style="width:100%;height:100%;border:none;display:block;"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          title="Pawleys Island Pier Live Cam — surfwashout.com"
+          loading="lazy">
+        </iframe>
       </div>
     </div>
     <p class="stream-caption">Pawleys Island Pier &nbsp;·&nbsp; Pawleys Island, SC &nbsp;·&nbsp; Live 24 / 7</p>
@@ -2646,37 +2765,105 @@
   </section>
 
   <!-- ══════════ ROTATING SPONSOR BANNER ══════════ -->
+  <!-- ══════════ ROTATING SPONSOR BANNER ══════════ -->
   <section class="ad-banner-section" id="adBanner">
     <div class="ad-banner-track" id="adTrack">
 
-      <!-- Slide 1 — Bradham Wilder -->
-      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#003E5C 0%,#0077B6 100%);">
+      <!-- Slide 1 — Bradham Wilder / ERA Wilder Realty -->
+      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#011E2B 0%,#003F6B 60%,#005B9A 100%);">
+        <!-- Photo placeholder (left) -->
+        <div class="ad-banner-photo">
+          <!-- Replace img src with a real photo URL to show a photo -->
+          <!-- <img src="YOUR_PHOTO_URL" alt="Bradham Wilder"> -->
+          <div class="ad-banner-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Agent Photo</span>
+          </div>
+        </div>
+        <!-- Center text -->
         <div class="ad-banner-left">
           <div class="ad-banner-tag">Premier Sponsor</div>
-          <div class="ad-banner-name">Bradham Wilder · ERA Wilder Realty</div>
-          <div class="ad-banner-sub">15+ years selling Pawleys Island · 803-309-4709</div>
+          <div class="ad-banner-name">Bradham Wilder</div>
+          <div class="ad-banner-sub">ERA Wilder Realty &nbsp;·&nbsp; 15+ Years on Pawleys Island &nbsp;·&nbsp; 803-309-4709</div>
+          <div class="ad-banner-sub" style="margin-top:4px;color:rgba(255,255,255,0.40);font-size:0.72rem;">Barrier Island Specialist &nbsp;·&nbsp; Oceanfront Estates &nbsp;·&nbsp; Investment Properties</div>
         </div>
-        <a href="tel:+18033094709" class="ad-banner-cta">Call Now</a>
+        <!-- CTA -->
+        <div class="ad-banner-cta-wrap">
+          <a href="tel:+18033094709" class="ad-banner-cta">Call Now</a>
+        </div>
+        <!-- Logo placeholder (right) -->
+        <div class="ad-banner-logo">
+          <!-- Replace with ERA logo: <img src="era-logo.png" alt="ERA Wilder Realty"> -->
+          <!-- ERA logo SVG inline -->
+          <svg viewBox="0 0 80 96" xmlns="http://www.w3.org/2000/svg" width="64" height="77" style="opacity:0.90;">
+            <polygon points="8,48 40,8 72,48 52,48 52,26 40,14 28,26 28,48" fill="#C8102E"/>
+            <polygon points="40,8 72,48 52,48 52,26" fill="#8B0032"/>
+            <rect x="8" y="48" width="64" height="48" fill="rgba(0,0,0,0.7)"/>
+            <text x="40" y="80" text-anchor="middle" font-family="Arial Black,sans-serif" font-weight="900" font-size="22" fill="white">ERA</text>
+            <rect x="12" y="83" width="56" height="2.5" fill="#C8102E"/>
+            <text x="40" y="92" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="7" fill="white" letter-spacing="2">WILDER REALTY</text>
+          </svg>
+        </div>
       </div>
 
-      <!-- Slide 2 — King's Tide -->
-      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#6D1F00 0%,#E76F51 100%);">
+      <!-- Slide 2 — King's Tide Beach House -->
+      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#1a0a00 0%,#7B3010 50%,#E76F51 100%);">
+        <!-- Photo placeholder (left) -->
+        <div class="ad-banner-photo">
+          <!-- <img src="YOUR_KINGS_TIDE_PHOTO_URL" alt="King's Tide"> -->
+          <div class="ad-banner-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Property Photo</span>
+          </div>
+        </div>
+        <!-- Center text -->
         <div class="ad-banner-left">
           <div class="ad-banner-tag">Premier Sponsor</div>
-          <div class="ad-banner-name">King's Tide Beach House · 334 Myrtle Ave</div>
-          <div class="ad-banner-sub">Two oceanside suites available for nightly &amp; weekly stays</div>
+          <div class="ad-banner-name">King's Tide Beach House</div>
+          <div class="ad-banner-sub">334 Myrtle Ave, Pawleys Island &nbsp;·&nbsp; Unit B & Unit C Available</div>
+          <div class="ad-banner-sub" style="margin-top:4px;color:rgba(255,255,255,0.40);font-size:0.72rem;">Oceanside Suites &nbsp;·&nbsp; Nightly & Weekly Stays &nbsp;·&nbsp; Steps from the Beach</div>
         </div>
-        <a href="https://www.pawleysislandrealty.com/rentals/kings-tide-dn-ste-b" target="_blank" rel="noopener" class="ad-banner-cta">Book a Suite</a>
+        <!-- CTA -->
+        <div class="ad-banner-cta-wrap">
+          <a href="https://www.pawleysislandrealty.com/rentals/kings-tide-dn-ste-b" target="_blank" rel="noopener" class="ad-banner-cta">Book a Suite</a>
+        </div>
+        <!-- Logo placeholder (right) -->
+        <div class="ad-banner-logo">
+          <!-- <img src="YOUR_KINGS_TIDE_LOGO_URL" alt="King's Tide"> -->
+          <div class="ad-banner-logo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+            <span>Your Logo Here</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Slide 3 — Open Slot -->
-      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#1a1a2e 0%,#2a2a4a 100%);opacity:0.7;">
-        <div class="ad-banner-left">
-          <div class="ad-banner-tag" style="background:rgba(233,196,106,0.25);color:#E9C46A;">Your Ad Here</div>
-          <div class="ad-banner-name">Reach Thousands of Pawleys Island Visitors</div>
-          <div class="ad-banner-sub">Local restaurants, shops, tours &amp; services — inquire about availability</div>
+      <!-- Slide 3 — Open advertising slot -->
+      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#0F1923 0%,#1C2B38 100%);">
+        <!-- Photo placeholder (left) -->
+        <div class="ad-banner-photo" style="border-right:1px dashed rgba(233,196,106,0.2);">
+          <div class="ad-banner-photo-placeholder" style="opacity:0.5;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Your Photo</span>
+          </div>
         </div>
-        <a href="#advertise" class="ad-banner-cta" onclick="document.querySelector('[data-tab=advertise]').click();return false;" style="background:rgba(233,196,106,0.2);border-color:rgba(201,150,58,0.5);color:#E9C46A;">See Rates</a>
+        <!-- Center text -->
+        <div class="ad-banner-left">
+          <div class="ad-banner-tag" style="color:#E9C46A;">Available · Your Ad Here</div>
+          <div class="ad-banner-name" style="color:rgba(255,255,255,0.75);">Reach Thousands of Pawleys Island Visitors</div>
+          <div class="ad-banner-sub">Local restaurants, charters, shops &amp; services — spots are limited</div>
+          <div class="ad-banner-sub" style="margin-top:4px;color:rgba(233,196,106,0.5);font-size:0.72rem;">Starting at $79/month · Tap-to-call included · Monthly analytics report</div>
+        </div>
+        <!-- CTA -->
+        <div class="ad-banner-cta-wrap">
+          <a href="#advertise" class="ad-banner-cta" onclick="document.querySelector('[data-tab=advertise]').click();return false;" style="background:rgba(233,196,106,0.15);border-color:rgba(233,196,106,0.35);color:#E9C46A;">See Rates</a>
+        </div>
+        <!-- Logo placeholder (right) -->
+        <div class="ad-banner-logo" style="border-left:1px dashed rgba(233,196,106,0.2);">
+          <div class="ad-banner-logo-placeholder" style="opacity:0.5;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+            <span>Your Logo Here</span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -2777,14 +2964,42 @@
         <!-- LEFT: Identity + CTA -->
         <div class="realtor-identity">
           <div class="realtor-avatar-wrap">
-            <div class="realtor-avatar">
-              <span class="realtor-avatar-text">BW</span>
+            <!-- ERA logo SVG -->
+            <div class="era-logo-wrap">
+              <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" width="72" height="86">
+                <!-- House rooftop shape -->
+                <polygon points="20,120 100,20 180,120 130,120 130,65 100,35 70,65 70,120" fill="#005B9A"/>
+                <polygon points="100,20 180,120 130,120 130,65" fill="#8B0032"/>
+                <!-- Black body -->
+                <rect x="20" y="120" width="160" height="120" fill="#000000"/>
+                <!-- ERA text -->
+                <text x="100" y="178" text-anchor="middle" font-family="Arial Black,sans-serif" font-weight="900" font-size="52" fill="#FFFFFF" letter-spacing="-1">ERA</text>
+                <!-- Red rule -->
+                <rect x="30" y="187" width="140" height="5" fill="#005B9A"/>
+                <!-- REAL ESTATE text -->
+                <text x="100" y="222" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="18" fill="#FFFFFF" letter-spacing="4">REAL ESTATE</text>
+              </svg>
             </div>
             <div class="realtor-id-text">
               <div class="realtor-name">Bradham Wilder</div>
               <div class="realtor-title-line">REALTOR® · ERA Wilder Realty</div>
             </div>
           </div>
+
+          <!-- ERA logo CSS -->
+          <style>
+            .era-logo-wrap {
+              flex-shrink: 0;
+              background: #000;
+              border-radius: 10px;
+              padding: 8px 10px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              box-shadow: 0 4px 20px rgba(0,91,154,0.4);
+              border: 1px solid rgba(0,91,154,0.3);
+            }
+          </style>
 
           <p class="realtor-tagline">
             "Born and raised on the South Carolina coast — I don't just sell the Lowcountry lifestyle, I live it."
@@ -3250,13 +3465,18 @@
 
   <!-- ══════════ MOOD STRIP — always visible ══════════ -->
   <section class="mood-strip">
-    <svg width="48" height="48" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:16px;opacity:0.7;">
-      <path d="M11,8 A6,6 0 1,0 11,20 A4.5,4.5 0 1,1 11,8Z" fill="rgba(255,255,255,0.85)"/>
-      <path d="M20.5,18 L21.5,32 L19.5,32 Z" fill="rgba(255,255,255,0.85)"/>
-      <path d="M20,18 C17,15 14,11 12,8 C14,11 17,15 20,18Z" fill="rgba(255,255,255,0.85)"/>
-      <path d="M20,18 C23,15 26,11 28,8 C26,11 23,15 20,18Z" fill="rgba(255,255,255,0.85)"/>
-      <path d="M20,18 C16,15 11,13 7,12 C11,13 16,16 20,18Z" fill="rgba(255,255,255,0.85)"/>
-      <path d="M20,18 C24,15 29,13 33,12 C29,13 24,16 20,18Z" fill="rgba(255,255,255,0.85)"/>
+    <!-- SC Flag palmetto standalone for mood strip -->
+    <svg width="64" height="48" viewBox="0 0 76 56" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:16px;opacity:0.80;border-radius:4px;">
+      <rect width="76" height="56" fill="rgba(0,51,102,0.6)"/>
+      <path d="M14,9 A9,9 0 1,0 14,27 A6.5,6.5 0 1,1 14,9Z" fill="rgba(255,255,255,0.85)"/>
+      <rect x="35.5" y="23" width="5" height="21" rx="2.5" fill="rgba(255,255,255,0.85)"/>
+      <path d="M38,23 C37,18 36,13 38,9 C40,13 39,18 38,23Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M38,21 C34,17 28,14 24,13 C28,14 34,18 38,21Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M38,21 C42,17 48,14 52,13 C48,14 42,18 38,21Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M38,21 C33,19 27,19 23,20 C27,18 33,18 38,21Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M38,21 C43,19 49,19 53,20 C49,18 43,18 38,21Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M38,21 C35,16 33,12 34,8 C34,12 36,17 38,21Z" fill="rgba(255,255,255,0.85)"/>
+      <path d="M38,21 C41,16 43,12 42,8 C42,12 40,17 38,21Z" fill="rgba(255,255,255,0.85)"/>
     </svg>
     <p class="mood-quote">"If the phone doesn't ring, it's me… watching the surf at Pawleys Island Pier."</p>
     <p class="mood-attr">— The Lowcountry Way</p>
