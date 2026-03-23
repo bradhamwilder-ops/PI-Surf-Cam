@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pawleys Island Pier · Fishing &amp; Surf · Pawleys Island, SC</title>
+  <title>Surf. Fish. Live Pawleys. · Pawleys Island Pier · SC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -1643,27 +1643,38 @@
       gap: 20px;
       margin-bottom: 56px;
     }
+    /* ─── Realistic Fish Illustration Cards ─── */
     .species-card {
       background: #fff;
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
       border: 1px solid var(--silver-light);
-      padding: 22px 22px 20px;
+      overflow: hidden;
       transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
     }
     .species-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .species-card-head {
+
+    .species-illus {
+      width: 100%;
+      background: #F9F5EE;
+      border-bottom: 1px solid var(--sand-dark);
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
+      justify-content: center;
+      padding: 18px 12px 10px;
+      min-height: 110px;
     }
-    .species-icon {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      flex-shrink: 0;
+    .species-illus svg { width: 100%; height: auto; max-height: 90px; }
+
+    .species-card-body { padding: 16px 18px 16px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+
+    .species-card-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      flex-direction: column;
     }
     .species-name {
       font-family: 'Playfair Display', Georgia, serif;
@@ -1678,7 +1689,7 @@
       line-height: 1.6;
     }
     .species-detail strong { color: var(--era-red); font-weight: 600; }
-    .species-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .species-tags { display: flex; flex-wrap: wrap; gap: 5px; }
     .species-method-tag {
       background: var(--sand-dark);
       color: var(--ink);
@@ -1686,6 +1697,9 @@
       padding: 2px 8px;
       border-radius: 20px;
     }
+    /* Remove old circle icon */
+    .species-icon { display: none; }
+
 
     /* Responsive fishing */
     @media (max-width: 900px) {
@@ -2852,24 +2866,47 @@
   <!-- ══════════ FROSTED-GLASS NAV ══════════ -->
   <nav>
     <a href="#" class="nav-brand">
-      <!-- SC State Flag — proper proportioned flag -->
-      <svg width="52" height="36" viewBox="0 0 104 72" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;border-radius:5px;box-shadow:0 2px 8px rgba(0,63,102,0.35);">
-        <rect width="104" height="72" fill="#003366"/>
-        <!-- Crescent (upper left, SC flag style) -->
-        <path d="M18,11 A11,11 0 1,0 18,33 A8,8 0 1,1 18,11Z" fill="white"/>
-        <!-- Palmetto trunk -->
-        <rect x="48" y="30" width="6" height="28" rx="3" fill="white"/>
-        <!-- Top frond (vertical) -->
-        <path d="M51,30 C50,24 49,17 51,12 C53,17 52,24 51,30Z" fill="white"/>
-        <!-- Side fronds -->
-        <path d="M51,28 C46,23 38,19 32,18 C38,20 46,24 51,28Z" fill="white"/>
-        <path d="M51,28 C56,23 64,19 70,18 C64,20 56,24 51,28Z" fill="white"/>
-        <path d="M51,28 C45,26 38,26 33,27 C38,25 45,25 51,28Z" fill="white"/>
-        <path d="M51,28 C57,26 64,26 69,27 C64,25 57,25 51,28Z" fill="white"/>
-        <path d="M51,28 C48,21 45,16 46,11 C47,16 49,22 51,28Z" fill="white"/>
-        <path d="M51,28 C54,21 57,16 56,11 C55,16 53,22 51,28Z" fill="white"/>
+      <!-- ══ PAWLEYS ISLAND LOGO — Surf · Fish · Live ══ -->
+      <svg viewBox="0 0 210 42" xmlns="http://www.w3.org/2000/svg" width="210" height="42" style="flex-shrink:0;">
+        <!-- Badge shadow -->
+        <rect x="1.5" y="2.5" width="40" height="40" rx="8" fill="rgba(0,0,0,0.16)"/>
+        <!-- Badge background -->
+        <rect x="0" y="0.5" width="40" height="40" rx="8" fill="#2C3E6B"/>
+        <!-- Seafoam inner ring -->
+        <rect x="2" y="2.5" width="36" height="36" rx="6.5" fill="none" stroke="#4DA49C" stroke-width="1.3"/>
+        <!-- Sun halo -->
+        <circle cx="29" cy="10" r="7.5" fill="#E9C46A" opacity="0.14"/>
+        <!-- Sun -->
+        <circle cx="29" cy="10" r="5" fill="#E9C46A" opacity="0.93"/>
+        <!-- Clipping mask for wave/water inside badge -->
+        <clipPath id="badgeClip">
+          <rect x="0" y="0.5" width="40" height="40" rx="8"/>
+        </clipPath>
+        <g clip-path="url(#badgeClip)">
+          <!-- Ocean water fill -->
+          <path d="M0,30 C5,24 12,30 20,26 C28,22 34,28 40,26 L40,41 L0,41Z" fill="#4DA49C" opacity="0.24"/>
+          <!-- Main wave -->
+          <path d="M0,28 C5,22 12,28 20,24 C28,20 34,26 40,24" fill="none" stroke="#90E0EF" stroke-width="2.3" stroke-linecap="round"/>
+          <!-- Secondary wave (faint) -->
+          <path d="M0,33 C6,30 14,34 20,31 C26,28 34,32 40,30" fill="none" stroke="rgba(144,224,239,0.28)" stroke-width="1.3" stroke-linecap="round"/>
+        </g>
+        <!-- Fish body -->
+        <ellipse cx="18" cy="17" rx="6.2" ry="3.3" fill="white" opacity="0.88"/>
+        <!-- Fish tail -->
+        <path d="M24.2,17 L29.5,13 L29.5,21Z" fill="white" opacity="0.75"/>
+        <!-- Fish eye -->
+        <circle cx="13.5" cy="15.8" r="1.1" fill="#2C3E6B" opacity="0.9"/>
+        <!-- Dorsal fin arc -->
+        <path d="M17,13.5 C19,11 22,11 23,13.5" fill="none" stroke="rgba(255,255,255,0.62)" stroke-width="1.1" stroke-linecap="round"/>
+        <!-- Divider between badge and wordmark -->
+        <line x1="48" y1="8" x2="48" y2="34" stroke="#D2CAC0" stroke-width="0.9" opacity="0.55"/>
+        <!-- Primary wordmark -->
+        <text x="56" y="19" font-family="'Bebas Neue','Impact',sans-serif" font-size="17" fill="#2C3E6B" letter-spacing="0.5">PAWLEYS ISLAND</text>
+        <!-- Slogan -->
+        <text x="57" y="30.5" font-family="'Bebas Neue','Impact',sans-serif" font-size="11.5" fill="#4DA49C" letter-spacing="2.6">SURF · FISH · LIVE</text>
+        <!-- Region sub-line -->
+        <text x="57.5" y="39.5" font-family="'DM Sans','Arial',sans-serif" font-size="6.8" fill="#8B7355" letter-spacing="1.8" font-weight="600">SOUTH CAROLINA</text>
       </svg>
-      <span class="nav-brand-name">Pawleys Island Surf Cam</span>
     </a>
     <div style="display:flex;align-items:center;gap:16px;">
       <a href="links.html" style="font-size:0.72rem;font-weight:700;color:#005B9A;text-decoration:none;letter-spacing:1px;text-transform:uppercase;">Links</a>
@@ -2882,9 +2919,9 @@
 
   <!-- ══════════ HERO ══════════ -->
   <section class="hero">
-    <p class="hero-eyebrow" style="font-family:'Bebas Neue','Impact',sans-serif;font-size:0.82rem;letter-spacing:0.22em;">🤙 &nbsp;Pawleys Island, South Carolina &nbsp;·&nbsp; Est. on the Strand</p>
-    <h1 class="hero-title">Pier, Fish &amp;<br><em>Open Water.</em></h1>
-    <p class="hero-sub">Fishing reports, tide charts, seasonal guides, and the local businesses that make Pawleys Island worth every cast — and every wave.</p>
+    <p class="hero-eyebrow" style="font-family:'Bebas Neue','Impact',sans-serif;font-size:0.85rem;letter-spacing:0.24em;">🤙 &nbsp;Pawleys Island, South Carolina &nbsp;·&nbsp; Est. on the Strand</p>
+    <h1 class="hero-title" style="line-height:1.05;">Surf. Fish.<br><em>Live Pawleys.</em></h1>
+    <p class="hero-sub">Your guide to the pier, the Lowcountry tides, what's biting this season — and the local businesses that make this island worth every cast and every wave.</p>
     <div class="hero-pills">
       <span class="pill pill-teal">Live Pier Cam</span>
       <span class="pill pill-coral">Live Sunsets</span>
@@ -2896,13 +2933,18 @@
   <!-- ══════════ TAB BAR ══════════ -->
   <div class="tab-bar" id="tabBar">
     <div class="tab-bar-inner">
-      <button class="tab-btn active" data-tab="cam">
+      <button class="tab-btn active" data-tab="surfcam">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        Surf Cam
+      </button>
+      <button class="tab-btn" data-tab="cam">
         <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><path d="M2,9 Q5,5 7,7 Q9,9 12,5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="5" r="1.5" fill="currentColor"/><path d="M1,11 Q4,8 7,10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/></svg>
         Fishing
       </button>
-      <button class="tab-btn" data-tab="realestate">
+      <button class="tab-btn" data-tab="realestate" onclick="window.open('https://bradhamwilder.erawilderrealty.com/search/#status=active&sold_days=180&ls_conversion=acres&location_search_field=Pawleys%20SC&drive_time=09%3A00&drive_duration=15&drive_avoid_ferry=1&drive_departure=1&ss_locale=en-US&ss_description=Pawleys%20Island%2C%20SC&ss_email_freq=40&ss_send_zero_result=1&bounds_north=33.590662715021665&bounds_east=-78.966621423332&bounds_south=33.2324335943146&bounds_west=-79.21724703368356&center_lat=33.4332236&center_lon=-79.12143130000001&center_lat_pan=33.41173284179556&center_lon_pan=-79.09193422850778&geotype=CUSTOM&user_lat=33.4332236&user_lon=-79.12143130000001&pgsize=20&startidx=0&zoom=11&sort_by=1&company_uuid=3880084&commute=0&geolayer=%7B%22custom%22%3Atrue%2C%22geojson%22%3A%7B%22type%22%3A%22MultiPolygon%22%2C%22coordinates%22%3A%5B%5B%5B%5B-79.128675%2C33.50654%5D%2C%5B-79.06413%2C33.499669%5D%2C%5B-79.160947%2C33.327723%5D%2C%5B-79.266988%2C33.339771%5D%2C%5B-79.224416%2C33.402848%5D%2C%5B-79.20519%2C33.425201%5D%2C%5B-79.175664%2C33.444111%5D%2C%5B-79.158498%2C33.46187%5D%2C%5B-79.154378%2C33.478481%5D%2C%5B-79.139959%2C33.505395%5D%2C%5B-79.128675%2C33.50654%5D%5D%5D%5D%7D%2C%22geolayerid%22%3A-1%2C%22templateids%22%3A%5B%5D%7D&buffer_miles=0.25&geospatial=true&agent_uuid=ad93b90d-a437-4fec-9275-e39fe0bc85ae&ptype=1%2C2%2C3%2C4%2C5%2C7%2C9%2C8&searchType=criteria&pstatus=1%2C2%2C11&omit_hidden=true&currency=USD','_blank');return false;">
         <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><path d="M2,12 L2,6 L7,2 L12,6 L12,12 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><rect x="5" y="8" width="4" height="4" fill="currentColor" opacity="0.5"/></svg>
         Real Estate
+        <svg width="9" height="9" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:0;margin-left:3px;opacity:0.5;"><path d="M3,1 H9 V7 M9,1 L4,6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <button class="tab-btn" data-tab="stay">
         <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><path d="M7,1 C4,1 1,3.5 1,7 C1,11 4,13 7,13 C10,13 13,11 13,7 C13,3.5 10,1 7,1Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1,7 Q4,5 7,7 Q10,9 13,7" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
@@ -2919,8 +2961,50 @@
     </div>
   </div>
 
-  <!-- ══════════ PANEL: LIVE CAM ══════════ -->
-  <div class="tab-panel active" data-panel="cam">
+  <!-- ══════════ PANEL: SURF CAM ══════════ -->
+  <div class="tab-panel active" data-panel="surfcam">
+
+  <!-- ══════════ SURF CAM PLACEHOLDER ══════════ -->
+  <section style="padding:0 24px 52px;display:flex;flex-direction:column;align-items:center;">
+    <div style="width:100%;max-width:1060px;background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);border:1px solid var(--glass-border);">
+      <!-- Chrome bar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:var(--white);border-bottom:1px solid var(--glass-border);">
+        <div style="display:flex;gap:7px;">
+          <div style="width:11px;height:11px;border-radius:50%;background:#ff5f57;"></div>
+          <div style="width:11px;height:11px;border-radius:50%;background:#febc2e;"></div>
+          <div style="width:11px;height:11px;border-radius:50%;background:#28c840;"></div>
+        </div>
+        <span style="font-size:0.73rem;font-weight:500;color:var(--ink-faint);letter-spacing:0.5px;">Pawleys Island Pier — Live Cam</span>
+        <div style="display:flex;align-items:center;gap:5px;font-size:0.73rem;font-weight:600;color:var(--silver);">
+          <div style="width:7px;height:7px;border-radius:50%;background:var(--silver);"></div>
+          OFFLINE
+        </div>
+      </div>
+      <!-- Placeholder viewport -->
+      <div style="aspect-ratio:16/9;background:linear-gradient(160deg,#0F1923 0%,#1C2B38 50%,#2C3E6B 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;position:relative;overflow:hidden;">
+        <!-- Subtle wave bg -->
+        <svg style="position:absolute;bottom:0;left:0;right:0;opacity:0.12;" viewBox="0 0 1060 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,60 C120,20 240,100 360,60 C480,20 600,100 720,60 C840,20 960,80 1060,50 L1060,120 L0,120Z" fill="#4DA49C"/>
+        </svg>
+        <!-- Camera icon -->
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+        <div style="text-align:center;padding:0 20px;">
+          <div style="font-family:'Bebas Neue','Impact',sans-serif;font-size:1.6rem;color:rgba(255,255,255,0.55);letter-spacing:0.1em;margin-bottom:8px;">LIVE CAM — COMING SOON</div>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.35);max-width:420px;line-height:1.6;">A live feed of Pawleys Island Pier is on the way. Check back soon for real-time surf, weather, and pier conditions.</p>
+        </div>
+        <!-- Logo watermark -->
+        <div style="position:absolute;bottom:16px;right:20px;font-family:'Bebas Neue','Impact',sans-serif;font-size:0.75rem;letter-spacing:0.14em;color:rgba(255,255,255,0.18);">PAWLEYS ISLAND · SURF · FISH · LIVE</div>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--ink-faint);margin-top:12px;letter-spacing:0.3px;">Pawleys Island Pier &nbsp;·&nbsp; Pawleys Island, SC &nbsp;·&nbsp; Live cam coming soon</p>
+  </section>
+
+  </div><!-- /tab-panel surfcam -->
+
+  <!-- ══════════ PANEL: FISHING ══════════ -->
+  <div class="tab-panel" data-panel="cam">
 
   <!-- ══════════ FISHING SECTION ══════════ -->
   <section class="fishing-section">
@@ -3047,127 +3131,328 @@
       <h3 class="seasons-title" style="margin-bottom:28px;">Know Your <em>Species</em></h3>
       <div class="species-guide-grid">
 
-        <div class="species-card">
-          <div class="species-card-head">
-            <div class="species-icon" style="background:#FFF3E0;">🐟</div>
-            <div>
-              <div class="species-name">Red Drum (Redfish)</div>
-              <div class="species-latin">Sciaenops ocellatus</div>
-            </div>
-          </div>
-          <div class="species-detail">
-            <strong>Best season:</strong> Fall (bull reds) &amp; Spring. Inshore all year. Fish the creek mouths, oyster beds, and around the pier on incoming tides. <br><br>
-            <strong>Limit:</strong> 3 per person · 15–23" slot limit in SC.
-          </div>
-          <div class="species-tags">
-            <span class="species-method-tag">Live Shrimp</span>
-            <span class="species-method-tag">Cut Mullet</span>
-            <span class="species-method-tag">Gold Spoon</span>
-            <span class="species-method-tag">Soft Plastics</span>
-          </div>
-        </div>
+<div class="species-card">
+  <div class="species-illus"><svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="rdBk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7A5010"/>
+      <stop offset="32%" stop-color="#BE8020"/>
+      <stop offset="65%" stop-color="#D4A848"/>
+      <stop offset="100%" stop-color="#F0DCA0"/>
+    </linearGradient>
+    <linearGradient id="rdFn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A87020" stop-opacity="0.82"/>
+      <stop offset="100%" stop-color="#D4A040" stop-opacity="0.38"/>
+    </linearGradient>
+  </defs>
+  <path d="M256,38 C270,20 294,16 296,34 L296,66 C294,84 270,80 256,62 Z" fill="url(#rdFn)" stroke="#8A5E10" stroke-width="0.8"/>
+  <path d="M54,50 C64,27 110,15 167,15 C224,15 258,30 263,50 C258,70 224,85 167,85 C110,85 64,73 54,50 Z" fill="url(#rdBk)" stroke="#8A5E10" stroke-width="0.8"/>
+  <path d="M54,50 C48,38 36,33 26,39 C19,44 19,56 26,62 C36,67 50,62 54,50 Z" fill="url(#rdBk)" stroke="#8A5E10" stroke-width="0.8"/>
+  <path d="M66,27 C57,38 56,52 61,63 C66,70 74,67 75,59" fill="none" stroke="#8A5E10" stroke-width="1.1"/>
+  <g fill="none" stroke="#8A5E10" stroke-width="0.5" opacity="0.32">
+    <path d="M98,35 Q106,29 114,34"/><path d="M118,31 Q126,25 134,30"/>
+    <path d="M138,28 Q147,22 155,27"/><path d="M159,27 Q168,21 176,26"/>
+    <path d="M178,28 Q187,22 195,27"/><path d="M198,31 Q207,25 215,30"/>
+  </g>
+  <path d="M68,43 C145,39 205,39 252,47" fill="none" stroke="#8A5E10" stroke-width="0.6" opacity="0.38"/>
+  <path d="M107,17 L112,2 L118,0 L124,3 L130,0 L136,3 L141,1 L147,4 L152,2 L157,17" fill="url(#rdFn)" stroke="#8A5E10" stroke-width="0.6"/>
+  <path d="M162,18 C175,6 202,3 213,12 L213,26 C200,24 174,26 162,26 Z" fill="url(#rdFn)" stroke="#8A5E10" stroke-width="0.6"/>
+  <path d="M75,46 C80,31 95,26 100,31 C102,46 97,63 89,70 C81,65 74,57 75,46 Z" fill="#C89830" fill-opacity="0.62" stroke="#8A5E10" stroke-width="0.6"/>
+  <path d="M113,77 L120,92 L129,92 L130,77 Z" fill="#C89830" fill-opacity="0.52" stroke="#8A5E10" stroke-width="0.5"/>
+  <path d="M182,79 C198,91 217,93 222,84 L220,72 C207,73 193,74 182,79 Z" fill="url(#rdFn)" stroke="#8A5E10" stroke-width="0.6"/>
+  <circle cx="238" cy="57" r="11.5" fill="#0E0C06"/>
+  <circle cx="238" cy="57" r="16" fill="none" stroke="#DEC050" stroke-width="2.8"/>
+  <circle cx="40" cy="47" r="6.5" fill="white" stroke="#4A3006" stroke-width="0.5"/>
+  <circle cx="41.5" cy="47" r="5" fill="#110E05"/>
+  <circle cx="43" cy="45.5" r="1.5" fill="white"/>
+  <path d="M23,59 C28,63 37,64 47,61" fill="none" stroke="#4A3006" stroke-width="0.9"/>
+  <text x="155" y="97" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#8B6340" letter-spacing="1" opacity="0.7">Red Drum · Sciaenops ocellatus</text>
+  </svg></div>
+  <div class="species-card-body">
+    <div class="species-card-head">
+      <div class="species-name">Red Drum (Redfish)</div>
+      <div class="species-latin">Sciaenops ocellatus</div>
+    </div>
+    <div class="species-detail"><strong>Best season:</strong> Fall (bull reds) &amp; Spring. Inshore all year. Fish creek mouths, oyster beds, and around the pier on incoming tides. The black spot near the tail base is its signature mark.<br><br><strong>Limit (SC):</strong> 2 per person/day &middot; max 6 per boat &middot; 15&ndash;23&quot; slot (release fish outside slot). Reduced from 3/day in 2018.</div>
+    <div class="species-tags"><span class="species-method-tag">Live Crab</span><span class="species-method-tag">Finger Mullet</span><span class="species-method-tag">Gold Spoon</span></div>
+  </div>
+</div>
 
-        <div class="species-card">
-          <div class="species-card-head">
-            <div class="species-icon" style="background:#E8F5E9;">🐠</div>
-            <div>
-              <div class="species-name">Flounder</div>
-              <div class="species-latin">Paralichthys dentatus</div>
-            </div>
-          </div>
-          <div class="species-detail">
-            <strong>Best season:</strong> Spring through Fall. Ambush predators — lie flat on sandy bottom near structure. Drift live finger mullet along the edges of grass beds and pier shadow lines.
-            <br><br>
-            <strong>Limit:</strong> 10 per person · 12" min in SC.
-          </div>
-          <div class="species-tags">
-            <span class="species-method-tag">Live Finger Mullet</span>
-            <span class="species-method-tag">Gulp Shrimp</span>
-            <span class="species-method-tag">Jig &amp; Twister</span>
-          </div>
-        </div>
+<div class="species-card">
+  <div class="species-illus"><svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="sfBk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3A3018"/>
+      <stop offset="50%" stop-color="#5C4E28"/>
+      <stop offset="100%" stop-color="#887645"/>
+    </linearGradient>
+    <radialGradient id="sfSp" cx="50%" cy="50%" r="50%">
+      <stop offset="55%" stop-color="#28220E" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#28220E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path d="M260,34 C276,22 300,20 302,36 L302,64 C300,80 276,78 260,66 Z" fill="#5C4E28" fill-opacity="0.82" stroke="#3A3018" stroke-width="0.8"/>
+  <path d="M36,50 C54,26 125,15 195,19 C258,22 295,34 298,50 C295,66 258,77 195,81 C125,85 54,74 36,50 Z" fill="url(#sfBk)" stroke="#3A3018" stroke-width="0.9"/>
+  <path d="M54,28 C105,13 180,10 254,21 L254,30 C178,21 103,24 52,38 Z" fill="#4C4020" fill-opacity="0.72" stroke="#3A3018" stroke-width="0.6"/>
+  <path d="M68,72 C135,82 205,82 256,70 L254,78 C202,90 133,90 66,80 Z" fill="#4C4020" fill-opacity="0.68" stroke="#3A3018" stroke-width="0.6"/>
+  <ellipse cx="108" cy="40" rx="16" ry="10" fill="url(#sfSp)"/>
+  <ellipse cx="152" cy="36" rx="14" ry="9" fill="url(#sfSp)"/>
+  <ellipse cx="194" cy="38" rx="15" ry="9" fill="url(#sfSp)"/>
+  <ellipse cx="234" cy="42" rx="12" ry="8" fill="url(#sfSp)"/>
+  <ellipse cx="128" cy="54" rx="12" ry="8" fill="url(#sfSp)"/>
+  <ellipse cx="170" cy="53" rx="13" ry="8" fill="url(#sfSp)"/>
+  <ellipse cx="212" cy="56" rx="11" ry="7" fill="url(#sfSp)"/>
+  <circle cx="98" cy="53" r="4.5" fill="#28220E" fill-opacity="0.52"/>
+  <circle cx="140" cy="50" r="4" fill="#28220E" fill-opacity="0.5"/>
+  <circle cx="165" cy="58" r="3.5" fill="#28220E" fill-opacity="0.5"/>
+  <circle cx="228" cy="57" r="4" fill="#28220E" fill-opacity="0.5"/>
+  <path d="M70,42 C80,32 92,32 95,38 C94,50 87,60 78,62 C70,58 67,50 70,42 Z" fill="#5C4E28" fill-opacity="0.58" stroke="#3A3018" stroke-width="0.5"/>
+  <circle cx="52" cy="36" r="5.5" fill="white" stroke="#28220E" stroke-width="0.5"/>
+  <circle cx="53.5" cy="36" r="4" fill="#1A1408"/>
+  <circle cx="55" cy="34.5" r="1.2" fill="white"/>
+  <circle cx="46" cy="43" r="4.5" fill="white" stroke="#28220E" stroke-width="0.5"/>
+  <circle cx="47.5" cy="43" r="3.2" fill="#1A1408"/>
+  <circle cx="49" cy="41.8" r="1" fill="white"/>
+  <path d="M26,54 C32,58 42,59 52,56" fill="none" stroke="#28220E" stroke-width="0.8"/>
+  <text x="155" y="97" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#7A7055" letter-spacing="1" opacity="0.7">Southern Flounder · Paralichthys lethostigma</text>
+  </svg></div>
+  <div class="species-card-body">
+    <div class="species-card-head">
+      <div class="species-name">Southern Flounder</div>
+      <div class="species-latin">Paralichthys lethostigma</div>
+    </div>
+    <div class="species-detail"><strong>Best season:</strong> Fall is prime — flounder migrate toward inlets in Oct&ndash;Nov. Drift live finger mullet or mud minnows along grass flat edges and near inlet mouths. Both eyes on the same side is the unmistakable tell.<br><br><strong>Limit (SC):</strong> 5 per person/day &middot; max 10 per boat &middot; 16&quot; minimum total length (updated 2021).</div>
+    <div class="species-tags"><span class="species-method-tag">Finger Mullet</span><span class="species-method-tag">Mud Minnow</span><span class="species-method-tag">Flounder Rig</span></div>
+  </div>
+</div>
 
-        <div class="species-card">
-          <div class="species-card-head">
-            <div class="species-icon" style="background:#E3F2FD;">🐡</div>
-            <div>
-              <div class="species-name">Spanish Mackerel</div>
-              <div class="species-latin">Scomberomorus maculatus</div>
-            </div>
-          </div>
-          <div class="species-detail">
-            <strong>Best season:</strong> Spring &amp; Fall runs. Fast, aggressive, and absolutely fun on light tackle. Troll Clark spoons or cast silver slabs off the pier on incoming tide.
-            <br><br>
-            <strong>Limit:</strong> 15 per person in SC.
-          </div>
-          <div class="species-tags">
-            <span class="species-method-tag">Clark Spoon</span>
-            <span class="species-method-tag">Silver Slab</span>
-            <span class="species-method-tag">Bucktail Jig</span>
-          </div>
-        </div>
+<div class="species-card">
+  <div class="species-illus"><svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="smBky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#285068"/>
+      <stop offset="35%" stop-color="#487888"/>
+      <stop offset="65%" stop-color="#8AB4C4"/>
+      <stop offset="100%" stop-color="#CCE0E8"/>
+    </linearGradient>
+    <linearGradient id="smFny" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#285068" stop-opacity="0.78"/>
+      <stop offset="100%" stop-color="#8AB4C4" stop-opacity="0.28"/>
+    </linearGradient>
+  </defs>
+  <path d="M270,43 C284,26 308,18 310,36 L310,50" fill="url(#smFny)" stroke="#285068" stroke-width="0.7"/>
+  <path d="M270,57 C284,74 308,82 310,64 L310,50" fill="url(#smFny)" stroke="#285068" stroke-width="0.7"/>
+  <path d="M24,50 C40,36 100,28 186,28 C252,28 276,37 280,50 C276,63 252,72 186,72 C100,72 40,64 24,50 Z" fill="url(#smBky)" stroke="#285068" stroke-width="0.8"/>
+  <path d="M24,50 C18,46 12,48 8,51 C10,54 18,54 24,50 Z" fill="url(#smBky)" stroke="#285068" stroke-width="0.6"/>
+  <path d="M106,30 L116,7 L150,5 L162,8 L164,15 L160,30" fill="url(#smFny)" stroke="#285068" stroke-width="0.6"/>
+  <path d="M172,31 C185,22 206,22 216,28 L216,38 L172,40 Z" fill="url(#smFny)" stroke="#285068" stroke-width="0.6"/>
+  <path d="M222,37 L226,27 L230,37" fill="url(#smFny)" stroke="#285068" stroke-width="0.5"/>
+  <path d="M233,38 L237,29 L241,38" fill="url(#smFny)" stroke="#285068" stroke-width="0.5"/>
+  <path d="M244,40 L247,32 L250,40" fill="url(#smFny)" stroke="#285068" stroke-width="0.5"/>
+  <path d="M174,68 C188,78 210,80 218,74 L218,64 L174,62 Z" fill="url(#smFny)" stroke="#285068" stroke-width="0.6"/>
+  <path d="M222,63 L226,72 L230,63" fill="url(#smFny)" stroke="#285068" stroke-width="0.5"/>
+  <path d="M233,62 L237,70 L241,62" fill="url(#smFny)" stroke="#285068" stroke-width="0.5"/>
+  <path d="M244,61 L247,68 L250,61" fill="url(#smFny)" stroke="#285068" stroke-width="0.5"/>
+  <path d="M55,46 C61,34 74,30 78,36 C80,49 75,62 67,67 C59,62 53,54 55,46 Z" fill="#8AB4C4" fill-opacity="0.52" stroke="#285068" stroke-width="0.5"/>
+  <ellipse cx="118" cy="41" rx="7.5" ry="5" fill="#E0B820" fill-opacity="0.9"/>
+  <ellipse cx="146" cy="39" rx="7.5" ry="5" fill="#E0B820" fill-opacity="0.9"/>
+  <ellipse cx="173" cy="39" rx="7" ry="5" fill="#E0B820" fill-opacity="0.88"/>
+  <ellipse cx="199" cy="40" rx="7" ry="4.5" fill="#E0B820" fill-opacity="0.85"/>
+  <ellipse cx="222" cy="41" rx="6.5" ry="4.5" fill="#E0B820" fill-opacity="0.8"/>
+  <ellipse cx="132" cy="52" rx="6.5" ry="4.5" fill="#E0B820" fill-opacity="0.72"/>
+  <ellipse cx="159" cy="51" rx="6.5" ry="4.5" fill="#E0B820" fill-opacity="0.72"/>
+  <ellipse cx="186" cy="52" rx="6" ry="4" fill="#E0B820" fill-opacity="0.68"/>
+  <path d="M38,46 C120,42 210,42 266,48" fill="none" stroke="#285068" stroke-width="0.6" opacity="0.32"/>
+  <path d="M48,33 C41,41 40,52 45,61 C50,66 58,63 59,55" fill="none" stroke="#285068" stroke-width="0.9"/>
+  <circle cx="32" cy="47" r="5.5" fill="white" stroke="#182E40" stroke-width="0.5"/>
+  <circle cx="33.5" cy="47" r="4" fill="#0C1E28"/>
+  <circle cx="35" cy="45.5" r="1.3" fill="white"/>
+  <path d="M8,52 C12,55 19,56 24,53" fill="none" stroke="#182E40" stroke-width="0.8"/>
+  <text x="160" y="97" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#3A6878" letter-spacing="1" opacity="0.7">Spanish Mackerel · Scomberomorus maculatus</text>
+  </svg></div>
+  <div class="species-card-body">
+    <div class="species-card-head">
+      <div class="species-name">Spanish Mackerel</div>
+      <div class="species-latin">Scomberomorus maculatus</div>
+    </div>
+    <div class="species-detail"><strong>Best season:</strong> Spring through Fall. Mackerel arrive with warming water in March and run hard through October. Troll spoons or cast Clark spoons off the pier end on incoming tide. The gold oval spots on silver sides are the key ID mark.<br><br><strong>Limit (SC):</strong> 15 per person/day &middot; 12&quot; fork length minimum.</div>
+    <div class="species-tags"><span class="species-method-tag">Clark Spoon</span><span class="species-method-tag">Gotcha Plug</span><span class="species-method-tag">Live Bait</span></div>
+  </div>
+</div>
 
-        <div class="species-card">
-          <div class="species-card-head">
-            <div class="species-icon" style="background:#F3E5F5;">🦈</div>
-            <div>
-              <div class="species-name">Sheepshead</div>
-              <div class="species-latin">Archosargus probatocephalus</div>
-            </div>
-          </div>
-          <div class="species-detail">
-            <strong>Best season:</strong> Winter &amp; early Spring. One of the best-tasting fish in the ocean. They live on barnacles and crustaceans — fish straight down on the pier pilings with fiddler crabs on a small hook.
-            <br><br>
-            <strong>Limit:</strong> 10 per person · 12" min in SC.
-          </div>
-          <div class="species-tags">
-            <span class="species-method-tag">Fiddler Crab</span>
-            <span class="species-method-tag">Sand Flea</span>
-            <span class="species-method-tag">Barnacle</span>
-          </div>
-        </div>
+<div class="species-card">
+  <div class="species-illus"><svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="shBky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B8B8A8"/>
+      <stop offset="50%" stop-color="#D0D0C0"/>
+      <stop offset="100%" stop-color="#E4E4D8"/>
+    </linearGradient>
+    <linearGradient id="shFny" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#787870" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#B8B8A8" stop-opacity="0.32"/>
+    </linearGradient>
+    <clipPath id="shClp">
+      <path d="M70,50 C80,18 140,6 200,8 C254,10 280,27 284,50 C280,73 254,92 200,94 C140,96 80,82 70,50 Z"/>
+    </clipPath>
+  </defs>
+  <path d="M282,35 C295,20 314,18 316,35 L316,65 C314,82 295,80 282,65 Z" fill="url(#shFny)" stroke="#4A4A3C" stroke-width="0.8"/>
+  <path d="M70,50 C80,18 140,6 200,8 C254,10 280,27 284,50 C280,73 254,92 200,94 C140,96 80,82 70,50 Z" fill="url(#shBky)" stroke="#4A4A3C" stroke-width="0.9"/>
+  <path d="M70,50 C64,36 52,31 42,37 C34,42 34,58 42,65 C52,70 66,63 70,50 Z" fill="url(#shBky)" stroke="#4A4A3C" stroke-width="0.9"/>
+  <g clip-path="url(#shClp)" fill="#1C1C14" opacity="0.86">
+    <rect x="84" y="0" width="18" height="110"/>
+    <rect x="114" y="0" width="17" height="110"/>
+    <rect x="143" y="0" width="17" height="110"/>
+    <rect x="172" y="0" width="17" height="110"/>
+    <rect x="201" y="0" width="16" height="110"/>
+    <rect x="228" y="0" width="15" height="110"/>
+    <rect x="254" y="0" width="14" height="110"/>
+  </g>
+  <path d="M70,50 C80,18 140,6 200,8 C254,10 280,27 284,50 C280,73 254,92 200,94 C140,96 80,82 70,50 Z" fill="none" stroke="#4A4A3C" stroke-width="0.9"/>
+  <path d="M94,9 L97,0 L105,0 L108,1 L116,0 L119,2 L127,0 L130,2 L138,0 L141,2 L148,1 L152,9 C138,7 118,7 94,9 Z" fill="url(#shFny)" stroke="#4A4A3C" stroke-width="0.6"/>
+  <path d="M158,10 C172,2 200,1 212,7 L212,19 C199,16 172,18 158,18 Z" fill="url(#shFny)" stroke="#4A4A3C" stroke-width="0.6"/>
+  <path d="M168,88 C185,98 208,100 215,90 L215,80 C202,82 184,82 168,88 Z" fill="url(#shFny)" stroke="#4A4A3C" stroke-width="0.6"/>
+  <path d="M86,46 C91,30 106,24 110,31 C112,46 106,63 98,70 C89,65 84,56 86,46 Z" fill="#C0C0B0" fill-opacity="0.52" stroke="#4A4A3C" stroke-width="0.6"/>
+  <path d="M120,84 L127,98 L136,98 L136,84 Z" fill="#C0C0B0" fill-opacity="0.48" stroke="#4A4A3C" stroke-width="0.5"/>
+  <path d="M80,23 C72,34 70,50 74,63 C78,72 86,70 88,62" fill="none" stroke="#4A4A3C" stroke-width="1"/>
+  <rect x="44" y="57" width="5.5" height="7" rx="1.8" fill="white" stroke="#3A3A2C" stroke-width="0.5"/>
+  <rect x="50.5" y="57" width="5" height="6.5" rx="1.5" fill="white" stroke="#3A3A2C" stroke-width="0.5"/>
+  <rect x="56.5" y="57" width="4.5" height="6" rx="1.4" fill="white" stroke="#3A3A2C" stroke-width="0.5"/>
+  <circle cx="56" cy="40" r="7" fill="white" stroke="#2C2C20" stroke-width="0.5"/>
+  <circle cx="57.5" cy="40" r="5.5" fill="#0E0E08"/>
+  <circle cx="59" cy="38.5" r="1.6" fill="white"/>
+  <path d="M34,59 C40,64 52,65 62,62" fill="none" stroke="#2C2C20" stroke-width="0.9"/>
+  <text x="155" y="97" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#8A8060" letter-spacing="1" opacity="0.7">Sheepshead · Archosargus probatocephalus</text>
+  </svg></div>
+  <div class="species-card-body">
+    <div class="species-card-head">
+      <div class="species-name">Sheepshead</div>
+      <div class="species-latin">Archosargus probatocephalus</div>
+    </div>
+    <div class="species-detail"><strong>Best season:</strong> Winter through Spring. Sheepshead stack tight on the pier pilings and bridge structure year-round. Use live fiddler crabs on a small hook right against the structure. The bold black stripes and human-like front teeth are unmistakable.<br><br><strong>Limit (SC):</strong> 10 per person/day &middot; max 30 per boat &middot; 12&quot; minimum total length.</div>
+    <div class="species-tags"><span class="species-method-tag">Fiddler Crab</span><span class="species-method-tag">Sand Flea</span><span class="species-method-tag">Oyster</span></div>
+  </div>
+</div>
 
-        <div class="species-card">
-          <div class="species-card-head">
-            <div class="species-icon" style="background:#FFF9C4;">🌊</div>
-            <div>
-              <div class="species-name">Pompano</div>
-              <div class="species-latin">Trachinotus carolinus</div>
-            </div>
-          </div>
-          <div class="species-detail">
-            <strong>Best season:</strong> Spring surf run (April–May) and again in October. Target them in the gut — the trough between the sandbar and the beach — with sand fleas (mole crabs) on a pompano rig.
-            <br><br>
-            <strong>Limit:</strong> No bag limit in SC · 11" min.
-          </div>
-          <div class="species-tags">
-            <span class="species-method-tag">Sand Flea</span>
-            <span class="species-method-tag">Pompano Rig</span>
-            <span class="species-method-tag">Shrimp</span>
-          </div>
-        </div>
+<div class="species-card">
+  <div class="species-illus"><svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="fpBky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6880A0"/>
+      <stop offset="35%" stop-color="#98B0C4"/>
+      <stop offset="62%" stop-color="#C0CCDA"/>
+      <stop offset="100%" stop-color="#D4B848"/>
+    </linearGradient>
+    <linearGradient id="fpFny" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#506880" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#A0B8CC" stop-opacity="0.28"/>
+    </linearGradient>
+    <linearGradient id="fpGld" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C8D4DA"/>
+      <stop offset="100%" stop-color="#D0B038"/>
+    </linearGradient>
+  </defs>
+  <path d="M255,43 C270,22 298,14 300,34 L300,50" fill="url(#fpFny)" stroke="#405870" stroke-width="0.7"/>
+  <path d="M255,57 C270,78 298,86 300,66 L300,50" fill="url(#fpFny)" stroke="#405870" stroke-width="0.7"/>
+  <path d="M66,50 C76,18 138,6 196,8 C248,10 268,27 271,50 C268,73 248,92 196,94 C138,96 76,82 66,50 Z" fill="url(#fpBky)" stroke="#405870" stroke-width="0.8"/>
+  <path d="M66,50 C76,80 138,94 196,94 C248,92 268,72 271,50" fill="url(#fpGld)" fill-opacity="0.42"/>
+  <path d="M66,50 C60,36 48,30 38,36 C30,42 30,58 38,65 C48,70 62,63 66,50 Z" fill="url(#fpBky)" stroke="#405870" stroke-width="0.8"/>
+  <path d="M104,10 C130,0 176,0 216,8 L216,24 C176,16 130,14 104,20 Z" fill="url(#fpFny)" stroke="#405870" stroke-width="0.6"/>
+  <path d="M148,88 C172,98 212,98 222,88 L222,77 C210,80 170,80 148,82 Z" fill="url(#fpFny)" stroke="#405870" stroke-width="0.6"/>
+  <path d="M82,45 C88,28 104,22 110,29 C112,45 106,64 97,71 C88,66 81,57 82,45 Z" fill="#98B0C4" fill-opacity="0.56" stroke="#405870" stroke-width="0.6"/>
+  <path d="M126,83 L134,97 L143,97 L143,83 Z" fill="#98B0C4" fill-opacity="0.48" stroke="#405870" stroke-width="0.5"/>
+  <path d="M78,40 C155,35 234,36 256,44" fill="none" stroke="#405870" stroke-width="0.5" opacity="0.34"/>
+  <path d="M76,24 C67,36 66,50 71,64 C75,72 84,70 85,62" fill="none" stroke="#405870" stroke-width="1"/>
+  <circle cx="50" cy="44" r="7" fill="white" stroke="#304460" stroke-width="0.5"/>
+  <circle cx="51.5" cy="44" r="5.5" fill="#0C1820"/>
+  <circle cx="53" cy="42.5" r="1.6" fill="white"/>
+  <path d="M30,60 C36,65 46,66 56,63" fill="none" stroke="#304460" stroke-width="0.9"/>
+  <text x="155" y="97" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#5A8090" letter-spacing="1" opacity="0.7">Florida Pompano · Trachinotus carolinus</text>
+  </svg></div>
+  <div class="species-card-body">
+    <div class="species-card-head">
+      <div class="species-name">Florida Pompano</div>
+      <div class="species-latin">Trachinotus carolinus</div>
+    </div>
+    <div class="species-detail"><strong>Best season:</strong> Spring (April&ndash;May) and Fall. Pompano run the surf hard after storms and on incoming tides. Walk the wash zone with a pompano rig and sand fleas (mole crabs). Blunt rounded head and deeply forked tail distinguish it from permit.<br><br><strong>Limit (SC):</strong> 20 per person/day &middot; no confirmed minimum size.</div>
+    <div class="species-tags"><span class="species-method-tag">Sand Flea</span><span class="species-method-tag">Pompano Rig</span><span class="species-method-tag">Shrimp</span></div>
+  </div>
+</div>
 
-        <div class="species-card">
-          <div class="species-card-head">
-            <div class="species-icon" style="background:#E0F7FA;">🎣</div>
-            <div>
+
+<div class="species-card">
+          <div class="species-illus"><svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="stBk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#485830"/>
+      <stop offset="32%" stop-color="#6A7A52"/>
+      <stop offset="65%" stop-color="#98A080"/>
+      <stop offset="100%" stop-color="#DCE0C8"/>
+    </linearGradient>
+    <linearGradient id="stF" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#485830" stop-opacity="0.76"/>
+      <stop offset="100%" stop-color="#98A080" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <!-- Tail fin (slightly forked) -->
+  <path d="M264,36 C278,20 300,18 302,36 L302,64 C300,82 278,80 264,64 Z" fill="url(#stF)" stroke="#384828" stroke-width="0.8"/>
+  <!-- Body (elongated) -->
+  <path d="M40,50 C52,28 108,18 176,18 C236,18 267,31 273,50 C267,69 236,82 176,82 C108,82 52,72 40,50 Z" fill="url(#stBk)" stroke="#384828" stroke-width="0.8"/>
+  <!-- Head (slightly projecting upper jaw) -->
+  <path d="M40,50 C34,38 22,33 14,39 C7,45 7,55 14,62 C22,67 36,62 40,50 Z" fill="url(#stBk)" stroke="#384828" stroke-width="0.8"/>
+  <!-- Gill arc -->
+  <path d="M52,27 C44,38 42,52 47,63 C52,71 60,68 62,60" fill="none" stroke="#384828" stroke-width="1"/>
+  <!-- Lateral line -->
+  <path d="M62,42 C148,38 218,38 260,46" fill="none" stroke="#384828" stroke-width="0.6" opacity="0.36"/>
+  <!-- Spiny dorsal (first, low, triangular) -->
+  <path d="M102,20 L107,6 L113,4 L119,7 L125,4 L131,7 L136,5 L141,8 L146,7 L150,20" fill="url(#stF)" stroke="#384828" stroke-width="0.6"/>
+  <!-- Soft dorsal (second, longer) -->
+  <path d="M158,22 C172,11 200,10 215,17 L215,30 C200,26 172,28 158,30 Z" fill="url(#stF)" stroke="#384828" stroke-width="0.6"/>
+  <!-- Pectoral fin -->
+  <path d="M63,44 C68,30 82,25 87,31 C89,46 83,63 75,69 C67,64 61,54 63,44 Z" fill="#8A9870" fill-opacity="0.58" stroke="#384828" stroke-width="0.6"/>
+  <!-- Pelvic fin -->
+  <path d="M102,74 L109,89 L118,89 L119,74 Z" fill="#8A9870" fill-opacity="0.5" stroke="#384828" stroke-width="0.5"/>
+  <!-- Anal fin -->
+  <path d="M180,78 C195,90 215,92 220,82 L218,71 C205,73 192,73 180,78 Z" fill="url(#stF)" stroke="#384828" stroke-width="0.6"/>
+  <!-- Scattered black spots (on dorsal field + lateral line area) -->
+  <g fill="#181E0E" opacity="0.76">
+    <circle cx="110" cy="26" r="3.5"/><circle cx="127" cy="23" r="3.2"/>
+    <circle cx="144" cy="22" r="3.5"/><circle cx="161" cy="22" r="3.2"/>
+    <circle cx="178" cy="23" r="3.5"/><circle cx="195" cy="25" r="3.2"/>
+    <circle cx="212" cy="28" r="3.5"/><circle cx="229" cy="31" r="3"/>
+    <circle cx="246" cy="35" r="3.2"/><circle cx="98" cy="36" r="3"/>
+    <circle cx="116" cy="34" r="3.5"/><circle cx="134" cy="33" r="3.2"/>
+    <circle cx="152" cy="32" r="3.5"/><circle cx="170" cy="33" r="3"/>
+    <circle cx="188" cy="34" r="3.2"/><circle cx="206" cy="36" r="3.5"/>
+    <circle cx="224" cy="39" r="3"/><circle cx="241" cy="42" r="3.2"/>
+    <circle cx="258" cy="46" r="3"/>
+  </g>
+  <!-- Dorsal fin spots -->
+  <circle cx="133" cy="12" r="2.5" fill="#181E0E" opacity="0.65"/>
+  <circle cx="144" cy="10" r="2.5" fill="#181E0E" opacity="0.65"/>
+  <circle cx="155" cy="9" r="2" fill="#181E0E" opacity="0.65"/>
+  <!-- Canine fangs (two prominent) -->
+  <rect x="17" y="48" width="5" height="8" rx="2" fill="white" stroke="#384828" stroke-width="0.5"/>
+  <rect x="24" y="49" width="4" height="7" rx="1.5" fill="white" stroke="#384828" stroke-width="0.5"/>
+  <!-- Eye -->
+  <circle cx="28" cy="43" r="6.5" fill="white" stroke="#283618" stroke-width="0.5"/>
+  <circle cx="29.5" cy="43" r="5" fill="#0E1208"/>
+  <circle cx="31" cy="41.5" r="1.5" fill="white"/>
+  <!-- Mouth -->
+  <path d="M11,60 C17,64 27,65 38,62" fill="none" stroke="#283618" stroke-width="0.9"/>
+  <text x="155" y="97" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#4A7060" letter-spacing="1" opacity="0.7">Spotted Seatrout · Cynoscion nebulosus</text>
+</svg></div>
+          <div class="species-card-body">
+            <div class="species-card-head">
               <div class="species-name">Speckled Trout</div>
               <div class="species-latin">Cynoscion nebulosus</div>
             </div>
-          </div>
-          <div class="species-detail">
-            <strong>Best season:</strong> Late Fall through Winter in the creeks; early morning Spring action near the pier. Work a suspending twitch bait along the edge of a grass flat on the turn of the tide.
-            <br><br>
-            <strong>Limit:</strong> 10 per person · 14" min in SC.
-          </div>
-          <div class="species-tags">
-            <span class="species-method-tag">Mirrolure</span>
-            <span class="species-method-tag">Paddle Tail</span>
-            <span class="species-method-tag">Live Shrimp</span>
+            <div class="species-detail"><strong>Best season:</strong> Late Fall through Winter in the creeks; early morning Spring near the pier. Work a suspending twitch bait along a grass flat edge. The two prominent canine fangs and black spots on the back and dorsal fin are its defining features.<br><br><strong>Limit (SC):</strong> 10 per person/day · 14&quot; minimum total length.</div>
+            <div class="species-tags"><span class="species-method-tag">Mirrolure</span><span class="species-method-tag">Paddle Tail</span><span class="species-method-tag">Live Shrimp</span></div>
           </div>
         </div>
 
-      </div><!-- /species-guide-grid -->
+            </div><!-- /species-guide-grid -->
 
       <p style="text-align:center;font-size:0.82rem;color:var(--ink-light);max-width:560px;margin:0 auto;">
         Always verify current SC regulations before fishing. Limits and seasons can change. Visit <a href="https://www.dnr.sc.gov/fish.html" target="_blank" rel="noopener" style="color:var(--era-red);">SCDNR Fishing Regulations</a> for official rules.
@@ -3250,8 +3535,8 @@
         <div class="ad-banner-left">
           <div class="ad-banner-tag">Premier Sponsor</div>
           <div class="ad-banner-name">Bradham Wilder</div>
-          <div class="ad-banner-sub">ERA Wilder Realty &nbsp;·&nbsp; 15+ Years on Pawleys Island &nbsp;·&nbsp; 803-309-4709</div>
-          <div class="ad-banner-sub" style="margin-top:4px;color:rgba(255,255,255,0.40);font-size:0.72rem;">Barrier Island Specialist &nbsp;·&nbsp; Oceanfront Estates &nbsp;·&nbsp; Investment Properties</div>
+          <div class="ad-banner-sub">ERA Wilder Realty &nbsp;·&nbsp; 15+ Years on the SC Coast &nbsp;·&nbsp; 803-309-4709</div>
+          <div class="ad-banner-sub" style="margin-top:4px;color:rgba(255,255,255,0.40);font-size:0.72rem;">North Myrtle Beach to Savannah, GA &nbsp;·&nbsp; Oceanfront Estates &nbsp;·&nbsp; Investment Properties</div>
         </div>
         <!-- CTA -->
         <div class="ad-banner-cta-wrap">
@@ -3567,16 +3852,24 @@
           </div>
 
           <div class="specialties-card">
-            <div class="specialties-label">Market Expertise</div>
+            <div class="specialties-label">Market Expertise · North Myrtle Beach to Savannah, GA</div>
             <div class="specialty-list">
-              <span class="specialty-tag">Pawleys Island</span>
-              <span class="specialty-tag">Litchfield Beach</span>
-              <span class="specialty-tag">Murrells Inlet</span>
-              <span class="specialty-tag">Georgetown County</span>
-              <span class="specialty-tag">Waccamaw Neck</span>
+              <span class="specialty-tag">North Myrtle Beach</span>
               <span class="specialty-tag">Myrtle Beach</span>
-              <span class="specialty-tag">Waterfront Homes</span>
+              <span class="specialty-tag">Surfside Beach</span>
+              <span class="specialty-tag">Garden City Beach</span>
+              <span class="specialty-tag">Murrells Inlet</span>
+              <span class="specialty-tag">Litchfield Beach</span>
+              <span class="specialty-tag">Pawleys Island</span>
+              <span class="specialty-tag">Waccamaw Neck</span>
+              <span class="specialty-tag">Georgetown County</span>
+              <span class="specialty-tag">Edisto Beach</span>
+              <span class="specialty-tag">Hilton Head Island</span>
+              <span class="specialty-tag">Bluffton</span>
+              <span class="specialty-tag">Savannah, GA</span>
               <span class="specialty-tag">Oceanfront Estates</span>
+              <span class="specialty-tag">Waterfront Homes</span>
+              <span class="specialty-tag">Investment Properties</span>
             </div>
           </div>
         </div>
