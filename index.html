@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pawleys Island Surf Cam</title>
+  <title>Pawleys Island Pier · Fishing &amp; Surf · Pawleys Island, SC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
 
     /* ─────────────────────────────────────────────
@@ -25,11 +25,21 @@
       --gold-pale:   #FFF8E1;
 
       /* Faherty Naturals */
-      --sand:        #FAFAF9;
-      --sand-dark:   #EEEBE4;
+      --sand:        #F8F4EE;
+      --sand-dark:   #EDE5D8;
       --driftwood:   #8B7355;
       --marsh:       #2D6A4F;
       --sky:         #90E0EF;
+
+      /* Village Surf Shop Palette */
+      --wax:         #F5EDD8;
+      --barnwood:    #7B6652;
+      --seafoam:     #4DA49C;
+      --seafoam-pale:#D6F0EE;
+      --denim:       #2C3E6B;
+      --denim-faded: #4A5FA0;
+      --surf-olive:  #4A6741;
+      --surf-tan:    #C4A06A;
 
       /* Quick Silver */
       --silver:      #ADB5BD;
@@ -1508,6 +1518,189 @@
     }
 
     /* ─────────────────────────────────────────────
+       FISHING SECTION
+    ───────────────────────────────────────────── */
+    .fishing-section {
+      background: linear-gradient(180deg, var(--wax) 0%, #EAF4EE 40%, #EBF6FF 70%, var(--wax) 100%);
+      padding: 64px 24px 72px;
+      border-top: 4px solid var(--denim);
+    }
+    .fishing-inner { max-width: 1080px; margin: 0 auto; }
+    .fishing-header { text-align: center; margin-bottom: 44px; }
+
+    /* Report card */
+    .fish-report-card {
+      background: linear-gradient(135deg, #0F1923 0%, #003F6B 60%, #005B9A 100%);
+      border-radius: var(--radius-xl);
+      padding: 36px 40px;
+      margin-bottom: 52px;
+      box-shadow: var(--shadow-lg);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: start;
+    }
+    .fish-report-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.55rem;
+      color: #fff;
+      margin: 0 0 6px;
+    }
+    .fish-report-meta {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 18px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .fish-report-body {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.97rem;
+      line-height: 1.7;
+    }
+    .fish-report-conditions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 160px;
+    }
+    .fish-cond-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 40px;
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.80);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .fish-cond-pill span { display: block; font-size: 0.68rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Seasons grid */
+    .seasons-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.55rem;
+      color: var(--ink);
+      text-align: center;
+      margin: 0 0 28px;
+    }
+    .seasons-title em { color: var(--era-red); font-style: italic; }
+    .seasons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+    .season-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      border: 1px solid var(--silver-light);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .season-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .season-card-head {
+      padding: 14px 18px 10px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .season-card-head .season-emoji { font-size: 1.3rem; }
+    .season-card-body { padding: 14px 18px 18px; }
+    .season-species {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .species-tag {
+      background: var(--era-red-pale);
+      color: var(--era-red-dark);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+      letter-spacing: 0.02em;
+    }
+    .season-tip {
+      font-size: 0.82rem;
+      color: var(--ink-light);
+      line-height: 1.55;
+      border-top: 1px solid var(--silver-light);
+      padding-top: 10px;
+      margin-top: 4px;
+    }
+
+    /* Species guide */
+    .species-guide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+    .species-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--silver-light);
+      padding: 22px 22px 20px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .species-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .species-card-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .species-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .species-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .species-latin { font-size: 0.72rem; color: var(--ink-light); font-style: italic; }
+    .species-detail {
+      font-size: 0.83rem;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+    .species-detail strong { color: var(--era-red); font-weight: 600; }
+    .species-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .species-method-tag {
+      background: var(--sand-dark);
+      color: var(--ink);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* Responsive fishing */
+    @media (max-width: 900px) {
+      .seasons-grid { grid-template-columns: repeat(2, 1fr); }
+      .species-guide-grid { grid-template-columns: repeat(2, 1fr); }
+      .fish-report-card { grid-template-columns: 1fr; gap: 20px; }
+      .fish-report-conditions { flex-direction: row; flex-wrap: wrap; min-width: unset; }
+    }
+    @media (max-width: 560px) {
+      .seasons-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .species-guide-grid { grid-template-columns: 1fr; }
+      .fishing-section { padding: 40px 16px 52px; }
+    }
+
+    /* ─────────────────────────────────────────────
        TIDES SECTION
     ───────────────────────────────────────────── */
     .tides-section {
@@ -1792,9 +1985,17 @@
        LOCAL PARTNERS GRID
     ───────────────────────────────────────────── */
     .partners-section {
-      background: #F5F0E8;
+      background: var(--wax);
       padding: 52px 40px;
-      border-top: 1px solid var(--sand-dark);
+      border-top: 3px solid var(--denim);
+      position: relative;
+    }
+    .partners-section::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: repeating-linear-gradient(90deg, var(--denim) 0px, var(--denim) 18px, var(--seafoam) 18px, var(--seafoam) 36px, var(--surf-tan) 36px, var(--surf-tan) 54px, transparent 54px, transparent 60px);
+      opacity: 0.6;
     }
 
     .partners-inner { max-width: 1060px; margin: 0 auto; }
@@ -1858,7 +2059,17 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
+      position: relative;
+      overflow: hidden;
     }
+    .partner-tile::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--tile-accent, var(--denim));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .partner-tile:hover::after { opacity: 1; }
 
     .partner-tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
 
@@ -1890,6 +2101,40 @@
     .partner-tile.open .partner-tile-icon { opacity: 0.3; }
     .partner-tile.open .partner-tile-name { color: var(--ink-faint); font-style: italic; }
     .partner-tile.open .partner-tile-cat  { color: var(--coral); font-style: normal; font-weight: 600; letter-spacing: 0.5px; text-transform: none; font-size: 0.68rem; }
+
+    /* ─────────────────────────────────────────────
+       SURF STICKER / BADGE STYLES
+    ───────────────────────────────────────────── */
+    .surf-eyebrow {
+      font-family: 'Bebas Neue', 'Impact', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      color: var(--seafoam);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .surf-badge {
+      display: inline-block;
+      background: var(--denim);
+      color: #fff;
+      font-family: 'Bebas Neue', 'Impact', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      padding: 3px 12px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+    .surf-sticker {
+      display: inline-block;
+      border: 2px solid currentColor;
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-family: 'Bebas Neue', 'Impact', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .bebas { font-family: 'Bebas Neue', 'Impact', sans-serif; letter-spacing: 0.06em; }
 
     /* ─────────────────────────────────────────────
        ADVERTISE PANEL — MEDIA KIT
@@ -2637,9 +2882,9 @@
 
   <!-- ══════════ HERO ══════════ -->
   <section class="hero">
-    <p class="hero-eyebrow">Pawleys Island, South Carolina</p>
-    <h1 class="hero-title">Life's a Beach.<br><em>Watch It Live.</em></h1>
-    <p class="hero-sub">Your front-row seat to the Pawleys Island Pier — Lowcountry sunrises, crashing surf, and the endless horizon of the Carolina coast.</p>
+    <p class="hero-eyebrow" style="font-family:'Bebas Neue','Impact',sans-serif;font-size:0.82rem;letter-spacing:0.22em;">🤙 &nbsp;Pawleys Island, South Carolina &nbsp;·&nbsp; Est. on the Strand</p>
+    <h1 class="hero-title">Pier, Fish &amp;<br><em>Open Water.</em></h1>
+    <p class="hero-sub">Fishing reports, tide charts, seasonal guides, and the local businesses that make Pawleys Island worth every cast — and every wave.</p>
     <div class="hero-pills">
       <span class="pill pill-teal">Live Pier Cam</span>
       <span class="pill pill-coral">Live Sunsets</span>
@@ -2652,8 +2897,8 @@
   <div class="tab-bar" id="tabBar">
     <div class="tab-bar-inner">
       <button class="tab-btn active" data-tab="cam">
-        <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="7" r="2" fill="currentColor"/></svg>
-        Live Cam
+        <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><path d="M2,9 Q5,5 7,7 Q9,9 12,5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="5" r="1.5" fill="currentColor"/><path d="M1,11 Q4,8 7,10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/></svg>
+        Fishing
       </button>
       <button class="tab-btn" data-tab="realestate">
         <svg width="13" height="13" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-1px;margin-right:5px;opacity:0.8;"><path d="M2,12 L2,6 L7,2 L12,6 L12,12 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><rect x="5" y="8" width="4" height="4" fill="currentColor" opacity="0.5"/></svg>
@@ -2677,37 +2922,258 @@
   <!-- ══════════ PANEL: LIVE CAM ══════════ -->
   <div class="tab-panel active" data-panel="cam">
 
-  <!-- ══════════ LIVE STREAM ══════════ -->
-  <section class="stream-section">
-    <div class="stream-card">
+  <!-- ══════════ FISHING SECTION ══════════ -->
+  <section class="fishing-section">
+    <div class="fishing-inner">
 
-      <!-- stream card chrome bar -->
-      <div class="stream-chrome">
-        <div class="chrome-dots">
-          <div class="chrome-dot dot-red"></div>
-          <div class="chrome-dot dot-yellow"></div>
-          <div class="chrome-dot dot-green"></div>
+      <div class="fishing-header">
+        <div class="surf-eyebrow" style="margin-bottom:8px;">Pawleys Island &amp; Waccamaw Neck</div>
+        <h2 class="section-title bebas" style="font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:0.04em;font-weight:400;">Fishing Guide <em style="color:var(--seafoam);font-family:'Playfair Display',serif;font-style:italic;font-size:0.85em;">&amp; Report</em></h2>
+        <p style="color:var(--ink-soft);font-size:0.93rem;margin-top:6px;">What's biting, when to go, and how to fish it</p>
+      </div>
+
+      <!-- ── Current Fishing Report ── -->
+      <div class="fish-report-card">
+        <div>
+          <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;">📋 Community Fishing Report</div>
+          <h3>Current Conditions — Pawleys Island</h3>
+          <div class="fish-report-meta">Updated weekly · Pier, Surf &amp; Inshore · Spring 2026</div>
+          <div class="fish-report-body">
+            <p style="margin:0 0 12px;">Red drum and flounder are showing up in the creek mouths and around the pier pilings as water temps climb toward 65°F. Spanish mackerel runs have been sporadic but consistent on incoming tides around the pier end. Sheepshead are stacked tight on the pier structure — use live fiddler crabs for best results.</p>
+            <p style="margin:0 0 12px;">The surf has been productive for pompano in the mornings. Spot and whiting are plentiful along the beach. Bluefish blitzes in the evenings have been drawing crowds to the pier.</p>
+            <p style="margin:0;font-size:0.85rem;color:rgba(255,255,255,0.50);">🐟 Tip: Fish the first two hours of an incoming tide for the best action — especially around the pier structure and creek junctions.</p>
+          </div>
         </div>
-        <span class="chrome-label">Pawleys Island Pier — Live Feed</span>
-        <div class="chrome-live">
-          <div class="nav-dot"></div>
-          LIVE
+        <div class="fish-report-conditions">
+          <div class="fish-cond-pill">🌊 Surf<span>Pompano · Whiting</span></div>
+          <div class="fish-cond-pill">🐟 Pier<span>Mackerel · Bluefish</span></div>
+          <div class="fish-cond-pill">🦀 Inshore<span>Flounder · Redfish</span></div>
+          <div class="fish-cond-pill">🌡️ Water Temp<span>~63°F</span></div>
+          <div class="fish-cond-pill">📅 Best Tide<span>Incoming</span></div>
         </div>
       </div>
 
-      <!-- Stream viewport — surfwashout.com live feed -->
-      <div class="stream-viewport" style="background:#000;position:relative;">
-        <iframe
-          src="https://surfwashout.com"
-          style="width:100%;height:100%;border:none;display:block;"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen
-          title="Pawleys Island Pier Live Cam — surfwashout.com"
-          loading="lazy">
-        </iframe>
-      </div>
+      <!-- ── Seasonal Calendar ── -->
+      <h3 class="seasons-title">Fishing <em>by Season</em></h3>
+      <div class="seasons-grid">
+
+        <!-- Winter -->
+        <div class="season-card">
+          <div class="season-card-head" style="background:linear-gradient(135deg,#1C3A5E,#2D5A8E);">
+            <span class="season-emoji">❄️</span>
+            <div>
+              <div style="font-size:0.65rem;opacity:0.65;text-transform:uppercase;letter-spacing:0.06em;">Dec · Jan · Feb</div>
+              Winter
+            </div>
+          </div>
+          <div class="season-card-body">
+            <div class="season-species">
+              <span class="species-tag">Speckled Trout</span>
+              <span class="species-tag">Red Drum</span>
+              <span class="species-tag">Sheepshead</span>
+              <span class="species-tag">Black Drum</span>
+            </div>
+            <div class="season-tip">Trout and drum move into deep tidal creeks as temps drop. Fish slow-sinking lures near structure. Sheepshead stack on the pier pilings — fiddler crabs are king.</div>
+          </div>
+        </div>
+
+        <!-- Spring -->
+        <div class="season-card">
+          <div class="season-card-head" style="background:linear-gradient(135deg,#0F5730,#1E8449);">
+            <span class="season-emoji">🌿</span>
+            <div>
+              <div style="font-size:0.65rem;opacity:0.65;text-transform:uppercase;letter-spacing:0.06em;">Mar · Apr · May</div>
+              Spring
+            </div>
+          </div>
+          <div class="season-card-body">
+            <div class="season-species">
+              <span class="species-tag">Spanish Mackerel</span>
+              <span class="species-tag">Flounder</span>
+              <span class="species-tag">Pompano</span>
+              <span class="species-tag">Bluefish</span>
+              <span class="species-tag">Red Drum</span>
+            </div>
+            <div class="season-tip">One of the best times of year. Mackerel show up in March with rising water temps. Pompano run the surf hard in April. Flounder move onto grassy flats — drift live finger mullet.</div>
+          </div>
+        </div>
+
+        <!-- Summer -->
+        <div class="season-card">
+          <div class="season-card-head" style="background:linear-gradient(135deg,#7B3F00,#C9680A);">
+            <span class="season-emoji">☀️</span>
+            <div>
+              <div style="font-size:0.65rem;opacity:0.65;text-transform:uppercase;letter-spacing:0.06em;">Jun · Jul · Aug</div>
+              Summer
+            </div>
+          </div>
+          <div class="season-card-body">
+            <div class="season-species">
+              <span class="species-tag">King Mackerel</span>
+              <span class="species-tag">Cobia</span>
+              <span class="species-tag">Tarpon</span>
+              <span class="species-tag">Flounder</span>
+              <span class="species-tag">Spot</span>
+              <span class="species-tag">Whiting</span>
+            </div>
+            <div class="season-tip">Kings and cobia cruise the nearshore structures. Night fishing the pier for flounder and spot is a local tradition. Tarpon roll the inlet at dawn — sight-fishing with live crabs.</div>
+          </div>
+        </div>
+
+        <!-- Fall -->
+        <div class="season-card">
+          <div class="season-card-head" style="background:linear-gradient(135deg,#6B2D0A,#C0392B);">
+            <span class="season-emoji">🍂</span>
+            <div>
+              <div style="font-size:0.65rem;opacity:0.65;text-transform:uppercase;letter-spacing:0.06em;">Sep · Oct · Nov</div>
+              Fall
+            </div>
+          </div>
+          <div class="season-card-body">
+            <div class="season-species">
+              <span class="species-tag">Red Drum</span>
+              <span class="species-tag">Speckled Trout</span>
+              <span class="species-tag">Flounder</span>
+              <span class="species-tag">Spanish Mackerel</span>
+              <span class="species-tag">Bluefish</span>
+            </div>
+            <div class="season-tip">Fall is arguably the finest fishing on the SC coast. Giant redfish bull reds stage in the inlets through October. Flounder flood the flats before the run-out. Don't miss it.</div>
+          </div>
+        </div>
+
+      </div><!-- /seasons-grid -->
+
+      <!-- ── Species Guide ── -->
+      <h3 class="seasons-title" style="margin-bottom:28px;">Know Your <em>Species</em></h3>
+      <div class="species-guide-grid">
+
+        <div class="species-card">
+          <div class="species-card-head">
+            <div class="species-icon" style="background:#FFF3E0;">🐟</div>
+            <div>
+              <div class="species-name">Red Drum (Redfish)</div>
+              <div class="species-latin">Sciaenops ocellatus</div>
+            </div>
+          </div>
+          <div class="species-detail">
+            <strong>Best season:</strong> Fall (bull reds) &amp; Spring. Inshore all year. Fish the creek mouths, oyster beds, and around the pier on incoming tides. <br><br>
+            <strong>Limit:</strong> 3 per person · 15–23" slot limit in SC.
+          </div>
+          <div class="species-tags">
+            <span class="species-method-tag">Live Shrimp</span>
+            <span class="species-method-tag">Cut Mullet</span>
+            <span class="species-method-tag">Gold Spoon</span>
+            <span class="species-method-tag">Soft Plastics</span>
+          </div>
+        </div>
+
+        <div class="species-card">
+          <div class="species-card-head">
+            <div class="species-icon" style="background:#E8F5E9;">🐠</div>
+            <div>
+              <div class="species-name">Flounder</div>
+              <div class="species-latin">Paralichthys dentatus</div>
+            </div>
+          </div>
+          <div class="species-detail">
+            <strong>Best season:</strong> Spring through Fall. Ambush predators — lie flat on sandy bottom near structure. Drift live finger mullet along the edges of grass beds and pier shadow lines.
+            <br><br>
+            <strong>Limit:</strong> 10 per person · 12" min in SC.
+          </div>
+          <div class="species-tags">
+            <span class="species-method-tag">Live Finger Mullet</span>
+            <span class="species-method-tag">Gulp Shrimp</span>
+            <span class="species-method-tag">Jig &amp; Twister</span>
+          </div>
+        </div>
+
+        <div class="species-card">
+          <div class="species-card-head">
+            <div class="species-icon" style="background:#E3F2FD;">🐡</div>
+            <div>
+              <div class="species-name">Spanish Mackerel</div>
+              <div class="species-latin">Scomberomorus maculatus</div>
+            </div>
+          </div>
+          <div class="species-detail">
+            <strong>Best season:</strong> Spring &amp; Fall runs. Fast, aggressive, and absolutely fun on light tackle. Troll Clark spoons or cast silver slabs off the pier on incoming tide.
+            <br><br>
+            <strong>Limit:</strong> 15 per person in SC.
+          </div>
+          <div class="species-tags">
+            <span class="species-method-tag">Clark Spoon</span>
+            <span class="species-method-tag">Silver Slab</span>
+            <span class="species-method-tag">Bucktail Jig</span>
+          </div>
+        </div>
+
+        <div class="species-card">
+          <div class="species-card-head">
+            <div class="species-icon" style="background:#F3E5F5;">🦈</div>
+            <div>
+              <div class="species-name">Sheepshead</div>
+              <div class="species-latin">Archosargus probatocephalus</div>
+            </div>
+          </div>
+          <div class="species-detail">
+            <strong>Best season:</strong> Winter &amp; early Spring. One of the best-tasting fish in the ocean. They live on barnacles and crustaceans — fish straight down on the pier pilings with fiddler crabs on a small hook.
+            <br><br>
+            <strong>Limit:</strong> 10 per person · 12" min in SC.
+          </div>
+          <div class="species-tags">
+            <span class="species-method-tag">Fiddler Crab</span>
+            <span class="species-method-tag">Sand Flea</span>
+            <span class="species-method-tag">Barnacle</span>
+          </div>
+        </div>
+
+        <div class="species-card">
+          <div class="species-card-head">
+            <div class="species-icon" style="background:#FFF9C4;">🌊</div>
+            <div>
+              <div class="species-name">Pompano</div>
+              <div class="species-latin">Trachinotus carolinus</div>
+            </div>
+          </div>
+          <div class="species-detail">
+            <strong>Best season:</strong> Spring surf run (April–May) and again in October. Target them in the gut — the trough between the sandbar and the beach — with sand fleas (mole crabs) on a pompano rig.
+            <br><br>
+            <strong>Limit:</strong> No bag limit in SC · 11" min.
+          </div>
+          <div class="species-tags">
+            <span class="species-method-tag">Sand Flea</span>
+            <span class="species-method-tag">Pompano Rig</span>
+            <span class="species-method-tag">Shrimp</span>
+          </div>
+        </div>
+
+        <div class="species-card">
+          <div class="species-card-head">
+            <div class="species-icon" style="background:#E0F7FA;">🎣</div>
+            <div>
+              <div class="species-name">Speckled Trout</div>
+              <div class="species-latin">Cynoscion nebulosus</div>
+            </div>
+          </div>
+          <div class="species-detail">
+            <strong>Best season:</strong> Late Fall through Winter in the creeks; early morning Spring action near the pier. Work a suspending twitch bait along the edge of a grass flat on the turn of the tide.
+            <br><br>
+            <strong>Limit:</strong> 10 per person · 14" min in SC.
+          </div>
+          <div class="species-tags">
+            <span class="species-method-tag">Mirrolure</span>
+            <span class="species-method-tag">Paddle Tail</span>
+            <span class="species-method-tag">Live Shrimp</span>
+          </div>
+        </div>
+
+      </div><!-- /species-guide-grid -->
+
+      <p style="text-align:center;font-size:0.82rem;color:var(--ink-light);max-width:560px;margin:0 auto;">
+        Always verify current SC regulations before fishing. Limits and seasons can change. Visit <a href="https://www.dnr.sc.gov/fish.html" target="_blank" rel="noopener" style="color:var(--era-red);">SCDNR Fishing Regulations</a> for official rules.
+      </p>
+
     </div>
-    <p class="stream-caption">Pawleys Island Pier &nbsp;·&nbsp; Pawleys Island, SC &nbsp;·&nbsp; Live 24 / 7</p>
   </section>
 
   <!-- ══════════ TIDES SECTION ══════════ -->
@@ -2839,25 +3305,21 @@
 
       <!-- Slide 3 — Open advertising slot -->
       <div class="ad-banner-slide" style="background:linear-gradient(135deg,#0F1923 0%,#1C2B38 100%);">
-        <!-- Photo placeholder (left) -->
         <div class="ad-banner-photo" style="border-right:1px dashed rgba(233,196,106,0.2);">
           <div class="ad-banner-photo-placeholder" style="opacity:0.5;">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             <span>Your Photo</span>
           </div>
         </div>
-        <!-- Center text -->
         <div class="ad-banner-left">
           <div class="ad-banner-tag" style="color:#E9C46A;">Available · Your Ad Here</div>
           <div class="ad-banner-name" style="color:rgba(255,255,255,0.75);">Reach Thousands of Pawleys Island Visitors</div>
           <div class="ad-banner-sub">Local restaurants, charters, shops &amp; services — spots are limited</div>
           <div class="ad-banner-sub" style="margin-top:4px;color:rgba(233,196,106,0.5);font-size:0.72rem;">Starting at $79/month · Tap-to-call included · Monthly analytics report</div>
         </div>
-        <!-- CTA -->
         <div class="ad-banner-cta-wrap">
           <a href="#advertise" class="ad-banner-cta" onclick="document.querySelector('[data-tab=advertise]').click();return false;" style="background:rgba(233,196,106,0.15);border-color:rgba(233,196,106,0.35);color:#E9C46A;">See Rates</a>
         </div>
-        <!-- Logo placeholder (right) -->
         <div class="ad-banner-logo" style="border-left:1px dashed rgba(233,196,106,0.2);">
           <div class="ad-banner-logo-placeholder" style="opacity:0.5;">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
@@ -2866,78 +3328,144 @@
         </div>
       </div>
 
+      <!-- Slide 4 — Fishing Guide -->
+      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#111C0F 0%,#243D1A 55%,#4A6741 100%);">
+        <div class="ad-banner-photo">
+          <!-- <img src="YOUR_GUIDE_PHOTO_URL" alt="Waccamaw Guide Service"> -->
+          <div class="ad-banner-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Guide Photo</span>
+          </div>
+        </div>
+        <div class="ad-banner-left">
+          <div class="ad-banner-tag" style="color:#A8D8A0;">🎣 Charter &amp; Guide</div>
+          <div class="ad-banner-name bebas" style="font-size:1.7rem;letter-spacing:0.05em;">Waccamaw Guide Service</div>
+          <div class="ad-banner-sub">Inshore &amp; Nearshore Charters · Pawleys Island, SC · Half &amp; Full Day Trips</div>
+          <div class="ad-banner-sub" style="margin-top:4px;color:rgba(255,255,255,0.40);font-size:0.72rem;">Redfish · Flounder · Trout · Spanish Mackerel · Sheepshead</div>
+        </div>
+        <div class="ad-banner-cta-wrap">
+          <a href="tel:+18435550123" class="ad-banner-cta" style="background:rgba(74,103,65,0.6);border-color:rgba(168,216,160,0.4);">Book a Trip</a>
+        </div>
+        <div class="ad-banner-logo">
+          <!-- <img src="YOUR_GUIDE_LOGO_URL" alt="Waccamaw Guide Service"> -->
+          <div class="ad-banner-logo-placeholder" style="font-size:2.5rem;">🎣</div>
+        </div>
+      </div>
+
+      <!-- Slide 5 — Surf Camp -->
+      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#002A45 0%,#005F8A 55%,#0096C7 100%);">
+        <div class="ad-banner-photo">
+          <!-- <img src="YOUR_SURF_CAMP_PHOTO_URL" alt="Pawleys Island Surf Camp"> -->
+          <div class="ad-banner-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Camp Photo</span>
+          </div>
+        </div>
+        <div class="ad-banner-left">
+          <div class="ad-banner-tag" style="color:#90E0EF;">🏄 Surf Camp</div>
+          <div class="ad-banner-name bebas" style="font-size:1.7rem;letter-spacing:0.05em;">Pawleys Island Surf Camp</div>
+          <div class="ad-banner-sub">All Levels Welcome · Kids &amp; Adults · Weekly Sessions June–August</div>
+          <div class="ad-banner-sub" style="margin-top:4px;color:rgba(255,255,255,0.40);font-size:0.72rem;">Board Rental Included · Certified Instructors · Pier Beach Location</div>
+        </div>
+        <div class="ad-banner-cta-wrap">
+          <a href="tel:+18435550456" class="ad-banner-cta" style="background:rgba(0,96,199,0.5);border-color:rgba(144,224,239,0.4);">Enroll Now</a>
+        </div>
+        <div class="ad-banner-logo">
+          <!-- <img src="YOUR_SURF_CAMP_LOGO_URL" alt="Surf Camp"> -->
+          <div class="ad-banner-logo-placeholder" style="font-size:2.5rem;">🏄</div>
+        </div>
+      </div>
+
+      <!-- Slide 6 — Surf Shop -->
+      <div class="ad-banner-slide" style="background:linear-gradient(135deg,#14183A 0%,#2C3E6B 55%,#4A5FA0 100%);">
+        <div class="ad-banner-photo">
+          <!-- <img src="YOUR_SURF_SHOP_PHOTO_URL" alt="Village Surf Shop"> -->
+          <div class="ad-banner-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Shop Photo</span>
+          </div>
+        </div>
+        <div class="ad-banner-left">
+          <div class="ad-banner-tag" style="color:#A8C4FF;">🤙 Surf Shop</div>
+          <div class="ad-banner-name bebas" style="font-size:1.7rem;letter-spacing:0.05em;">Village Surf Shoppe</div>
+          <div class="ad-banner-sub">Boards · Wetsuits · Wax · Fins · Gear · Pawleys Island &amp; Garden City Beach</div>
+          <div class="ad-banner-sub" style="margin-top:4px;color:rgba(255,255,255,0.40);font-size:0.72rem;">Rentals · Lessons · Local Knowledge · Est. on the Strand</div>
+        </div>
+        <div class="ad-banner-cta-wrap">
+          <a href="tel:+18435550789" class="ad-banner-cta" style="background:rgba(44,62,107,0.6);border-color:rgba(168,196,255,0.4);">Visit the Shop</a>
+        </div>
+        <div class="ad-banner-logo">
+          <!-- <img src="YOUR_SURF_SHOP_LOGO_URL" alt="Village Surf Shoppe"> -->
+          <div class="ad-banner-logo-placeholder" style="font-size:2.5rem;">🤙</div>
+        </div>
+      </div>
+
     </div>
     <div class="ad-banner-dots" id="adDots">
       <div class="ad-banner-dot active" onclick="bannerGo(0)"></div>
       <div class="ad-banner-dot" onclick="bannerGo(1)"></div>
       <div class="ad-banner-dot" onclick="bannerGo(2)"></div>
+      <div class="ad-banner-dot" onclick="bannerGo(3)"></div>
+      <div class="ad-banner-dot" onclick="bannerGo(4)"></div>
+      <div class="ad-banner-dot" onclick="bannerGo(5)"></div>
     </div>
   </section>
 
   <!-- ══════════ LOCAL PARTNERS GRID ══════════ -->
   <section class="partners-section">
     <div class="partners-header">
-      <div class="partners-eyebrow">Community</div>
-      <h2 class="partners-title">Local Partners</h2>
-      <p class="partners-sub">Supporting the businesses that make Pawleys Island special</p>
+      <div class="partners-eyebrow surf-eyebrow">The Lineup</div>
+      <h2 class="partners-title bebas" style="font-size:1.5rem;letter-spacing:0.06em;">Local Partners &amp; Sponsors</h2>
+      <p class="partners-sub">The businesses that keep Pawleys Island rolling</p>
     </div>
     <div class="partners-grid">
 
-      <!-- Real partner: Bradham Wilder -->
-      <div class="partner-tile">
-        <div class="partner-logo" style="background:linear-gradient(135deg,#0077B6,#0096C7);color:#fff;font-size:1.1rem;font-weight:700;letter-spacing:-0.5px;">BW</div>
-        <div class="partner-info">
-          <div class="partner-name">ERA Wilder Realty</div>
-          <div class="partner-cat">Real Estate</div>
-        </div>
-        <a href="tel:+18033094709" class="partner-action">Call</a>
+      <!-- ERA Wilder Realty -->
+      <div class="partner-tile" style="--tile-accent:#005B9A;">
+        <div class="partner-tile-icon" style="font-size:1.5rem;background:linear-gradient(135deg,#003F6B,#005B9A);color:#fff;width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;letter-spacing:-0.5px;">BW</div>
+        <div class="partner-tile-name">ERA Wilder Realty</div>
+        <div class="partner-tile-cat">Real Estate</div>
+        <a href="tel:+18033094709" class="partner-action" style="color:var(--era-red);font-size:0.72rem;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(0,91,154,0.2);padding-bottom:1px;">Call Bradham</a>
       </div>
 
-      <!-- Real partner: King's Tide -->
-      <div class="partner-tile">
-        <div class="partner-logo" style="background:linear-gradient(135deg,#E76F51,#F4A261);color:#fff;font-size:1.5rem;">🌊</div>
-        <div class="partner-info">
-          <div class="partner-name">King's Tide Beach House</div>
-          <div class="partner-cat">Vacation Rental</div>
-        </div>
-        <a href="https://www.pawleysislandrealty.com/rentals/kings-tide-dn-ste-b" target="_blank" rel="noopener" class="partner-action">Book</a>
+      <!-- King's Tide -->
+      <div class="partner-tile" style="--tile-accent:#E76F51;">
+        <div class="partner-tile-icon">🌊</div>
+        <div class="partner-tile-name">King's Tide Beach House</div>
+        <div class="partner-tile-cat">Vacation Rental</div>
+        <a href="https://www.pawleysislandrealty.com/rentals/kings-tide-dn-ste-b" target="_blank" rel="noopener" class="partner-action" style="color:var(--coral);font-size:0.72rem;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(231,111,81,0.2);padding-bottom:1px;">Book a Stay</a>
       </div>
 
-      <!-- Open slots -->
+      <!-- Fishing Guide -->
+      <div class="partner-tile" style="--tile-accent:#4A6741;">
+        <div class="partner-tile-icon">🎣</div>
+        <div class="partner-tile-name">Waccamaw Guide Service</div>
+        <div class="partner-tile-cat">Fishing Charter</div>
+        <a href="tel:+18435550123" class="partner-action" style="color:var(--surf-olive);font-size:0.72rem;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(74,103,65,0.2);padding-bottom:1px;">Book a Trip</a>
+      </div>
+
+      <!-- Surf Camp -->
+      <div class="partner-tile" style="--tile-accent:#0096C7;">
+        <div class="partner-tile-icon">🏄</div>
+        <div class="partner-tile-name">Pawleys Island Surf Camp</div>
+        <div class="partner-tile-cat">Surf Instruction</div>
+        <a href="tel:+18435550456" class="partner-action" style="color:var(--teal);font-size:0.72rem;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(0,150,199,0.2);padding-bottom:1px;">Enroll Now</a>
+      </div>
+
+      <!-- Surf Shop -->
+      <div class="partner-tile" style="--tile-accent:#4A5FA0;">
+        <div class="partner-tile-icon">🤙</div>
+        <div class="partner-tile-name">Village Surf Shoppe</div>
+        <div class="partner-tile-cat">Boards &amp; Gear</div>
+        <a href="tel:+18435550789" class="partner-action" style="color:var(--denim-faded);font-size:0.72rem;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(74,95,160,0.2);padding-bottom:1px;">Visit the Shop</a>
+      </div>
+
+      <!-- Open slot -->
       <div class="partner-tile open" onclick="document.querySelector('[data-tab=advertise]').click();">
-        <div class="partner-logo open-logo">+</div>
-        <div class="partner-info">
-          <div class="partner-name">Available</div>
-          <div class="partner-cat">Restaurant · Bar · Tour</div>
-        </div>
-        <span class="partner-action open-action">Inquire</span>
-      </div>
-
-      <div class="partner-tile open" onclick="document.querySelector('[data-tab=advertise]').click();">
-        <div class="partner-logo open-logo">+</div>
-        <div class="partner-info">
-          <div class="partner-name">Available</div>
-          <div class="partner-cat">Surf Shop · Outfitter</div>
-        </div>
-        <span class="partner-action open-action">Inquire</span>
-      </div>
-
-      <div class="partner-tile open" onclick="document.querySelector('[data-tab=advertise]').click();">
-        <div class="partner-logo open-logo">+</div>
-        <div class="partner-info">
-          <div class="partner-name">Available</div>
-          <div class="partner-cat">Charter Fishing · Kayak</div>
-        </div>
-        <span class="partner-action open-action">Inquire</span>
-      </div>
-
-      <div class="partner-tile open" onclick="document.querySelector('[data-tab=advertise]').click();">
-        <div class="partner-logo open-logo">+</div>
-        <div class="partner-info">
-          <div class="partner-name">Available</div>
-          <div class="partner-cat">Retail · Services</div>
-        </div>
-        <span class="partner-action open-action">Inquire</span>
+        <div class="partner-tile-icon" style="opacity:0.3;font-size:1.4rem;">+</div>
+        <div class="partner-tile-name" style="color:var(--ink-faint);font-style:italic;">Your Business Here</div>
+        <div class="partner-tile-cat" style="color:var(--coral);font-size:0.68rem;font-weight:600;text-transform:none;">Restaurant · Bar · Tour · Shop</div>
+        <span style="color:var(--coral);font-size:0.72rem;font-weight:600;cursor:pointer;">Inquire →</span>
       </div>
 
     </div>
@@ -3915,7 +4443,7 @@
   /* ── Rotating Sponsor Banner ── */
   let bannerIdx = 0;
   let bannerTimer = null;
-  const BANNER_SLIDES = 3;
+  const BANNER_SLIDES = 6;
   const BANNER_INTERVAL = 6000;
 
   function bannerGo(idx) {
