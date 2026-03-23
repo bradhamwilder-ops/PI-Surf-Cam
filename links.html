@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bradham Wilder · Links</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --teal:        #0a7c6e;
+      --teal-light:  #12a897;
+      --coral:       #e8612a;
+      --coral-light: #f4894e;
+      --gold:        #c9963a;
+      --sand:        #f7f2ea;
+      --sand-dark:   #ede5d6;
+      --ink:         #1a1a1a;
+      --ink-mid:     #3d3d3d;
+      --ink-soft:    #6e6e73;
+      --white:       #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 100% 60% at 50% 0%, rgba(10,124,110,0.18) 0%, transparent 55%),
+        linear-gradient(180deg, #d4ebe7 0%, #e6e0d4 40%, #f7f2ea 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px 80px;
+    }
+
+    /* ── AVATAR / PROFILE ── */
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 50%, #8fd5cc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.6rem;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 20px rgba(10,124,110,0.3);
+      border: 3px solid rgba(255,255,255,0.6);
+    }
+
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.4px;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .profile-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--teal);
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .profile-location {
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    /* ── LINK BUTTONS ── */
+    .links-container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 22px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid rgba(139,115,85,0.14);
+      text-decoration: none;
+      color: var(--ink);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 16px 0 0 16px;
+    }
+
+    .btn-teal::before   { background: var(--teal); }
+    .btn-coral::before  { background: var(--coral); }
+    .btn-gold::before   { background: var(--gold); }
+    .btn-marsh::before  { background: #4a6741; }
+
+    .link-btn:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+    }
+
+    .link-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      width: 40px;
+      text-align: center;
+    }
+
+    .link-text { flex: 1; }
+
+    .link-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 2px;
+      letter-spacing: -0.1px;
+    }
+
+    .link-sub {
+      font-size: 0.75rem;
+      color: var(--ink-soft);
+      font-weight: 400;
+    }
+
+    .link-arrow {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+
+    /* ── SECTION LABEL ── */
+    .links-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      width: 100%;
+      max-width: 480px;
+      margin: 24px 0 4px;
+      padding: 0 4px;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      margin-top: 44px;
+      text-align: center;
+    }
+
+    .footer-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(139,115,85,0.18);
+      background: rgba(255,255,255,0.5);
+      transition: background 0.2s;
+    }
+
+    .footer-back:hover { background: rgba(255,255,255,0.85); }
+
+    .powered {
+      margin-top: 14px;
+      font-size: 0.68rem;
+      color: rgba(110,110,115,0.5);
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROFILE -->
+  <div class="profile">
+    <div class="avatar">🌊</div>
+    <div class="profile-name">Bradham Wilder</div>
+    <div class="profile-title">ERA Wilder Realty &nbsp;·&nbsp; King's Tide Beach House</div>
+    <div class="profile-location">📍 Pawleys Island, South Carolina</div>
+  </div>
+
+  <!-- CONTACT LINKS -->
+  <p class="links-label">📞 Contact</p>
+
+  <div class="links-container">
+
+    <a href="tel:+18033094709" class="link-btn btn-teal">
+      <span class="link-icon">📱</span>
+      <span class="link-text">
+        <span class="link-label">Call Bradham</span>
+        <span class="link-sub">803-309-4709 &nbsp;·&nbsp; Direct line</span>
+      </span>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a href="mailto:bradham.wilder@gmail.com" class="link-btn btn-teal">
+      <span class="link-icon">✉️</span>
+      <span class="link-text">
+        <span class="link-label">Email Bradham</span>
+        <span class="link-sub">bradham.wilder@gmail.com</span>
+      </span>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- REAL ESTATE -->
+  <p class="links-label">🏡 Real Estate</p>
+
+  <div class="links-container">
+
+    <a href="#" class="link-btn btn-marsh">
+      <span class="link-icon">🏡</span>
+      <span class="link-text">
+        <span class="link-label">ERA Wilder Realty</span>
+        <span class="link-sub">Browse listings &amp; properties</span>
+      </span>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a href="https://bradhamwilder.erawilderrealty.com/search/#status=active&sold_days=180&ls_conversion=acres&location_search_field=pawleys%20island&drive_time=09%3A00&drive_duration=15&drive_avoid_ferry=1&drive_departure=1&ss_locale=en-US&ss_description=Pawleys%20Island%2C%20SC&ss_email_freq=40&ss_send_zero_result=1&bounds_north=33.46552589481308&bounds_east=-79.09390796994691&bounds_south=33.37741134564772&bounds_west=-79.15553440427308&center_lat=33.4332236&center_lon=-79.12143130000001&center_lat_pan=33.421479798422965&center_lon_pan=-79.12472118711&geotype=PopulatedPlace&user_lat=33.4332236&user_lon=-79.12143130000001&pgsize=20&startidx=0&zoom=13&sort_by=1&company_uuid=3880084&commute=0&buffer_miles=0.25&geospatial=true&agent_uuid=ad93b90d-a437-4fec-9275-e39fe0bc85ae&ptype=1%2C2%2C3%2C4%2C5%2C7%2C9%2C8&searchType=criteria&pstatus=1%2C2%2C11&omit_hidden=true&currency=USD"
+       target="_blank" rel="noopener" class="link-btn btn-teal">
+      <span class="link-icon">🔍</span>
+      <span class="link-text">
+        <span class="link-label">Pawleys Island Properties</span>
+        <span class="link-sub">Search active listings now</span>
+      </span>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- VACATION RENTAL -->
+  <p class="links-label">🌅 King's Tide Vacation Rentals · 334 Myrtle Ave</p>
+
+  <div class="links-container">
+
+    <a href="https://www.pawleysislandrealty.com/rentals/kings-tide-dn-ste-b" target="_blank" rel="noopener" class="link-btn btn-marsh">
+      <span class="link-icon">🌊</span>
+      <span class="link-text">
+        <span class="link-label">King's Tide — Unit B</span>
+        <span class="link-sub">Downstairs Suite · Book Now</span>
+      </span>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a href="https://www.pawleysislandrealty.com/rentals/kings-tide-upste-c" target="_blank" rel="noopener" class="link-btn btn-coral">
+      <span class="link-icon">☀️</span>
+      <span class="link-text">
+        <span class="link-label">King's Tide — Unit C</span>
+        <span class="link-sub">Upstairs Suite · Book Now</span>
+      </span>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a href="https://maps.google.com/?q=334+Myrtle+Ave,+Pawleys+Island,+SC" target="_blank" rel="noopener" class="link-btn btn-coral" style="opacity:0.7;">
+      <span class="link-icon">📍</span>
+      <span class="link-text">
+        <span class="link-label">Get Directions</span>
+        <span class="link-sub">334 Myrtle Ave, Pawleys Island, SC</span>
+      </span>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- SURF CAM -->
+  <p class="links-label">📡 Live Camera</p>
+
+  <div class="links-container">
+
+    <a href="pawleys-island-surf-cam.html" class="link-btn btn-gold">
+      <span class="link-icon">🎣</span>
+      <span class="link-text">
+        <span class="link-label">Pawleys Island Surf Cam</span>
+        <span class="link-sub">Watch the pier — live 24/7</span>
+      </span>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <a href="pawleys-island-surf-cam.html" class="footer-back">← Back to Surf Cam</a>
+    <p class="powered">Pawleys Island · South Carolina Lowcountry</p>
+  </div>
+
+</body>
+</html>
